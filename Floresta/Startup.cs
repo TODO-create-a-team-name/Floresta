@@ -29,7 +29,13 @@ namespace Floresta
             services.AddDbContext<FlorestaDbContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+
+            })
                 .AddEntityFrameworkStores<FlorestaDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -58,6 +64,7 @@ namespace Floresta
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

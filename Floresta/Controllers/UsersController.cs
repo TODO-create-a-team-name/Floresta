@@ -136,7 +136,7 @@ namespace Floresta.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                    ModelState.AddModelError(string.Empty, "The user was not found");
                 }
             }
             return View(model);
