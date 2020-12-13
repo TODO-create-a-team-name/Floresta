@@ -1,0 +1,33 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+@model IEnumerable<Floresta.Models.Seedling>
+@{
+    ViewBag.Title = "Seedlings List";
+}
+
+@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+{
+    <a asp-action="Create">Add Seedling</a>
+}
+
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Height</td>
+        <td>Amount</td>
+        <td>Description</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Price</td>
+            <td>@item.Height</td>
+            <td>@item.Amount</td>
+            <td>@item.Description</td>
+
+            <td><a class="btn-success" asp-action="Pay" asp-route-id="@item.Id">Plant</a></td>
+
+        </tr>
+    }
+</table>
