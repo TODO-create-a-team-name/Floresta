@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Floresta.Models
@@ -9,5 +8,6 @@ namespace Floresta.Models
         public FlorestaDbContext(DbContextOptions<FlorestaDbContext> options)
             : base(options) { }
 
+        public DbSet<Seedling> Seedlings { get; set; }
     }
 }
