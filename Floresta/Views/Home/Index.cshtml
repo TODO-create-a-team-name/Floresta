@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+<h1>Test check for updates</h1>
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -14,6 +15,7 @@
 }
 else
 {
+
     <a asp-controller="Account" asp-action="Login">Sign in</a>
     <a asp-controller="Account" asp-action="Register">Sign Up</a>
 }
