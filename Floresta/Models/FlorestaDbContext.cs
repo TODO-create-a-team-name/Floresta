@@ -9,5 +9,6 @@ namespace Floresta.Models
             : base(options) { }
 
         public DbSet<Seedling> Seedlings { get; set; }
+        public DbSet<Marker> Markers { get; set; }
     }
 }
