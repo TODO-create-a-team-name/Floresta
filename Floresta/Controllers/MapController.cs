@@ -9,22 +9,29 @@ namespace Floresta.Controllers
 {
     public class MapController : Controller
     {
-        private FlorestaDbContext db;
+        private FlorestaDbContext _context;
         public MapController(FlorestaDbContext context)
         {
-            db = context;
+            _context = context;
         }
 
         public IActionResult Index()
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Index(Marker marker)
-        //{
-        //    db.Markers.Add(marker);
-        //    await db.SaveChangesAsync();
-        //    return RedirectToAction("Index");
-        //}
+
+        [HttpPost]
+        public async Task<IActionResult> Index(Marker marker)
+        {
+            _context.Markers.Add(marker);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public JsonResult GetMarkers()
+        {
+            var markers = _context.Markers.ToList();
+            return new JsonResult(markers);
+        }
     }
 }

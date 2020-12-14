@@ -1,26 +1,26 @@
-﻿@*AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM*@
-@model Floresta.Models.Marker
+﻿@model Floresta.Models.Marker
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Map Page";
     Layout = null;
 }
 <!DOCTYPE html>
 <html>
 <head>
     <title> Google Map </title>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
     </script>
 
     <style>
         #map {
-            height: 600px;
+            height: 800px;
             width: auto;
         }
     </style>
 </head>
 <body>
-    <form asp-action="index" asp-controller="home">
+    <form asp-action="index" asp-controller="map">
         <div class="form-group">
             <label asp-for="Title" class="control-label">Title</label>
             <input type="text" asp-for="Title" class="form-control" />
@@ -47,6 +47,19 @@
 
     <div id="map"></div>
     <script>
+        var markers = [];
+
+        $.ajax({
+            type: "GET",
+            url: "Map/GetMarkers",
+            contentType: "application/json",
+            dataType: "json",
+            success: function (result) {
+                markers = result;
+                console.log(markers);
+            }
+        })
+        
         var latEl = document.getElementById('lat');
         var lngEl = document.getElementById('lng');
         function initMap() {
@@ -58,7 +71,7 @@
                     position: google.maps.ControlPosition.LEFT_BOTTOM
                 },
             });
-
+            
             var input = document.getElementById('pac-input');
             var button = document.getElementById('searchid');
 
@@ -72,7 +85,6 @@
                 google.maps.event.trigger(input, 'focus')
                 google.maps.event.trigger(input, 'keyword', { keyCode: 13 });
             };
-
             var searchMarkers = [];
             // Listern for the event fired when the user selecets a predition and retrieve more details
             searchBox.addListener('places_changed', function () {
@@ -121,7 +133,7 @@
 
             google.maps.event.addListener(map, 'click', function (event) {
                 placeMarker(event.latLng, "Click title");
-
+                
             });
 
             function handleEvent(event) {
@@ -129,9 +141,9 @@
                 document.getElementById('lng').value = event.latLng.lng();
             }
 
-            var markers = [];
             var marker = null;
             function placeMarker(location, title) {
+               
                 marker = new google.maps.Marker({
                     position: location,
                     animation: google.maps.Animation.DROP,
@@ -140,13 +152,30 @@
                 });
 
                 marker.setMap(map);
+                contentString = "<table><tr><th>Title<th></tr><tr><td>Title</td></tr></table>"
+                var infoWindow = new google.maps.InfoWindow({
+                    content: contentString
+                })
+
+                marker.addListener('click', function () {
+                    infoWindow.open(map, marker);
+                });
+
                 lngEl.value = marker.getPosition().lng();
                 latEl.value = marker.getPosition().lat();
                 marker.addListener('drag', handleEvent);
                 marker.addListener('dragend', handleEvent);
             }
-        }
+            
+            function dropMarkers() {
+                for (var i = 0; i < markers.length; i++) {
 
+                    placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
+                }
+            }
+
+            dropMarkers();
+        }
     </script>
 
 </body>
