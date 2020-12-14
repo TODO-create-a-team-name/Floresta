@@ -1,0 +1,153 @@
+﻿@*AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM*@
+@model Floresta.Models.Marker
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Google Map </title>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&callback=initMap">
+    </script>
+
+    <style>
+        #map {
+            height: 600px;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <form asp-action="index" asp-controller="home">
+        <div class="form-group">
+            <label asp-for="Title" class="control-label">Title</label>
+            <input type="text" asp-for="Title" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Lng" class="control-label">Lng</label>
+            <input id="lng" type="text" asp-for="Lng" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Lat" class="control-label">Lat</label>
+            <input id="lat" type="text" asp-for="Lat" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Send" class="btn btn-default" />
+        </div>
+    </form>
+    <div id="map-dialog1">
+        <div id="fordragging">
+            <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
+            <input type="button" class="btn btn-primary searchbut" id="searchid" value="Search" style="margin-top: 9px" />
+        </div>
+        <div id="modal-map2" style="height:76%; width:76%; position: absolute; overflow:hidden;"> </div>
+    </div>
+
+    <div id="map"></div>
+    <script>
+        var latEl = document.getElementById('lat');
+        var lngEl = document.getElementById('lng');
+        function initMap() {
+            var uluru = { lat: 48.5405822, lng: 24.9988393 };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: uluru,
+                zoomControlOption: {
+                    position: google.maps.ControlPosition.LEFT_BOTTOM
+                },
+            });
+
+            var input = document.getElementById('pac-input');
+            var button = document.getElementById('searchid');
+
+            var searchBox = new google.maps.places.SearchBox(input);
+
+            //Pushing control on the map
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(button);
+
+            document.getElementById('searchid').onclick = function () {
+                google.maps.event.trigger(input, 'focus')
+                google.maps.event.trigger(input, 'keyword', { keyCode: 13 });
+            };
+
+            var searchMarkers = [];
+            // Listern for the event fired when the user selecets a predition and retrieve more details
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+                if (places.length == 0) {
+                    return;
+                }
+                //clear out the old markers
+                searchMarkers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                searchMarkers = [];
+                //for each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                //debugger
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25),
+                    };
+                    //creates a marker for each place
+                    searchMarkers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        position: place.geometry.location
+                    }));
+
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    }
+                    else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+
+            });
+
+            google.maps.event.addListener(map, 'click', function (event) {
+                placeMarker(event.latLng, "Click title");
+
+            });
+
+            function handleEvent(event) {
+                document.getElementById('lat').value = event.latLng.lat();
+                document.getElementById('lng').value = event.latLng.lng();
+            }
+
+            var markers = [];
+            var marker = null;
+            function placeMarker(location, title) {
+                marker = new google.maps.Marker({
+                    position: location,
+                    animation: google.maps.Animation.DROP,
+                    title: title,
+                    draggable: true
+                });
+
+                marker.setMap(map);
+                lngEl.value = marker.getPosition().lng();
+                latEl.value = marker.getPosition().lat();
+                marker.addListener('drag', handleEvent);
+                marker.addListener('dragend', handleEvent);
+            }
+        }
+
+    </script>
+
+</body>
+</html>
