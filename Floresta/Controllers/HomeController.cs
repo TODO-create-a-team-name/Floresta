@@ -1,4 +1,6 @@
 ﻿using Floresta.Models;
+using Floresta.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,21 +13,47 @@ namespace Floresta.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        SignInManager<User> _signInManager;
+        UserManager<User> _userManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
-            _logger = logger;
+            _signInManager = signInManager;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var model = new ShowUserViewModel
+                {
+                    Name = user.UserName,
+                    Surname = user.UserSurname,
+                    Email = user.Email
+                };
+            if (user != null)
+                return View(model);
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult AskQuestion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AskQuestion(QuestionViewModel model)
+        {
+            return View(model);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

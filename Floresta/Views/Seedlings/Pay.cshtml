@@ -1,7 +1,7 @@
 ﻿@model Floresta.ViewModels.PaymentViewModel
 
 <link rel="stylesheet" href="~/css/paymentStyles.css">
-<h1>Payment by @Model.Email</h1>
+<h1>Payment by @Model.Name @Model.Surname</h1>
 <h1>@Model.Seedling.Name</h1>
 <div class="checkout_form">
     <div class="card_number" id="card-container">
@@ -24,7 +24,7 @@
         </div>
     </div>
     <div>
-        <button class="btn" asp-action="Pay">Pay</button>
+        <a class="btn" asp-action="ConfirmPayment">Pay</a>
     </div>
 </div>
 

@@ -50,6 +50,8 @@ namespace Floresta.Controllers
                 var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
                 model = new PaymentViewModel
                 {
+                    Name = user.UserName,
+                    Surname = user.UserSurname,
                     Email = user.Email,
                     Seedling = seedling
                 };
@@ -62,8 +64,7 @@ namespace Floresta.Controllers
         }
 
         [Authorize]
-        [HttpPost]
-        public IActionResult Pay(string success)
+        public IActionResult ConfirmPayment(string success)
         {
             success = "Payment succeded";
             return Content(success);

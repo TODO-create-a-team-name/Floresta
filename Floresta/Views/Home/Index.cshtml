@@ -1,11 +1,12 @@
-﻿
+﻿@model Floresta.ViewModels.ShowUserViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
 
 @if (User.Identity.IsAuthenticated)
 {
-    <p>@User.Identity.Name</p>
+    <p>@Model.Name @Model.Surname </p>
+    <p>@Model.Email </p>
 
     <form method="post" asp-controller="Account" asp-action="Logout">
         <input type="submit" value="Log out" />

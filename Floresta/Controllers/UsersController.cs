@@ -51,7 +51,13 @@ namespace Floresta.Controllers
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email};
+            EditUserViewModel model = new EditUserViewModel 
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.UserName,
+                Surname = user.UserSurname
+            };
             return View(model);
         }
 
@@ -64,7 +70,8 @@ namespace Floresta.Controllers
                 if (user != null)
                 {
                     user.Email = model.Email;
-                    user.UserName = model.Email;
+                    user.UserName = model.Name;
+                    user.UserSurname = model.Surname;
 
                     var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
