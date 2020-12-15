@@ -41,6 +41,7 @@
         <div id="fordragging">
             <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
             <input type="button" class="btn btn-primary searchbut" id="searchid" value="Search" style="margin-top: 9px" />
+            <input type="button" class="btn" id="dropMarkers" value="Drop markers" style="margin-top: 9px" />
         </div>
         <div id="modal-map2" style="height:76%; width:76%; position: absolute; overflow:hidden;"> </div>
     </div>
@@ -57,6 +58,7 @@
             success: function (result) {
                 markers = result;
                 console.log(markers);
+
             }
         })
         
@@ -135,19 +137,14 @@
                 placeMarker(event.latLng, "Click title");
                 
             });
-            //this works, but responds to any action, throwing markers a lot of times
-            google.maps.event.addListener(map, 'idle', function () {
-                    for (var i = 0; i < markers.length; i++) {
-                        placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
-                        console.log("I was called blyat");
-                    }
-            });
             
 
             function handleEvent(event) {
                 document.getElementById('lat').value = event.latLng.lat();
                 document.getElementById('lng').value = event.latLng.lng();
             }
+
+            
 
             var marker = null;
             function placeMarker(location, title) {
@@ -159,7 +156,7 @@
                     draggable: true
                 });
 
-                marker.setMap(map);
+                
                 contentString = "<table><tr><th>Title<th></tr><tr><td>Title</td></tr></table>"
                 var infoWindow = new google.maps.InfoWindow({
                     content: contentString
@@ -173,17 +170,17 @@
                 latEl.value = marker.getPosition().lat();
                 marker.addListener('drag', handleEvent);
                 marker.addListener('dragend', handleEvent);
+                marker.setMap(map);
             }
             
-            function dropmarkers() {
-                //for (var i = 0; i < markers.length; i++) {
 
-                //    placemarker({ lat: parsefloat(markers[i].lat), lng: parsefloat(markers[i].lng) }, markers[i].title);
-                //    console.log("i was called blyat");
-                //}
-            }
+            document.getElementById('dropMarkers').onclick = function () {
+                for (var i = 0; i < markers.length; i++) {
 
-            dropmarkers();
+                    placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
+                    console.log("i was called");
+                }
+            };
         }
     </script>
 
