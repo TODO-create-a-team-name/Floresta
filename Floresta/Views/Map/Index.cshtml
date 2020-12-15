@@ -135,6 +135,14 @@
                 placeMarker(event.latLng, "Click title");
                 
             });
+            //this works, but responds to any action, throwing markers a lot of times
+            google.maps.event.addListener(map, 'idle', function () {
+                    for (var i = 0; i < markers.length; i++) {
+                        placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
+                        console.log("I was called blyat");
+                    }
+            });
+            
 
             function handleEvent(event) {
                 document.getElementById('lat').value = event.latLng.lat();
@@ -167,14 +175,15 @@
                 marker.addListener('dragend', handleEvent);
             }
             
-            function dropMarkers() {
-                for (var i = 0; i < markers.length; i++) {
+            function dropmarkers() {
+                //for (var i = 0; i < markers.length; i++) {
 
-                    placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
-                }
+                //    placemarker({ lat: parsefloat(markers[i].lat), lng: parsefloat(markers[i].lng) }, markers[i].title);
+                //    console.log("i was called blyat");
+                //}
             }
 
-            dropMarkers();
+            dropmarkers();
         }
     </script>
 
