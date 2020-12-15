@@ -6,30 +6,30 @@
     <div asp-validation-summary="ModelOnly"></div>
     <div>
         <label asp-for="Name"></label>
-        <input asp-for="Name" />
+        <input asp-for="Name"class="form-control" />
         <span asp-validation-for="Name"></span>
     </div>
     <div>
-        <label asp-for="Surname"></label>
-        <input asp-for="Surname" />
+        <label asp-for="Surname" ></label>
+        <input asp-for="Surname" class="form-control"/>
         <span asp-validation-for="Surname"></span>
     </div>
     <div>
         <label asp-for="Email"></label>
-        <input asp-for="Email" />
+        <input asp-for="Email" class="form-control" />
         <span asp-validation-for="Email"></span>
     </div>
     <div>
         <label asp-for="Password"></label>
-        <input asp-for="Password" />
+        <input asp-for="Password" class="form-control" />
         <span asp-validation-for="Password"></span>
     </div>
     <div>
         <label asp-for="PasswordConfirm"></label>
-        <input asp-for="PasswordConfirm" />
+        <input asp-for="PasswordConfirm"class="form-control" />
         <span asp-validation-for="PasswordConfirm"></span>
     </div>
     <div>
-        <input type="submit" value="Sign Up" />
+        <input type="submit" class="btn mt-3 btn-primary" value="Sign Up" />
     </div>
 </form>
