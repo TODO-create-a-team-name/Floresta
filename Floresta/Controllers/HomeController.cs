@@ -24,18 +24,21 @@ namespace Floresta.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+
             if (_signInManager.IsSignedIn(User))
             {
                 var user = await _userManager.GetUserAsync(User);
+                if(user != null) 
+                { 
                 var model = new ShowUserViewModel
                 {
-                    Name = user.UserName,
+                    Name = user.Name,
                     Surname = user.UserSurname,
                     Email = user.Email
                 };
-            if (user != null)
+
                 return View(model);
+                }
             }
             return View();
         }

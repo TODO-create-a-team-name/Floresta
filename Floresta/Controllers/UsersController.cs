@@ -27,7 +27,13 @@ namespace Floresta.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email};
+                User user = new User 
+                {
+                    Email = model.Email,
+                    UserName = model.Email,
+                    Name = model.Name,
+                    UserSurname = model.Surname
+                };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -55,7 +61,7 @@ namespace Floresta.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                Name = user.UserName,
+                Name = user.Name,
                 Surname = user.UserSurname
             };
             return View(model);
@@ -70,7 +76,8 @@ namespace Floresta.Controllers
                 if (user != null)
                 {
                     user.Email = model.Email;
-                    user.UserName = model.Name;
+                    user.UserName = model.Email;
+                    user.Name = model.Name;
                     user.UserSurname = model.Surname;
 
                     var result = await _userManager.UpdateAsync(user);
