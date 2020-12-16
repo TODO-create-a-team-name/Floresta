@@ -1,0 +1,24 @@
+﻿@model List<Question>
+
+<table class="table">
+    <tr>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Question</th>
+    </tr>
+    @foreach (var q in Model)
+    {
+        <tr>
+            <td>@q.User.Email</td>
+            <td>@q.User.Name</td>
+            <td>@q.User.UserSurname</td>
+            <td>@q.QuestionText</td>
+            <td>
+                <form method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>                    
+                </form>
+            </td>
+        </tr>
+    }
+</table>

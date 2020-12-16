@@ -1,11 +1,10 @@
 ﻿using Floresta.Models;
+using Floresta.Services;
 using Floresta.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,13 +12,15 @@ namespace Floresta.Controllers
 {
     public class HomeController : Controller
     {
-        SignInManager<User> _signInManager;
-        UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
+        private UserManager<User> _userManager;
+        private FlorestaDbContext _context;
 
-        public HomeController(SignInManager<User> signInManager, UserManager<User> userManager)
+        public HomeController(SignInManager<User> signInManager, UserManager<User> userManager, FlorestaDbContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -54,15 +55,48 @@ namespace Floresta.Controllers
         }
 
         [HttpPost]
-        public IActionResult AskQuestion(QuestionViewModel model)
+        public async Task<IActionResult> AskQuestion(QuestionViewModel model)
         {
-            return View(model);
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                Question question = new Question
+                {
+                    QuestionText = model.Question
+                };
+                _context.Questions.Add(question);
+                user.Questions.Add(question);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return RedirectToAction("Login", "Account");
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetQuestions()
+        {
+            var questions = await _context.Questions.Include(c => c.User).ToListAsync();
+            return View(questions);
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Authorize(Roles = "admin")]
+        public IActionResult AnswerQuestion()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> AnswerQuestion(int id, AnswerQuestionViewModel model)
+        {
+            Question question = _context.Questions.FirstOrDefault(x => id == x.Id);
+            var user = _context.Users.FirstOrDefault(x => question.UserId == x.Id);
+            EmailService emailService = new EmailService();
+
+            await emailService.SendEmailAsync(user.Email, "The answer for your question",
+                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.AnswerMessage}");
+
+            return Content("You've answered for the question");
         }
     }
 }
