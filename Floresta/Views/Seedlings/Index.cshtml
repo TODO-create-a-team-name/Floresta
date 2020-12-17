@@ -2,6 +2,7 @@
 @model IEnumerable<Floresta.Models.Seedling>
 @{
     ViewBag.Title = "Seedlings List";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
 
 @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))

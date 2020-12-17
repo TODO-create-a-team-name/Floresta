@@ -1,34 +1,13 @@
-﻿@model Floresta.ViewModels.ShowUserViewModel
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+
 @{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
-
-@if (User.Identity.IsAuthenticated)
-{
-    <h1 class="card-title">Floresta</h1>
-    <p>@Model.Name @Model.Surname </p>
-    <br />
-    <p>@Model.Email </p>
-
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Log out" />
-    </form>
-}
-else
-{
-    <div class="jumbotron bg-light">
-
-        <h1 class="display-4">Morpheus</h1>
-        <p class="lead">
-            Take the blue pill - and the story ends. You will wake up in your bed and believe that it was a dream. Take the red pill and enter the wonderland. I'll show you if the rabbit hole is deep.
-        </p>
-        <hr class="my-4">
-        <p>
-            Make a choice!
-        </p>
-        <a asp-controller="Account" class="btn btn-primary " asp-action="Login">Sign in</a>
-        <a asp-controller="Account" class="btn btn-danger " asp-action="Register">Sign Up</a>
-
+    <div ba>
+        
     </div>
 
-}
+
+
+    @Html.ActionLink("Жми здесь", "Index", "Admin_Home")
+    <h1>H2</h1>

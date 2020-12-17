@@ -1,6 +1,7 @@
 ﻿@model Floresta.ViewModels.CreateUserViewModel
 @{
     ViewBag.Title = "Add User";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
 <form asp-action="Create" asp-controller="Users">
     <div asp-validation-summary="All" class="text-danger"></div>
