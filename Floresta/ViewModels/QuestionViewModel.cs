@@ -1,11 +1,13 @@
 ﻿
 
+using Floresta.Models;
+using System.ComponentModel.DataAnnotations;
+
 namespace Floresta.ViewModels
 {
     public class QuestionViewModel
-    {
-        public string Email { get; set; }
-
+    { 
+        [Required]
         public string Question { get; set; }
     }
 }

@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using Floresta.Models;
+using Floresta.Services;
+using Floresta.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,12 +13,90 @@ namespace Floresta.Controllers
     public class HomeController : Controller
     {
         public IActionResult Index()
+        private SignInManager<User> _signInManager;
+        private UserManager<User> _userManager;
+        private FlorestaDbContext _context;
+
+        public HomeController(SignInManager<User> signInManager, UserManager<User> userManager, FlorestaDbContext context)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                var user = await _userManager.GetUserAsync(User);
+                if(user != null) 
+                { 
+                var model = new ShowUserViewModel
+                {
+                    Name = user.Name,
+                    Surname = user.UserSurname,
+                    Email = user.Email
+                };
+
+                return View(model);
+                }
+            }
+            return View();
+        }
+
+        public IActionResult Privacy()
         {
             return View();
         }
         public IActionResult Index1()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AskQuestion(QuestionViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                Question question = new Question
+                {
+                    QuestionText = model.Question
+                };
+                _context.Questions.Add(question);
+                user.Questions.Add(question);
+                _context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return RedirectToAction("Login", "Account");
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> GetQuestions()
+        {
+            var questions = await _context.Questions.Include(c => c.User).ToListAsync();
+            return View(questions);
+        }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult AnswerQuestion()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> AnswerQuestion(int id, AnswerQuestionViewModel model)
+        {
+            Question question = _context.Questions.FirstOrDefault(x => id == x.Id);
+            var user = _context.Users.FirstOrDefault(x => question.UserId == x.Id);
+            EmailService emailService = new EmailService();
+
+            await emailService.SendEmailAsync(user.Email, "The answer for your question",
+                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.AnswerMessage}");
+
+            return RedirectToAction("GetQuestions");
         }
     }
 }

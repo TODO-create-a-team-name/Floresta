@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Floresta.Models
 {
@@ -10,5 +11,6 @@ namespace Floresta.Models
 
         public DbSet<Seedling> Seedlings { get; set; }
         public DbSet<Marker> Markers { get; set; }
+        public DbSet<Question> Questions { get; set; }
     }
 }
