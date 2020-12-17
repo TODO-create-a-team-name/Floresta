@@ -1,5 +1,4 @@
-﻿
-@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 
 <!DOCTYPE html>
 
@@ -13,9 +12,6 @@
 </head>
 <body>
     <header>
-        @*<div class="scaling-svg-container">
-            <img class="scaling-svg" src="~/images/Backgroud site.svg" /> 
-        </div>*@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
             <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index">Floresta</a>
             <div class="container">
@@ -37,14 +33,26 @@
                     </li>
                     <li class=" nav_container">
                         <div class="menu_conteiner">
-                            <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Задати запитання</a>
+                            <a class="nav_item_text" asp-controller="Home" asp-action="AskQuestion">Задати запитання</a>
                         </div>
                     </li>
                 </ul>
             </div>
+            @if (!signInManager.IsSignedIn(User))
+            {
             <div class="account_container">
-                <button class="account_button button_text"> Вхід/Реєстрація</button>
+
+                 <a class="account_button button_text" asp-controller="Account" asp-action="Login">Вхід/Реєстрація</a>
             </div>
+            }
+            else 
+            { 
+        <div class="account_container">
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <input class="account_button button_text" type="submit" value="Вихід" />
+            </form>
+        </div>
+            }
         </nav>
     </header>
 

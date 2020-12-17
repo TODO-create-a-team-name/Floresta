@@ -12,7 +12,6 @@ namespace Floresta.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
         private SignInManager<User> _signInManager;
         private UserManager<User> _userManager;
         private FlorestaDbContext _context;
@@ -50,6 +49,11 @@ namespace Floresta.Controllers
             return View();
         }
         public IActionResult Index1()
+        {
+            return View();
+        }
+
+        public IActionResult AskQuestion()
         {
             return View();
         }

@@ -101,7 +101,7 @@ namespace Floresta.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Admin_Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -116,7 +116,7 @@ namespace Floresta.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Admin_Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
