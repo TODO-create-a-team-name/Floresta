@@ -13,5 +13,6 @@ namespace Floresta.Models
         public string Height { get; set; }
         public int Amount { get; set; }
         public string Description { get; set; }
+        public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

@@ -11,5 +11,8 @@ namespace Floresta.Models
         public string Title { get; set; }
         public string Lat { get; set; }
         public string Lng { get; set; }
+        public int PlantCount { get; set; }
+        public bool isPlantingFinished { get; set; }
+        public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }

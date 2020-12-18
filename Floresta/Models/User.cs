@@ -11,5 +11,6 @@ namespace Floresta.Models
         [Required]
         public string UserSurname { get; set; }
         public List<Question> Questions { get; set; } = new List<Question>();
+        public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }
