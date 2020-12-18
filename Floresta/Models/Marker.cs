@@ -15,5 +15,8 @@ namespace Floresta.Models
         public string Lat { get; set; }
         [Required(ErrorMessage = "The Lng filed is required")]
         public string Lng { get; set; }
+        public int PlantCount { get; set; }
+        public bool isPlantingFinished { get; set; }
+        public List<Payment> Payments { get; set; } = new List<Payment>();
     }
 }
