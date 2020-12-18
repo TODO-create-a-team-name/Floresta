@@ -1,4 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
+    var menu = document.querySelector('.nav_menu'),
+        icon = document.querySelector('.animated_menu_icon'),
+        menuButton = document.querySelector('#menu_button_container');
 
-// Write your JavaScript code.
+    menuButton.onclick = function () {
+        if (menu.style.display !== 'none') {
+            menu.classList.toggle('menu-opened');
+            icon.classList.toggle('menu-opened');
+        }
+        else {
+            menu.classList.remove('menu-opened');
+            icon.classList.remove('menu-opened');
+        }
+    }

@@ -12,47 +12,53 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm mb-3">
+        <nav class="adaptive_navbar  navbar-expand-sm">
             <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index">Floresta</a>
-            <div class="container">
-                <ul class="navbar-nav flex-grow-1 nav_item_postion">
-                    <li class="nav_container">
-                        <div class="menu_conteiner">
-                            <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Приєднатися до команди</a>
-                        </div>
-                    </li>
-                    <li class=" nav_container">
-                        <div class="menu_conteiner">
-                            <a class="nav_item_text" asp-area="" asp-controller="Home" asp-action="Index1">Новини</a>
-                        </div>
-                    </li>
-                    <li class=" nav_container">
-                        <div class="menu_conteiner">
-                            <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Про нас</a>
-                        </div>
-                    </li>
-                    <li class=" nav_container">
-                        <div class="menu_conteiner">
-                            <a class="nav_item_text" asp-controller="Home" asp-action="AskQuestion">Задати запитання</a>
-                        </div>
-                    </li>
-                </ul>
+            <div class="nav_menu">
+                <div class="container">
+                    <ul class="navbar-nav flex-grow-1 nav_item_postion ">
+                        <li class="nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Приєднатися до команди</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-area="" asp-controller="Home" asp-action="Index1">Новини</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Про нас</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="AskQuestion">Задати запитання</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                @if (!signInManager.IsSignedIn(User))
+                {
+                    <div class="account_container">
+                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Login">
+                            <input class="account_button button_text" type="submit" value="Вхід/Реєстрація" />
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="account_container">
+                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
+                            <input class="account_button button_text" type="submit" value="Вихід" />
+                        </form>
+                    </div>
+                }
             </div>
-            @if (!signInManager.IsSignedIn(User))
-            {
-            <div class="account_container">
-
-                 <a class="account_button button_text" asp-controller="Account" asp-action="Login">Вхід/Реєстрація</a>
-            </div>
-            }
-            else 
-            { 
-        <div class="account_container">
-            <form method="post" asp-controller="Account" asp-action="Logout">
-                <input class="account_button button_text" type="submit" value="Вихід" />
-            </form>
-        </div>
-            }
+            <button id="menu_button_container">
+                <div class="animated_menu_icon" />
+            </button>
         </nav>
     </header>
 
