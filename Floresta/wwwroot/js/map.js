@@ -7,11 +7,9 @@ $.ajax({
     dataType: "json",
     success: function (result) {
         markers = result;
-        console.log(markers);
-
     }
 })
-
+var titleEl = document.getElementById('title');
 var latEl = document.getElementById('lat');
 var lngEl = document.getElementById('lng');
 function initMap() {
@@ -23,11 +21,11 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         },
     });
-
     var input = document.getElementById('pac-input');
     var button = document.getElementById('searchid');
     var dropMarkers = document.getElementById("dropMarkers");
     var searchBox = new google.maps.places.SearchBox(input);
+
 
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
@@ -104,14 +102,10 @@ function initMap() {
             draggable: true
         });
         // show info window
-        contentString = "<table><tr><th>Title<th></tr><tr><td>Title</td></tr></table>"
-        var infoWindow = new google.maps.InfoWindow({
-            content: contentString
-        })
-
-        marker.addListener('click', function () {
-            infoWindow.open(map, marker);
-        });
+        //const infowindow = new google.maps.InfoWindow();
+        //marker.addListener("click", () => {
+        //    infowindow.open(markers.get("map"), markers);
+        //});
 
         lngEl.value = marker.getPosition().lng();
         latEl.value = marker.getPosition().lat();
@@ -119,13 +113,50 @@ function initMap() {
         marker.addListener('dragend', handleEvent);
         marker.setMap(map);
     }
-    //drop markers 
+    ///get markers from database
     dropMarkers.addEventListener("click", drop);
-
     function drop() {
-        for (var i = 0; i < markers.length; i++) {
-
-            placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
+        for (let i = 0; i < markers.length; ++i) {
+            const marker = new google.maps.Marker({
+                position: {
+                    lat: parseFloat(markers[i].lat),
+                    lng: parseFloat(markers[i].lng),
+                },
+                map: map,
+                id: markers[i].id,
+            });
+            info(marker, markers[i].title);
         }
-    };
+    }
+    function info(marker, title) {
+        const infowindow = new google.maps.InfoWindow({
+            content: title,
+        });
+        marker.addListener("click", () => {
+            
+            infowindow.open(marker.get("map"), marker);
+            titleEl.value = infowindow.content;
+        });
+    }
+
+        //drop markers 
+        // dropMarkers.addEventListener("click", drop);
+        //for (let i = 0; i < markers.length; ++i) {
+        //    const marker = new google.maps.Marker({
+        //        position: {
+        //            lat: parseFloat(markers[i].lat),
+        //            lng: parseFloat(markers[i].lng),
+        //        },
+        //        map: map,
+        //    });
+        //function drop() {
+        //    for (var i = 0; i < markers.length; i++) {
+
+        //        placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
+        //        console.log("asdf");
+        //    }
+        //}
 }
+
+// Attaches an info window to a marker with the provided message. When the
+// marker is clicked, the info window will open with the secret message.

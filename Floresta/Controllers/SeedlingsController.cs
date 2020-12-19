@@ -40,28 +40,28 @@ namespace Floresta.Controllers
             return RedirectToAction("Index");
         }
 
-        [Authorize]
-        public async Task<IActionResult> Pay(int id)
-        {
-            PaymentViewModel model;
-            if (_signInManager.IsSignedIn(User))
-            {
-                var user = await _userManager.GetUserAsync(User);
-                var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
-                model = new PaymentViewModel
-                {
-                    Name = user.UserName,
-                    Surname = user.UserSurname,
-                    Email = user.Email,
-                    Seedling = seedling
-                };
-            }
-            else
-            {
-                return RedirectToAction("Login", "Account");
-            }
-            return View(model);
-        }
+        //[Authorize]
+        //public async Task<IActionResult> Pay(int id)
+        //{
+        //    PaymentViewModel model;
+        //    if (_signInManager.IsSignedIn(User))
+        //    {
+        //        var user = await _userManager.GetUserAsync(User);
+        //        var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
+        //        model = new PaymentViewModel
+        //        {
+        //            Name = user.UserName,
+        //            Surname = user.UserSurname,
+        //            Email = user.Email,
+        //            Seedling = seedling
+        //        };
+        //    }
+        //    else
+        //    {
+        //        return RedirectToAction("Login", "Account");
+        //    }
+        //    return View(model);
+        //}
 
         [Authorize]
         public IActionResult ConfirmPayment(string success)
