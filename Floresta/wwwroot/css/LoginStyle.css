@@ -1,0 +1,130 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+html{
+    height: 100%;
+}
+body {
+    background: url('/images/Login Bg.svg') center center no-repeat;
+    background-size: cover;
+}
+.background {
+  
+}
+.card {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 300px;
+    height: 350px;
+    right: 15%;
+    top: 25%;
+    background: #ABCD2D;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+.form {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+    .form .form_item:nth-child(1) {
+        margin-top: 30px;
+
+    }
+    .form .form_item:nth-child(2) {
+        margin-top: 15px;
+    }
+.form_item {
+    margin-top: 10px;
+    display: inline-grid;
+}
+
+
+.form_control {
+    padding-left: 15px;
+    width: 250px;
+    height: 35px;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+    .form_control::placeholder {
+        font-style: normal;
+        font-weight: normal;
+        margin-left: 5px;
+        font-size: 16px;
+        color: #ABCD2D;
+    }
+
+
+span {
+    color: white;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+
+.form_buttons {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    height: 40px;
+    width: 250px;
+    position: absolute;
+    display: inline-block;
+    bottom: -10px;
+    right: -25px;    text-align: center;
+}
+
+.cancel_button {
+
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 2px;
+    color: #7F7F7F;
+    font-size: 16px;
+}
+
+.login_button {
+    color: white;
+    font-size: 16px;
+    margin-right: -20px;
+    background: #EF8C39;
+    height: 40px;
+    border: none;
+    width: 150px;
+    border-radius: 18px;
+}
+
+.fogot_password {
+    color: white;
+    font-size: 16px;
+}
+
+.Line_else{
+    color: white;
+}
+    .Line_else::after {
+        content: '';
+        width: 110px;
+        height: 4px;
+        margin-top: 8px;
+        left: 15px;
+        background-color: white;
+        position: absolute;
+        border-radius: 5px;
+    }
+    .Line_else::before {
+        content: '';
+        width: 110px;
+        height: 4px;
+        margin-top: 8px;
+        right: 15px;
+        background-color: white;
+        position: absolute;
+        border-radius: 5px;
+    }
