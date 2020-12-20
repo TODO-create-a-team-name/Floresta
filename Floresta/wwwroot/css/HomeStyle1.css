@@ -48,7 +48,7 @@ header {
     }
 
 .account_button {
-    margin-top: 15px;
+    margin-left: 55px;
     background: #819F00;
     border-radius: 19px;
     border: none;
@@ -60,6 +60,11 @@ header {
 
 
 .account_container {
+    right: 10px;
+    top: 20px;
+    position: absolute;
+    min-width: 130px;
+    width: auto;
     justify-content: end;
 }
 
@@ -82,6 +87,7 @@ header {
 }
 
 .nav_item_postion {
+    margin-right: 100px;
     justify-content: center;
     text-align: center;
 }
@@ -189,7 +195,28 @@ header {
     display: inline-flex;
 }
 
-@media only screen and (max-height: 550px), (max-width: 800px) {
+.admin_panel_box {
+    margin-top: 5px;
+    width: 132px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.admin_panel {
+    border-radius: 19px;
+    text-decoration: none;
+    padding: 6px 16px;
+    background-color: #EF8C39;
+    color: white;
+}
+
+    .admin_panel:hover {
+        color: white;
+        text-decoration: none;
+        background-color: #FD8118;
+    }
+
+@media only screen and (max-height: 550px), (max-width: 1050px) {
     .adaptive_navbar {
         position: fixed;
         top: 0;
@@ -215,6 +242,7 @@ header {
     }
 
     .nav_item_postion {
+        margin-right: unset;
         display: block !important;
         flex-direction: column-reverse !important;
     }
@@ -223,6 +251,27 @@ header {
             margin-top: 10px !important;
             margin-left: 0px !important;
         }
+
+    .account_container {
+        position: relative;
+        top: unset;
+        right: unset;
+        display: flex;
+        justify-content: center;
+    }
+
+    .account_button {
+        margin-top: 15px;
+        margin-left: 10px;
+    }
+
+    .admin_panel_box {
+        margin-top: 19px;
+        margin-left: 10px;
+        position: relative;
+        right: unset;
+        text-align: center;
+    }
 
     .Login_form {
         padding-bottom: 5px;
@@ -257,6 +306,7 @@ header {
         height: 0px;
     }
 }
+
 @keyframes open-menu-animation {
     0% {
         height: 0px;

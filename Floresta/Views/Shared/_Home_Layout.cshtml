@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/css/HomeStyle.css" />
+    <link rel="stylesheet" href="~/css/HomeStyle1.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 </head>
@@ -50,9 +50,16 @@
                 else
                 {
                     <div class="account_container">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                        {
+                            <div class="admin_panel_box">
+                                <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>
+                            </div>
+                        }
                         <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
                             <input class="account_button button_text" type="submit" value="Вихід" />
                         </form>
+
                     </div>
                 }
             </div>
