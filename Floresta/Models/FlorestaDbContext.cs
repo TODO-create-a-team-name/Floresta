@@ -12,5 +12,6 @@ namespace Floresta.Models
         public DbSet<Seedling> Seedlings { get; set; }
         public DbSet<Marker> Markers { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }

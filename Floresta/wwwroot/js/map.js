@@ -7,13 +7,20 @@ $.ajax({
     dataType: "json",
     success: function (result) {
         markers = result;
+        console.log(markers);
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
     }
 })
 var titleEl = document.getElementById('title');
 var latEl = document.getElementById('lat');
 var lngEl = document.getElementById('lng');
+
 function initMap() {
     var uluru = { lat: 48.5405822, lng: 24.9988393 };
+
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: uluru,
@@ -21,6 +28,7 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         },
     });
+
     var input = document.getElementById('pac-input');
     var button = document.getElementById('searchid');
     var dropMarkers = document.getElementById("dropMarkers");
@@ -101,11 +109,6 @@ function initMap() {
             title: title,
             draggable: true
         });
-        // show info window
-        //const infowindow = new google.maps.InfoWindow();
-        //marker.addListener("click", () => {
-        //    infowindow.open(markers.get("map"), markers);
-        //});
 
         lngEl.value = marker.getPosition().lng();
         latEl.value = marker.getPosition().lat();
@@ -123,6 +126,8 @@ function initMap() {
                     lng: parseFloat(markers[i].lng),
                 },
                 map: map,
+                title: markers[i].title,
+                plantCount: markers[i].plantCount,
                 id: markers[i].id,
             });
             info(marker, markers[i].title);
@@ -133,30 +138,19 @@ function initMap() {
             content: title,
         });
         marker.addListener("click", () => {
-            
+           
             infowindow.open(marker.get("map"), marker);
-            titleEl.value = infowindow.content;
+            $("#markerIdInput").val(marker.id);
+            $("#markerTitleInput").val(marker.title);
+            $("#plantCountInput").attr({
+                "max": marker.plantCount,
+                "min": 1
+            });
         });
     }
-
-        //drop markers 
-        // dropMarkers.addEventListener("click", drop);
-        //for (let i = 0; i < markers.length; ++i) {
-        //    const marker = new google.maps.Marker({
-        //        position: {
-        //            lat: parseFloat(markers[i].lat),
-        //            lng: parseFloat(markers[i].lng),
-        //        },
-        //        map: map,
-        //    });
-        //function drop() {
-        //    for (var i = 0; i < markers.length; i++) {
-
-        //        placeMarker({ lat: parseFloat(markers[i].lat), lng: parseFloat(markers[i].lng) }, markers[i].title);
-        //        console.log("asdf");
-        //    }
-        //}
 }
+
+
 
 // Attaches an info window to a marker with the provided message. When the
 // marker is clicked, the info window will open with the secret message.

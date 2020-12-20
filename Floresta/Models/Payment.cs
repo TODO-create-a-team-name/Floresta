@@ -13,9 +13,10 @@ namespace Floresta.Models
         public User User { get; set; }
         public int MarkerId { get; set; }
         public Marker Marker { get; set; }
-        public List<Seedling> Seedlings { get; set; } = new List<Seedling>();
-        public List<SeedlingAmount> SeedlingsAmounts { get; set; }
+        public int SeedlingId { get; set; }
+        public Seedling Seedling { get; set; }
+        public int PurchasedAmount { get; set; }
         public double Price { get; set; }
-        public bool isPaymentSucceded { get; set; } = false;
+        public bool IsPaymentSucceded { get; set; } = false;
     }
 }

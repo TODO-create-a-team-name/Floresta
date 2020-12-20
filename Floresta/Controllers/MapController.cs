@@ -1,5 +1,7 @@
 ﻿using Floresta.Models;
+using Floresta.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +19,15 @@ namespace Floresta.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new PaymentViewModel();
+            model.Seedlings = _context.Seedlings
+                .Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = $"{x.Name} price: {x.Price}"
+                })
+                .ToList();
+            return View(model);
         }
 
         [HttpPost]
