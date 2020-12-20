@@ -20,7 +20,7 @@
 <body>
     @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
     {
-        <form id="addMarkerForm" asp-action="index" asp-controller="map">
+        <form asp-action="index" asp-controller="map">
             <div>
                 <div class="validation" asp-validation-summary="All"></div>
                 <div class="form-group">
@@ -29,13 +29,18 @@
                     <span asp-validation-for="Title"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="PlantCount" class="control-label">PlantCount</label>
+                    <input type="number" asp-for="PlantCount" class="form-control" min="1"  />
+                    <span asp-validation-for="PlantCount"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Lng" class="control-label">Lng</label>
-                    <input id="lng" type="text" asp-for="Lng" class="form-control" />
+                    <input id="lng" type="text" asp-for="Lng" class="form-control" readonly />
                     <span asp-validation-for="Lng"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Lat" class="control-label">Lat</label>
-                    <input id="lat" type="text" asp-for="Lat" class="form-control" />
+                    <input id="lat" type="text" asp-for="Lat" class="form-control"readonly />
                     <span asp-validation-for="Lat"></span>
                 </div>
                 <div class="form-group">
@@ -44,31 +49,38 @@
             </div>
         </form>
     }
-    <form id="buy" asp-action="Index" asp-controller="Payment">
+<form asp-action="Index" asp-controller="Payment">
+    <div>
+        <div class="validation" asp-validation-summary="All"></div>
         <div class="form-group">
             <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
+
         </div>
         <div class="form-group">
-            <input id="markerTitleInput" type="text" />
+
+            <label asp-for="Title" class="control-label">Title</label>
+            <input id="markerTitleInput" type="text" asp-for="Title" class="form-control" readonly/>
+            <span asp-validation-for="Title"></span>
         </div>
         <div class="form-group">
+            <label asp-for="SeedlingId" class="control-label">SeedlingId</label>
             <select asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>
         </div>
         <div class="form-group">
-            <input id="plantCountInput" type="number" asp-for="PlantCount" min="0" max="0"/>
+            <label asp-for="PlantCount" class="control-label">PlantCount</label>
+            <input id="plantCountInput" type="number" asp-for="PlantCount" min="0" max="0" />
         </div>
         <div class="form-group">
             <input type="submit" value="Purchase" class="btn btn-success" />
         </div>
-    </form>
+    </div>
+</form>
 
     <div id="map-dialog1">
-        <div id="fordragging">
+        <div>
             <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
-            <input type="button" class="btn btn-primary searchbut" id="searchid" value="Search" style="margin-top: 9px" />
-            <input type="button" class="btn" id="dropMarkers" value="Drop markers" style="margin-top: 9px" />
+            <input type="button" class="btn btn-success" id="dropMarkers" value="Drop markers" style="margin-top: 9px" />
         </div>
-        <div id="modal-map2" style="height:76%; width:76%; position: absolute; overflow:hidden;"> </div>
     </div>
 
     <div id="map"></div>
@@ -77,6 +89,11 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/map.js"></script>
+    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+    {
+        <script src="~/js/adminMap.js"></script>
+    }
+        
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
     </script>

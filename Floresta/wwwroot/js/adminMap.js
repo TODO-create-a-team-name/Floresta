@@ -14,6 +14,8 @@ $.ajax({
     }
 })
 var titleEl = document.getElementById('title');
+var latEl = document.getElementById('lat');
+var lngEl = document.getElementById('lng');
 
 function initMap() {
     var uluru = { lat: 48.5405822, lng: 24.9988393 };
@@ -34,6 +36,7 @@ function initMap() {
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(dropMarkers);
+
     var searchMarkers = [];
     // Listern for the event fired when the user selecets a predition and retrieve more details
     searchBox.addListener('places_changed', function () {
@@ -80,6 +83,33 @@ function initMap() {
 
     });
 
+    google.maps.event.addListener(map, 'click', function (event) {
+        placeMarker(event.latLng, "Click title");
+
+    });
+
+
+    function handleEvent(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    }
+
+    var marker = null;
+    function placeMarker(location, title) {
+
+        marker = new google.maps.Marker({
+            position: location,
+            animation: google.maps.Animation.DROP,
+            title: title,
+            draggable: true
+        });
+
+        lngEl.value = marker.getPosition().lng();
+        latEl.value = marker.getPosition().lat();
+        marker.addListener('drag', handleEvent);
+        marker.addListener('dragend', handleEvent);
+        marker.setMap(map);
+    }
     ///get markers from database
     dropMarkers.addEventListener("click", drop);
     function drop() {
@@ -109,7 +139,9 @@ function initMap() {
     function info(marker, title) {
         const infowindow = new google.maps.InfoWindow({
             content: title,
+
         });
+        
         marker.addListener("click", () => {
            
             infowindow.open(marker.get("map"), marker);
@@ -121,4 +153,5 @@ function initMap() {
             });
         });
     }
+    
 }
