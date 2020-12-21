@@ -3,6 +3,8 @@ using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,6 +42,22 @@ namespace Floresta.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id != null)
+            {
+                var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == id);
+                return View(seedling);
+            }
+                return NotFound();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> Edit(Seedling seedling)
+        {
+            _context.Seedlings.Update(seedling);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

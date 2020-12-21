@@ -27,10 +27,20 @@ namespace Floresta
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FlorestaDbContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+            {
+                services.AddDbContext<FlorestaDbContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("RemoteConnection")));
+            }
+            else
+            {
+                services.AddDbContext<FlorestaDbContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            }
 
-            services.AddIdentity<User, IdentityRole>(options =>
+            services.BuildServiceProvider().GetService<FlorestaDbContext>().Database.Migrate();
+
+                services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
