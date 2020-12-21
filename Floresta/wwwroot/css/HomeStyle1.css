@@ -216,6 +216,16 @@ header {
         background-color: #FD8118;
     }
 
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-height: 550px), (max-width: 1050px) {
     .adaptive_navbar {
         position: fixed;
