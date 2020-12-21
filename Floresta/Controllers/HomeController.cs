@@ -98,5 +98,43 @@ namespace Floresta.Controllers
 
             return RedirectToAction("GetQuestions");
         }
+
+        [Authorize(Roles = "admin")]
+        public IActionResult Purchases()
+        {
+            var purchases = _context
+                .Payments
+                .Include(u => u.User)
+                .Include(m => m.Marker)
+                .Include(s => s.Seedling)
+                .ToList();
+
+            return View(purchases);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> Purchases(int? id)
+        {
+            if (id != null)
+            {
+                var purchase = _context.Payments.FirstOrDefault(x => x.Id == id);
+                var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == purchase.SeedlingId);
+                if(seedling.Amount > 0)
+                {
+                    seedling.Amount -= purchase.PurchasedAmount;
+                    _context.Update(seedling);
+                }
+                purchase.IsPaymentSucceded = true;
+                _context.Update(purchase);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Purchases", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+            
+        }
     }
 }

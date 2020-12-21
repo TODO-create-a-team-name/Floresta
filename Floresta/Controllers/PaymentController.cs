@@ -20,6 +20,7 @@ namespace Floresta.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
+        [HttpGet]
         public async Task<IActionResult> Index(PaymentViewModel m)
         {
             if (_signInManager.IsSignedIn(User))
@@ -29,6 +30,8 @@ namespace Floresta.Controllers
                 var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == m.SeedlingId);
                 var model = new ConfirmPaymentViewModel()
                 {
+                    MarkerId = m.MarkerId,
+                    SeedlingId = m.SeedlingId,
                     MarkerTitle = marker.Title,
                     PurchasedAmount = m.PlantCount,
                     Price = m.PlantCount * seedling.Price,
@@ -48,21 +51,21 @@ namespace Floresta.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ConfirmPaymentViewModel model)
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //var marker = await _context.Markers.FirstOrDefaultAsync(x => x.Id == paymentViewModel.MarkerId);
-            //var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == paymentViewModel.SeedlingId);
-            //var payment = new Payment
-            //{
-            //    User = user,
-            //    Marker = marker,
-            //    Seedling = seedling,
-            //    PurchasedAmount = paymentViewModel.PlantCount,
-            //    Price = paymentViewModel.PlantCount * seedling.Price
-            //};
-            //_context.Add(payment);
-            //_context.SaveChanges();
+            var user = await _userManager.GetUserAsync(User);
+            var marker = await _context.Markers.FirstOrDefaultAsync(x => x.Id == model.MarkerId);
+            var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == model.SeedlingId);
+            var payment = new Payment
+            {
+                User = user,
+                Marker = marker,
+                Seedling = seedling,
+                PurchasedAmount = model.PurchasedAmount,
+                Price = model.Price
+            };
+            _context.Add(payment);
+            _context.SaveChanges();
             return RedirectToAction("Index", "Map");
         }
     }

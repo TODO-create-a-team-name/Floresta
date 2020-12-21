@@ -43,5 +43,10 @@ namespace Floresta.Controllers
             var markers = _context.Markers.ToList();
             return new JsonResult(markers);
         }
+        public JsonResult GetSeedlings()
+        {
+            var seedlings = _context.Seedlings.ToList();
+            return new JsonResult(seedlings);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿var markers = [];
+var seedlings = [];
 
 $.ajax({
     type: "GET",
@@ -13,6 +14,22 @@ $.ajax({
         alert('Error - ' + errorMessage);
     }
 })
+
+$.ajax({
+    type: "GET",
+    url: "Map/GetSeedlings",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        seedlings = result;
+        console.log(seedlings);
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
+
 var titleEl = document.getElementById('title');
 var latEl = document.getElementById('lat');
 var lngEl = document.getElementById('lng');
@@ -147,10 +164,29 @@ function initMap() {
             infowindow.open(marker.get("map"), marker);
             $("#markerIdInput").val(marker.id);
             $("#markerTitleInput").val(marker.title);
-            $("#plantCountInput").attr({
-                "max": marker.plantCount,
-                "min": 1
-            });
+
+            var seedlingId = $("#seedlingsDropdown option:selected").val();
+            
+            var seedling;
+
+            for (var i = 0; i < seedlings.length; i++) {
+                if (seedlings[i].id == seedlingId) {
+                    seedling = seedlings[i];
+                }
+                break;
+            }
+            var count;
+            if (seedling.amount >= marker.plantCount) {
+                count = marker.plantCount;
+            }
+            else if (marker.plantCount > seedling.amount) {
+                count = seedling.amount;
+            }
+
+                $("#plantCountInput").attr({
+                    "max": count,
+                    "min": 1
+                });
         });
     }
     
