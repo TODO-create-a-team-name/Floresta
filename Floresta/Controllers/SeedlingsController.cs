@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Floresta.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class SeedlingsController : Controller
     {
         private FlorestaDbContext _context;
@@ -26,7 +27,6 @@ namespace Floresta.Controllers
             return View(list);
         }
 
-        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             return View();
@@ -40,34 +40,6 @@ namespace Floresta.Controllers
             return RedirectToAction("Index");
         }
 
-        //[Authorize]
-        //public async Task<IActionResult> Pay(int id)
-        //{
-        //    PaymentViewModel model;
-        //    if (_signInManager.IsSignedIn(User))
-        //    {
-        //        var user = await _userManager.GetUserAsync(User);
-        //        var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
-        //        model = new PaymentViewModel
-        //        {
-        //            Name = user.UserName,
-        //            Surname = user.UserSurname,
-        //            Email = user.Email,
-        //            Seedling = seedling
-        //        };
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Login", "Account");
-        //    }
-        //    return View(model);
-        //}
 
-        [Authorize]
-        public IActionResult ConfirmPayment(string success)
-        {
-            success = "Payment succeded";
-            return Content(success);
-        }
     }
 }
