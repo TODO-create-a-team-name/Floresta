@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Floresta.Models.Payment>
-
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
 <table class="table">
     <tr>
         <td>User Name</td>
@@ -20,7 +22,7 @@
             <td>@item.Marker.Title</td>
             <td>@item.PurchasedAmount</td>
             <td>@item.Price</td>
-            
+
             <td>
                 @if (!item.IsPaymentSucceded)
                 {
@@ -34,8 +36,8 @@
                 {
                     <label class="text-success">Confirmed</label>
                 }
-                </td>
-            
+            </td>
+
 
         </tr>
     }

@@ -1,5 +1,7 @@
 ﻿@model List<Question>
-
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
 <table class="table">
     <tr>
         <th>Email</th>
@@ -16,7 +18,7 @@
             <td>@q.QuestionText</td>
             <td>
                 <form method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>                    
+                    <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
                 </form>
             </td>
         </tr>
