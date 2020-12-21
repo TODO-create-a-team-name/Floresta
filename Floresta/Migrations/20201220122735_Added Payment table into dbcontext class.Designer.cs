@@ -4,14 +4,16 @@ using Floresta.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Floresta.Migrations
 {
     [DbContext(typeof(FlorestaDbContext))]
-    partial class FlorestaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201220122735_Added Payment table into dbcontext class")]
+    partial class AddedPaymenttableintodbcontextclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,29 +58,21 @@ namespace Floresta.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<bool>("IsPaymentSucceded")
-                        .HasColumnType("bit");
-
                     b.Property<int>("MarkerId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("PurchasedAmount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeedlingId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isPaymentSucceded")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MarkerId");
-
-                    b.HasIndex("SeedlingId");
 
                     b.HasIndex("UserId");
 
@@ -131,6 +125,26 @@ namespace Floresta.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Seedlings");
+                });
+
+            modelBuilder.Entity("Floresta.Models.SeedlingAmount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PaymentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentId");
+
+                    b.ToTable("SeedlingAmount");
                 });
 
             modelBuilder.Entity("Floresta.Models.User", b =>
@@ -337,6 +351,21 @@ namespace Floresta.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("PaymentSeedling", b =>
+                {
+                    b.Property<int>("PaymentsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeedlingsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("PaymentsId", "SeedlingsId");
+
+                    b.HasIndex("SeedlingsId");
+
+                    b.ToTable("PaymentSeedling");
+                });
+
             modelBuilder.Entity("Floresta.Models.Payment", b =>
                 {
                     b.HasOne("Floresta.Models.Marker", "Marker")
@@ -345,19 +374,11 @@ namespace Floresta.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Floresta.Models.Seedling", "Seedling")
-                        .WithMany("Payments")
-                        .HasForeignKey("SeedlingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Floresta.Models.User", "User")
                         .WithMany("Payments")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Marker");
-
-                    b.Navigation("Seedling");
 
                     b.Navigation("User");
                 });
@@ -369,6 +390,13 @@ namespace Floresta.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Floresta.Models.SeedlingAmount", b =>
+                {
+                    b.HasOne("Floresta.Models.Payment", null)
+                        .WithMany("SeedlingsAmounts")
+                        .HasForeignKey("PaymentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -422,14 +450,29 @@ namespace Floresta.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("PaymentSeedling", b =>
+                {
+                    b.HasOne("Floresta.Models.Payment", null)
+                        .WithMany()
+                        .HasForeignKey("PaymentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Floresta.Models.Seedling", null)
+                        .WithMany()
+                        .HasForeignKey("SeedlingsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Floresta.Models.Marker", b =>
                 {
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("Floresta.Models.Seedling", b =>
+            modelBuilder.Entity("Floresta.Models.Payment", b =>
                 {
-                    b.Navigation("Payments");
+                    b.Navigation("SeedlingsAmounts");
                 });
 
             modelBuilder.Entity("Floresta.Models.User", b =>

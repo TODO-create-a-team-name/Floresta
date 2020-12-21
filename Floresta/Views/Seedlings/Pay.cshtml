@@ -1,8 +1,6 @@
 ﻿@model Floresta.ViewModels.PaymentViewModel
 
 <link rel="stylesheet" href="~/css/paymentStyles.css">
-<h1>Payment by @Model.Name @Model.Surname</h1>
-<h1>@Model.Seedling.Name</h1>
 <div class="checkout_form">
     <div class="card_number" id="card-container">
         <input type="text" class="input" id="card" placeholder="0000 0000 0000 0000">
@@ -27,7 +25,4 @@
         <a class="btn" asp-action="ConfirmPayment">Pay</a>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 <script src="~/js/card-validator.js"></script>

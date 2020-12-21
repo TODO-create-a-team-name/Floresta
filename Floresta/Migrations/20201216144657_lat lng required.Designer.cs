@@ -4,14 +4,16 @@ using Floresta.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Floresta.Migrations
 {
     [DbContext(typeof(FlorestaDbContext))]
-    partial class FlorestaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201216144657_lat lng required")]
+    partial class latlngrequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,76 +36,13 @@ namespace Floresta.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PlantCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("isPlantingFinished")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Markers");
-                });
-
-            modelBuilder.Entity("Floresta.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<bool>("IsPaymentSucceded")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("MarkerId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("PurchasedAmount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SeedlingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MarkerId");
-
-                    b.HasIndex("SeedlingId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("Floresta.Models.Question", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("QuestionText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Floresta.Models.Seedling", b =>
@@ -159,7 +98,6 @@ namespace Floresta.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -190,7 +128,6 @@ namespace Floresta.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("UserSurname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -337,40 +274,6 @@ namespace Floresta.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Floresta.Models.Payment", b =>
-                {
-                    b.HasOne("Floresta.Models.Marker", "Marker")
-                        .WithMany("Payments")
-                        .HasForeignKey("MarkerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Floresta.Models.Seedling", "Seedling")
-                        .WithMany("Payments")
-                        .HasForeignKey("SeedlingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Floresta.Models.User", "User")
-                        .WithMany("Payments")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Marker");
-
-                    b.Navigation("Seedling");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Floresta.Models.Question", b =>
-                {
-                    b.HasOne("Floresta.Models.User", "User")
-                        .WithMany("Questions")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -420,23 +323,6 @@ namespace Floresta.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Floresta.Models.Marker", b =>
-                {
-                    b.Navigation("Payments");
-                });
-
-            modelBuilder.Entity("Floresta.Models.Seedling", b =>
-                {
-                    b.Navigation("Payments");
-                });
-
-            modelBuilder.Entity("Floresta.Models.User", b =>
-                {
-                    b.Navigation("Payments");
-
-                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }
