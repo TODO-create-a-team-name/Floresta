@@ -13,7 +13,20 @@ $.ajax({
         alert('Error - ' + errorMessage);
     }
 })
-var titleEl = document.getElementById('title');
+
+$.ajax({
+    type: "GET",
+    url: "Map/GetSeedlings",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        seedlings = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
 
 function initMap() {
     var uluru = { lat: 48.5405822, lng: 24.9988393 };
@@ -111,12 +124,31 @@ function initMap() {
             content: title,
         });
         marker.addListener("click", () => {
-           
+
             infowindow.open(marker.get("map"), marker);
             $("#markerIdInput").val(marker.id);
             $("#markerTitleInput").val(marker.title);
+
+            var seedlingId = $("#seedlingsDropdown option:selected").val();
+
+            var seedling;
+
+            for (var i = 0; i < seedlings.length; i++) {
+                if (seedlings[i].id == seedlingId) {
+                    seedling = seedlings[i];
+                }
+                break;
+            }
+            var count;
+            if (seedling.amount >= marker.plantCount) {
+                count = marker.plantCount;
+            }
+            else if (marker.plantCount > seedling.amount) {
+                count = seedling.amount;
+            }
+
             $("#plantCountInput").attr({
-                "max": marker.plantCount,
+                "max": count,
                 "min": 1
             });
         });

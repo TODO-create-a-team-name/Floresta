@@ -22,7 +22,6 @@ $.ajax({
     dataType: "json",
     success: function (result) {
         seedlings = result;
-        console.log(seedlings);
     },
     error: function (xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText
@@ -30,9 +29,6 @@ $.ajax({
     }
 })
 
-var titleEl = document.getElementById('title');
-var latEl = document.getElementById('lat');
-var lngEl = document.getElementById('lng');
 
 function initMap() {
     var uluru = { lat: 48.5405822, lng: 24.9988393 };
@@ -121,8 +117,8 @@ function initMap() {
             draggable: true
         });
 
-        lngEl.value = marker.getPosition().lng();
-        latEl.value = marker.getPosition().lat();
+        $("#lng").val(marker.getPosition().lng());
+        $("#lat").val(marker.getPosition().lat());
         marker.addListener('drag', handleEvent);
         marker.addListener('dragend', handleEvent);
         marker.setMap(map);
