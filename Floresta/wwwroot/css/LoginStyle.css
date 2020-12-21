@@ -1,0 +1,298 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,200;1,500&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: url('/images/Login Bg.svg') center center no-repeat;
+    background-size: cover;
+}
+
+.card {
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 290px;
+    height: 315px;
+    right: 15%;
+    top: 25%;
+    background: #ABCD2D;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 50px;
+}
+
+.form {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+    .form .form_item:nth-child(1) {
+        margin-top: 30px;
+    }
+
+    .form .form_item:nth-child(2) {
+        margin-top: 15px;
+    }
+
+.form_item {
+    margin-top: 10px;
+    display: inline-grid;
+}
+
+
+.form_control {
+    padding-left: 15px;
+    width: 250px;
+    height: 35px;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+    .form_control::placeholder {
+        font-style: normal;
+        font-weight: normal;
+        margin-left: 5px;
+        font-size: 16px;
+        color: #ABCD2D;
+    }
+
+
+span {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    margin-top: 2px;
+    font-size: 12px;
+}
+
+
+.form_buttons {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    height: 40px;
+    width: 250px;
+    position: absolute;
+    display: inline-block;
+    bottom: -10px;
+    right: -25px;
+    text-align: center;
+}
+
+.cancel_button {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 2px;
+    color: #7F7F7F;
+    font-size: 16px;
+}
+
+    .cancel_button:hover {
+        text-decoration: underline;
+    }
+
+.login_button {
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    margin-right: -20px;
+    background: #EF8C39;
+    height: 40px;
+    border: none;
+    width: 150px;
+    border-radius: 18px;
+}
+
+    .login_button:hover {
+        background-color: #FD8118;
+    }
+
+.fogot_password {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+}
+
+    .fogot_password:hover {
+        text-decoration: underline;
+    }
+
+.Line_else {
+    color: white;
+}
+
+    .Line_else::after {
+        content: '';
+        width: 110px;
+        height: 4px;
+        margin-top: 8px;
+        left: 15px;
+        background-color: white;
+        position: absolute;
+        border-radius: 5px;
+    }
+
+    .Line_else::before {
+        content: '';
+        width: 110px;
+        height: 4px;
+        margin-top: 8px;
+        right: 15px;
+        background-color: white;
+        position: absolute;
+        border-radius: 5px;
+    }
+
+.I_have_account_block {
+    display: inline-block;
+}
+
+    .I_have_account_block a {
+        color: #F68526;
+        text-decoration: none;
+    }
+
+        .I_have_account_block a:hover {
+            text-decoration: underline;
+        }
+
+.account_text {
+    font-size: 16px;
+}
+
+.google_icon {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 25px;
+}
+
+.SignInG_button {
+    cursor: pointer;
+    display: inline-flex;
+    border-radius: 15px;
+    width: 230px;
+    height: 35px;
+    background-color: white;
+    border: none;
+}
+
+    .SignInG_button:focus {
+        outline: none;
+    }
+
+.google_text {
+    margin-top: 8px;
+    margin-left: 20px;
+    font-size: 16px;
+    color: #7F7F7F;
+}
+
+.cancel_select {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.Login_title {
+    z-index: 122;
+    margin-top: 15vh;
+    margin-left: 20vw;
+}
+
+
+.sub_title {
+    font-family: 'Rubik', serif;
+    font-size: 64px;
+    color: #ABCD2D;
+}
+
+.Login_title .sub_title:nth-child(1) {
+    color: #EF8C39;
+}
+
+.margin_l7 {
+    margin-left: 70px;
+}
+
+.quote_container {
+    margin-right: 39vw;
+    margin-top: 6vh;
+    margin-left: 1vw;
+}
+
+.quotes {
+    font-size: 1.7vw;
+}
+
+.author {
+    font-family: 'Bitter', sans-serif;
+    font-weight: 200;
+    margin-top: 2vh;
+    margin-left: 22vw;
+    font-size: 1.2vw;
+}
+
+.quote_text {
+    font-family: 'Bitter', sans-serif;
+    font-weight: 500;
+    color: black;
+}
+
+.margin_l5 {
+    margin-left: 8vw;
+}
+
+@media only screen and (max-width: 1020px) {
+    .Login_title {
+        position: absolute;
+        left: -8vw;
+    }
+
+    .sub_title {
+        font-size: 6vw;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    .margin_l7 {
+        display: none;
+    }
+
+    .quote_container {
+        display: none;
+    }
+
+    .sub_title {
+        font-size: 46px;
+        margin-left: 45%;
+    }
+
+    .card {
+        right: 20%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .card {
+        right: 10%;
+    }
+}

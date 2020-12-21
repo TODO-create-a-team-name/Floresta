@@ -1,35 +1,72 @@
 ﻿@model Floresta.ViewModels.RegisterViewModel
-
-<h2>New User Registration</h2>
-
-<form method="post" asp-controller="Account" asp-action="Register">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/RegisterStyle.css" />
+<meta name="viewport" content="width=device-width" />
+<div>
+    <div class="Registeration_title">
+        <span class="sub_title">Реєстрація</span>
+        <br />
+        <span class="sub_title margin_l7">акаунт</span>
+        <div class="quote_container">
+            <span class="quotes quote_text">
+                “Хтось відпочиває сьогодні 
+            </span><br />
+                   <span class="quotes quote_text margin_l5">
+                       в тіні, тому що хтось посадив дерево
+                   </span>
+            <br />
+            <span class="quotes quote_text margin_l8">
+                 багато років тому.”
+            </span>
+            <br />
+            <div>
+                <span class="author quote_text">Уоррен Баффетт</span>
+            </div>
+        </div>
     </div>
-    <div>
-        <label asp-for="Surname"></label>
-        <input asp-for="Surname" />
-        <span asp-validation-for="Surname"></span>
+    <div class="card">
+        <form class="form" method="post" asp-controller="Account" asp-action="Register">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form_item">
+                <input placeholder="Ім’я" asp-for="Name" class="form_control" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form_item">
+                <input placeholder="Прізвище" asp-for="Surname" class="form_control" />
+                <span asp-validation-for="Surname"></span>
+            </div>
+            <div class="form_item">
+                <input type="email" placeholder="Електронна пошта" asp-for="Email" class="form_control" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form_item">
+                <input type="password" placeholder="Пароль" asp-for="Password" class="form_control" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form_item">
+                <input type="password" placeholder="Підтвердіть пароль" asp-for="PasswordConfirm" class="form_control" />
+                <span asp-validation-for="PasswordConfirm"></span>
+            </div><br />
+            <div class="form_item">
+                <div class="Line_else cancel_select">Або</div>
+            </div><br />
+            <div class="form_item">
+                <button class="SignInG_button cancel_select">
+                    <span class="iconify google_icon" data-inline="false" data-icon="flat-color-icons:google"></span>
+                    <span class="google_text">Sign in with Google</span>
+                </button>
+            </div>
+            <div class="form_item I_have_account_block cancel_select">
+                <span class="account_text">В тебе вже є акаунт?</span>
+                <a asp-controller="Account" asp-action="Login">Ввійти</a>
+            </div>
+            <div class="form_buttons cancel_select">
+                <a class="cancel_button" asp-controller="Home" asp-action="Index">Скасувати</a>
+                <input type="submit" class="register_button" value="Зареєструватися" />
+            </div>
+        </form>
     </div>
-    <div>
-        <label asp-for="Email"></label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="PasswordConfirm"></label>
-        <input asp-for="PasswordConfirm" />
-        <span asp-validation-for="PasswordConfirm"></span>
-    </div>
-    <div>
-        <input type="submit" value="Sign Up" />
-    </div>
-</form>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+</div>

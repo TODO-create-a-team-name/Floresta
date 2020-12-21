@@ -1,0 +1,81 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/css/HomeStyle1.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="adaptive_navbar  navbar-expand-sm">
+            <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index">Floresta</a>
+            <div class="nav_menu">
+                <div class="container">
+                    <ul class="navbar-nav flex-grow-1 nav_item_postion ">
+                        <li class="nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Приєднатися до команди</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-area="" asp-controller="Home" asp-action="Index1">Новини</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Про нас</a>
+                            </div>
+                        </li>
+                        <li class=" nav_container">
+                            <div class="menu_conteiner">
+                                <a class="nav_item_text" asp-controller="Home" asp-action="AskQuestion">Задати запитання</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                @if (!signInManager.IsSignedIn(User))
+                {
+                    <div class="account_container">
+                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Login">
+                            <input class="account_button button_text" type="submit" value="Вхід/Реєстрація" />
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="account_container">
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                        {
+                            <div class="admin_panel_box">
+                                <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>
+                            </div>
+                        }
+                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
+                            <input class="account_button button_text" type="submit" value="Вихід" />
+                        </form>
+
+                    </div>
+                }
+            </div>
+            <button id="menu_button_container">
+                <div class="animated_menu_icon" />
+            </button>
+        </nav>
+    </header>
+
+
+    <div class="page_body_container">
+        @RenderBody()
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>

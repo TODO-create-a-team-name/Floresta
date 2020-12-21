@@ -7,7 +7,7 @@ namespace Floresta.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            /*migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -19,8 +19,8 @@ namespace Floresta.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });*/
-            /*
+                });
+            
             migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
@@ -206,7 +206,7 @@ namespace Floresta.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL"); */
+                filter: "[NormalizedUserName] IS NOT NULL"); 
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

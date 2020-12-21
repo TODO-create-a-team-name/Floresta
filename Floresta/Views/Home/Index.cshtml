@@ -1,20 +1,13 @@
-﻿@model Floresta.ViewModels.ShowUserViewModel
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+
 @{
-    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
+    <div ba>
+        
+    </div>
 
-@if (User.Identity.IsAuthenticated)
-{
-    <p>@Model.Name @Model.Surname </p>
-    <p>@Model.Email </p>
 
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Log out" />
-    </form>
-}
-else
-{
 
-    <a asp-controller="Account" asp-action="Login">Sign in</a>
-    <a asp-controller="Account" asp-action="Register">Sign Up</a>
-}
+    @Html.ActionLink("Жми здесь", "Index", "Admin_Home")
+    <h1>H2</h1>

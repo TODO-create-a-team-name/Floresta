@@ -1,24 +1,66 @@
 ﻿@model Floresta.ViewModels.LoginViewModel
-
-<h2>Sign In</h2>
-<form method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnUrl="@Model.ReturnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/LoginStyle.css" />
+<meta name="viewport" content="width=device-width" />
+<div>
+    <div class="Login_title">
+        <span class="sub_title">Вхід</span>
+        <br/>
+        <span class="sub_title margin_l7">в акаунт</span>
+        <div class="quote_container">
+            <span class="quotes quote_text">
+                “Дивно, що ми бачимо дерева
+            </span><br />
+                   <span class="quotes quote_text margin_l5">
+                       і більше не дивуємося ними.”
+                   </span>
+                <br />
+            <div>
+                <span class="author quote_text">Ральф Уолдо Емерсон</span>
+            </div> 
+        </div>
+    </div>   
+    <div class="card">
+        <form method="post" class="form" asp-controller="Account" asp-action="Login"
+              asp-route-returnUrl="@Model.ReturnUrl">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form_item">
+                <input type="email" placeholder="Електронна пошта" asp-for="Email" class="form_control" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form_item">
+                <input type="password" placeholder="Пароль" asp-for="Password" class="form_control" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form_item">
+                <a class="fogot_password cancel_select">Забув пароль?</a>
+            </div><br />
+            <div class="form_item">
+                <div class="Line_else cancel_select">Або</div>
+            </div><br />
+            @*<div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" asp-for="RememberMe">
+                <label class="form-check-label" asp-for="RememberMe">Remember me</label>
+            </div>*@
+            <div class="form_item">
+                <button class="SignInG_button cancel_select">
+                    <span class="iconify google_icon" data-inline="false" data-icon="flat-color-icons:google"></span>
+                    <span class="google_text">Sign in with Google</span>
+                </button>
+            </div>
+            <div class="form_item I_have_account_block cancel_select">
+                <span class="account_text">В тебе немає акаунта?</span>
+                <a asp-controller="Account" asp-action="Register" >Реєстрація</a>
+            </div>
+           
+            <div class="form_buttons cancel_select">
+                <a class="cancel_button" asp-controller="Home" asp-action="Index" >Скасувати</a>
+                <input type="submit" class="login_button" value="Ввійти" />
+            </div>
+        </form>
     </div>
-    <div>
-        <label asp-for="Password"></label><br />
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label><br />
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Sign In" />
-    </div>
-</form>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+    
+</div>
