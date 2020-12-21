@@ -6,7 +6,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="~/css/HomeStyle1.css" />
+    <link rel="stylesheet" href="~/css/HomeStyle.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
 </head>
@@ -57,7 +57,10 @@
                             </div>
                         }
                         <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
-                            <input class="account_button button_text" type="submit" value="Вихід" />
+                            <button type="submit" class="account_button button_text">
+                                @Model.Name @Model.Surname
+                                <span class="iconify" data-inline="false" data-icon="ic:round-log-in" style="color: #ffffff; font-size: 22px;"></span>
+                            </button>
                         </form>
 
                     </div>
@@ -73,6 +76,7 @@
     <div class="page_body_container">
         @RenderBody()
     </div>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -3,11 +3,58 @@
 @{
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
-    <div ba>
-        
+
+
+<div>
+    <div class="years_container">
+        <div class="title_box">
+            <span class="home_title">Посаджено за цей рік</span>
+        </div>
+        <div class="years_goal">
+            <div class="goal_container">
+                <div id="donut_single"></div>
+                <div class="text_container">
+                    <div class="goal_texts"><span class="iconify goal_icon" data-inline="false" data-icon="octicon:people-24"></span> 188 людей підтримало</div>
+                    <div class="goal_texts"><span class="iconify goal_icon" data-inline="false" data-icon="bi:tree"></span> 1340 дерев було посаджено</div>
+                    <div class="goal_buttons">
+                        <button class="details_button">Детальніше</button>
+                        <button class="plant_button">Посадити дерево<span class="iconify shovel_icon" data-inline="false" data-icon="uil:shovel"></span></button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="years_container">
+        <div class="title_box">
+            <span class="home_title home_titleF">Як ми працюємо?</span>
+        </div>
+        <div class="text_block">
+            <div class="images">
+                <img class="help_image" src="~/images/Planet.svg"/>
+            </div>
+            <div class="text_uotside_text_box">
+                <div class="top_rood_container">
+                    <div class="svg_rood2"></div>
+                    <div class="svg_rood1"></div>
+                    <div class="svg_rood2"></div>
+                </div>
+                <div class="text_box">
+                    <div class="help_title">Ви вибираєте одну точку із точок на карті</div>
+                    <div class="help_text_box">
+                        На карті показано точки в твоєму місті де <br /> можна висаджувати дерева
+                    </div>
+                </div>
+                <div class="bottom_rood_container">
+                    <div class="svg_rood2"></div>
+                    <div class="svg_rood3"></div>
+                    <div class="svg_rood1"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
-    @Html.ActionLink("Жми здесь", "Index", "Admin_Home")
-    <h1>H2</h1>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</div>
