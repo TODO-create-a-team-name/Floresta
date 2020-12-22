@@ -4,6 +4,8 @@ namespace Floresta.ViewModels
 {
     public class ConfirmPaymentViewModel
     {
+        public int MarkerId { get; set; }
+        public int SeedlingId { get; set; }
         public string MarkerTitle { get; set; }
         public int PurchasedAmount { get; set; }
         public double Price { get; set; }

@@ -9,13 +9,6 @@ namespace Floresta.Services
 {
     public class EmailService
     {
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
-        public EmailService(UserManager<User> userManager = null, SignInManager<User> signInManager = null)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             var emailMessage = new MimeMessage();

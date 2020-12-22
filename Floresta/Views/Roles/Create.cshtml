@@ -1,5 +1,7 @@
 ﻿@model string
-
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form asp-action="Create" method="post">

@@ -1,32 +1,25 @@
 ﻿var markers = [];
+var seedlings = [];
 
-$.ajax({
-    type: "GET",
-    url: "Map/GetMarkers",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        markers = result;
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-})
+function getData(url, arr) {
+    $.ajax({
+        type: "GET",
+        url: url,
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            arr = result;
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
+        }
+    })
+}
 
-$.ajax({
-    type: "GET",
-    url: "Map/GetSeedlings",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        seedlings = result;
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-})
+getData("Map/GetMarkers", markers);
+getData("Map/GetSeedlings", seedlings);
+
 
 function initMap() {
     var uluru = { lat: 48.5405822, lng: 24.9988393 };
@@ -47,6 +40,7 @@ function initMap() {
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(dropMarkers);
+
     var searchMarkers = [];
     // Listern for the event fired when the user selecets a predition and retrieve more details
     searchBox.addListener('places_changed', function () {
@@ -93,6 +87,33 @@ function initMap() {
 
     });
 
+    google.maps.event.addListener(map, 'click', function (event) {
+        placeMarker(event.latLng, "Click title");
+
+    });
+
+
+    function handleEvent(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    }
+
+    var marker = null;
+    function placeMarker(location, title) {
+
+        marker = new google.maps.Marker({
+            position: location,
+            animation: google.maps.Animation.DROP,
+            title: title,
+            draggable: true
+        });
+
+        $("#lng").val(marker.getPosition().lng());
+        $("#lat").val(marker.getPosition().lat());
+        marker.addListener('drag', handleEvent);
+        marker.addListener('dragend', handleEvent);
+        marker.setMap(map);
+    }
     ///get markers from database
     dropMarkers.addEventListener("click", drop);
     function drop() {
@@ -122,15 +143,17 @@ function initMap() {
     function info(marker, title) {
         const infowindow = new google.maps.InfoWindow({
             content: title,
-        });
-        marker.addListener("click", () => {
 
+        });
+        
+        marker.addListener("click", () => {
+           
             infowindow.open(marker.get("map"), marker);
             $("#markerIdInput").val(marker.id);
             $("#markerTitleInput").val(marker.title);
 
             var seedlingId = $("#seedlingsDropdown option:selected").val();
-
+            
             var seedling;
 
             for (var i = 0; i < seedlings.length; i++) {
@@ -147,10 +170,11 @@ function initMap() {
                 count = seedling.amount;
             }
 
-            $("#plantCountInput").attr({
-                "max": count,
-                "min": 1
-            });
+                $("#plantCountInput").attr({
+                    "max": count,
+                    "min": 1
+                });
         });
     }
+    
 }
