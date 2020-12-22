@@ -50,12 +50,12 @@
                 else
                 {
                     <div class="account_container">
-                        @*@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-                        {*@
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                        {
                             <div class="admin_panel_box">
                                 <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>
                             </div>
-                        @*}*@
+                        }
                         <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
                             <button type="submit" class="account_button button_text">
                                 @Model.Name @Model.Surname
@@ -70,14 +70,6 @@
                 <div class="animated_menu_icon" />
             </button>
         </nav>
-        <div class="main_title_block">
-            <div class="main_title">
-                Посади дерево
-            </div>
-            <div class="main_sub_title">
-                Ти зможеш посадити дерево в своєму місті та <br /> приєднатиьсь до руху	захету дерев
-            </div>
-        </div>
     </header>
 
 

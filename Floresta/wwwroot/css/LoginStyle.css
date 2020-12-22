@@ -67,6 +67,7 @@ body {
         color: #ABCD2D;
     }
 
+
 span {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -213,7 +214,7 @@ span {
 
 .Login_title {
     z-index: 122;
-    margin-top: 12vh;
+    margin-top: 15vh;
     margin-left: 20vw;
 }
 
