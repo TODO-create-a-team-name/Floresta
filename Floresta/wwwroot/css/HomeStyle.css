@@ -127,10 +127,10 @@ header {
     color: white;
     font-family: 'Roboto', sans-serif;
     padding: 5px 16px;
+    vertical-align: central;
 }
 
     .button_text span {
-        vertical-align: central;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -620,7 +620,10 @@ header {
 }
 
 @media only screen and (max-height: 550px), (max-width: 1150px) {
-    .logo_icon{
+    .out_icon{
+        margin-bottom: 15px;
+    }
+    .logo_icon {
         margin: unset;
         margin-top: -10px;
         height: 40px;
@@ -628,7 +631,6 @@ header {
     .page_body_container {
         margin-top: 220px;
     }
-
     .main_title_block {
         margin-top: 79.5vh;
     }
