@@ -7,18 +7,12 @@
         user = await userManager.FindByNameAsync(User.Identity.Name);
 }
 
-@{ 
-    User user = new Floresta.Models.User();
-    if (signInManager.IsSignedIn(User))
-        user = await userManager.FindByNameAsync(User.Identity.Name);
-}
-
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewData["Title"] - Floresta</title>
     <link rel="stylesheet" href="~/css/HomeStyle.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
@@ -26,7 +20,7 @@
 <body>
     <header>
         <nav class="adaptive_navbar  navbar-expand-sm">
-            <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index">Floresta</a>
+            <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/Site icon.svg" class="logo_icon" /></a>
             <div class="nav_menu">
                 <div class="container">
                     <ul class="navbar-nav flex-grow-1 nav_item_postion ">
@@ -73,9 +67,9 @@
                             <button type="submit" class="account_button button_text">
                                 @if (user != null)
                                 {
-                                    @user.Name @user.UserSurname
+                                    <span> @user.Name @user.UserSurname </span>  
                                 }
-                                <span class="iconify" data-inline="false" data-icon="ic:round-log-in" style="color: #ffffff; font-size: 22px;"></span>
+                                <span class="iconify out_icon" data-inline="false" data-icon="ic:round-log-in"></span>
                             </button>
                         </form>
 
@@ -91,7 +85,7 @@
                 Посади дерево
             </div>
             <div class="main_sub_title">
-                Ти зможеш посадити дерево в своєму місті та <br /> приєднатиьсь до руху	захету дерев
+                Ти зможеш посадити дерево в своєму місті та <br /> приєднатиьсь до руху	захисту дерев
             </div>
         </div>
     </header>

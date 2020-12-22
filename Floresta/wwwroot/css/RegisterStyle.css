@@ -1,5 +1,4 @@
-﻿
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,200;1,500&display=swap');
 
@@ -77,6 +76,9 @@ span {
 
 
 .form_buttons {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
@@ -199,7 +201,7 @@ span {
 
 .Registeration_title {
     z-index: 122;
-    margin-top: 15vh;
+    margin-top: 12vh;
     margin-left: 20vw;
 }
 
