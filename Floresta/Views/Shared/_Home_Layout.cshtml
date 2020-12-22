@@ -7,6 +7,12 @@
         user = await userManager.FindByNameAsync(User.Identity.Name);
 }
 
+@{ 
+    User user = new Floresta.Models.User();
+    if (signInManager.IsSignedIn(User))
+        user = await userManager.FindByNameAsync(User.Identity.Name);
+}
+
 <!DOCTYPE html>
 
 <html>
