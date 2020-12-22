@@ -14,11 +14,11 @@ menuButton.onclick = function () {
         menu.classList.add('menu-closed');
         icon.classList.remove('menu-opened');
         menu.classList.remove('menu-opened');
-        setTimeout(closeMenu, 1000)
-        open = !open;
+        setTimeout(closeMenu, 490) 
     }
     function closeMenu() {
         menu.classList.remove('menu-closed');
+        open = !open;
     }   
 }
 
