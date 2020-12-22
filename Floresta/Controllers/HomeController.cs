@@ -99,7 +99,9 @@ namespace Floresta.Controllers
 
             await emailService.SendEmailAsync(user.Email, "The answer for your question",
                 $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.AnswerMessage}");
-
+            question.IsAnswered = true;
+            _context.Questions.Update(question);
+            await _context.SaveChangesAsync();
             return RedirectToAction("GetQuestions");
         }
 

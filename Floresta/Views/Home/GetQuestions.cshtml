@@ -17,9 +17,16 @@
             <td>@q.User.UserSurname</td>
             <td>@q.QuestionText</td>
             <td>
-                <form method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
-                </form>
+                @if(!q.IsAnswered)
+                {
+                    <form method="post">
+                        <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
+                    </form>
+                }
+                else
+                {
+                <label class="text-success">Answered</label>
+                }
             </td>
         </tr>
     }
