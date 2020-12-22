@@ -123,12 +123,11 @@ namespace Floresta.Controllers
             if (id != null)
             {
                 var purchase = _context.Payments.FirstOrDefault(x => x.Id == id);
-                var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == purchase.SeedlingId);
-                if(seedling.Amount > 0)
-                {
-                    seedling.Amount -= purchase.PurchasedAmount;
-                    _context.Update(seedling);
-                }
+                var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
+                EmailService emailService = new EmailService();
+
+                await emailService.SendEmailAsync(user.Email, "Congratulations!!!",
+                    $"Dear {user.Name} {user.UserSurname}, your purchase was successfully confirmed!\nYour desire to save the world is bigger than our graditude to you!\nFollow our updates to be aware of everything!");
                 purchase.IsPaymentSucceded = true;
                 _context.Update(purchase);
                 await _context.SaveChangesAsync();
@@ -137,8 +136,7 @@ namespace Floresta.Controllers
             else
             {
                 return NotFound();
-            }
-            
+            }            
         }
     }
 }
