@@ -10,9 +10,35 @@ header {
 }
 
 header {
-    background: url('/images/Backgroud site.svg')center center no-repeat;
+    background: url('/images/Backgroud-site.png') no-repeat center center;
+    -webkit-background-size: cover;
+    height: 80vh;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 100vh;
+}
+.main_title_block {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 72vh;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: Georgia;
+}
+.main_title {
+    font-size: 48px;
+    color: #EF8C39;
+}
+.main_sub_title {
+    font-size: 24px;
+    color: #BCBCBC;
 }
 
 .Big_site_logo {
@@ -27,7 +53,9 @@ header {
 
 .nav_container {
 }
-
+.page_body_container{
+    margin-top: 200px;
+}
 .nav_item_text {
     cursor: pointer;
     -moz-user-select: -moz-none;
@@ -196,7 +224,7 @@ header {
 }
 
 .admin_panel_box {
-    margin-top: 5px;
+    margin-left: 100px;
     width: 132px;
     text-align: center;
     margin-bottom: 10px;
@@ -462,6 +490,12 @@ header {
     }
 }
 @media only screen and (max-height: 550px), (max-width: 1120px) {
+    .page_body_container{
+        margin-top: 220px;
+    }
+    .main_title_block {
+        margin-top: 79.5vh;
+    }
     .adaptive_navbar {
         position: fixed;
         top: 0;
@@ -511,6 +545,7 @@ header {
     }
 
     .admin_panel_box {
+        min-width:140px; 
         margin-top: 19px;
         margin-left: 10px;
         position: relative;
