@@ -1,4 +1,11 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+@inject Microsoft.AspNetCore.Identity.UserManager<User> userManager;
+
+@{ 
+    User user = new Floresta.Models.User();
+    if (signInManager.IsSignedIn(User))
+        user = await userManager.FindByNameAsync(User.Identity.Name);
+}
 
 <!DOCTYPE html>
 
@@ -58,7 +65,10 @@
                         }
                         <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
                             <button type="submit" class="account_button button_text">
-                                @Model.Name @Model.Surname
+                                @if (user != null)
+                                {
+                                @user.Name @user.UserSurname
+                                }
                                 <span class="iconify" data-inline="false" data-icon="ic:round-log-in" style="color: #ffffff; font-size: 22px;"></span>
                             </button>
                         </form>
