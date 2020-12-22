@@ -22,4 +22,30 @@ menuButton.onclick = function () {
     }   
 }
 
+google.charts.load("current", { packages: ["corechart"] });
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Trees', 'Plant'],
+        ['Посаджено', 1220],
+        ['Залишилось посадити', 5780]     
+    ]);
 
+    var options = {
+        colors: ['819F00', 'ABCD2D'],
+        pieSliceTextStyle: {
+            color: 'white',
+        },
+        tooltip: null,
+        fontSize: 16,
+        legend: 'none',
+        pieSliceText: 'value',
+        backgroundColor: 'none',
+        tooltip: 'nope',
+        chartArea: {left:20,top:0,width:'100%',height:'100%'},
+    };
+
+
+    var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+    chart.draw(data, options);
+}

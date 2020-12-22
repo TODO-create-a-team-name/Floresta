@@ -10,9 +10,35 @@ header {
 }
 
 header {
-    background: url('/images/Backgroud site.svg')center center no-repeat;
+    background: url('/images/Backgroud-site.png') no-repeat center center;
+    -webkit-background-size: cover;
+    height: 80vh;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    height: 100vh;
+}
+.main_title_block {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 72vh;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: Georgia;
+}
+.main_title {
+    font-size: 48px;
+    color: #EF8C39;
+}
+.main_sub_title {
+    font-size: 24px;
+    color: #BCBCBC;
 }
 
 .Big_site_logo {
@@ -27,7 +53,9 @@ header {
 
 .nav_container {
 }
-
+.page_body_container{
+    margin-top: 200px;
+}
 .nav_item_text {
     cursor: pointer;
     -moz-user-select: -moz-none;
@@ -196,7 +224,7 @@ header {
 }
 
 .admin_panel_box {
-    margin-top: 5px;
+    margin-left: 100px;
     width: 132px;
     text-align: center;
     margin-bottom: 10px;
@@ -216,7 +244,258 @@ header {
         background-color: #FD8118;
     }
 
-@media only screen and (max-height: 550px), (max-width: 1050px) {
+
+.years_container {
+    margin: 4vh 12vw 6vh 12vw;
+    font-family: Georgia;
+}
+.years_goal {
+    margin-top: 25px;
+    background: url('/images/Goal.svg') center center no-repeat;
+    background-size: 100% 100%;
+}
+
+.title_box {
+    margin-left: 12px;
+    color: #ABCD2D;
+    font-size: 40px;
+    
+}
+    .title_box::first-letter {
+        color: #EF8C39;
+    }
+
+.goal_buttons {
+    vertical-align:central;
+    font-family: 'Roboto', sans-serif;
+    margin-top: 35px;
+    margin-left: 18vw;
+}
+.details_button {
+    color: white;
+    font-size: 16px;
+    height: 40px;
+    width: 160px;
+    border-radius: 30px;
+    border: none;
+    background-color: #EF8C39;
+}
+    .details_button:hover {
+        background-color: #FD8118;
+    }
+    .plant_button {
+        color: white;
+        font-size: 18px;
+        height: 45px;
+        vertical-align: central;
+        width: 195px;
+        border-radius: 30px;
+        border: none;
+        margin-left: 10px;
+        background-color: #819F00;
+    }
+    .plant_button:hover {
+        background-color: #91B211;
+    }
+
+    .text_container {
+        margin-top: 40px;
+    }
+.donut_single {
+    margin-left: 50px;
+    min-height: 250px;
+    min-width: 250px;
+    max-height: 260px;
+    max-width: 250px;
+}   
+.goal_texts {
+    color: #ABCD2D;
+    font-size: 24px;
+}
+    .goal_texts:nth-child(2){
+        margin-top: 15px;
+    }
+.goal_icon {
+    color: #ef8c39;
+    font-size: 45px;
+}
+    .goal_container {
+        margin-left: 6vw;
+        display: inline-flex;
+    }
+.shovel_icon {
+    padding: 0px;
+    margin-top:-5px;
+    margin-left: 5px;
+    font-size: 25px;
+}
+
+
+
+
+.years_container:nth-child(2) {
+    margin: 12vh 15vw 6vh 12vw;
+}
+.help_image{
+    height: 250px;
+    width: 300px;
+}
+
+.images{
+    margin-top: 20px;
+}
+.home_titleF {
+    margin-top: 40px;
+}
+
+.svg_rood2 {
+    min-width: 70px;
+    display: inline-block;
+    width: 8vw;
+    height: 12px;
+    border-radius: 12px;
+    background-color: #DFF9FF;
+}
+.svg_rood1 {   
+    min-width: 130px;
+    width: 13vw;
+    height: 12px;
+    border-radius: 12px;
+    background-color: #DFF9FF;
+}
+.svg_rood3 {
+    min-width: 25px;
+    width: 3vw;
+    height: 12px;
+    border-radius: 12px;
+    background-color: #DFF9FF;
+}
+.top_rood_container {
+    margin-top: 20px;
+}
+    .top_rood_container .svg_rood1 {
+        margin-left: 30vw;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    .top_rood_container .svg_rood2:first-child {
+        margin-left: 10vw;
+        
+    }
+    .top_rood_container .svg_rood2 {
+        margin-bottom: 10px;
+        margin-left: 8vw;
+    }
+
+.bottom_rood_container{
+    margin-top: -10px;
+}
+    .bottom_rood_container .svg_rood2{
+        margin-left: 40vw;
+    }
+    .bottom_rood_container .svg_rood3 {
+        margin-left: 5vw;
+    }
+    .bottom_rood_container .svg_rood1 {
+        margin-top: 35px;
+        margin-left: 15vw;
+    }
+
+
+
+.help_title {
+    text-align: center;
+    color: #ABCD2D;
+    font-size: 26px;
+}
+.text_block{
+    display: inline-flex;
+}
+.help_text_box {
+    text-align: center;
+    color: #BCBCBC;
+    font-size: 20px;
+}
+.text_box{
+    margin-left: 6vw;
+}
+
+
+
+@media only screen and (max-width: 1550px) {
+    .goal_buttons{
+        margin-left: 5vw;
+    }
+    .text_container {
+        margin-left: 2vw;
+    }
+}
+@media only screen and (max-width: 1300px){
+    .goal_buttons {
+        margin-left:unset;
+    }
+    .details_button{
+        margin-bottom: 20px;
+    }
+    .plant_button{
+        margin-left: unset;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .goal_container{
+        margin-left: unset;
+        display:grid;
+        justify-content: center;
+        text-align: center;
+    }
+    .donut_single {
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .text_block {
+        margin-left: unset;
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+    .bottom_rood_container {
+        margin-left: 7vw;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .text_box{
+        margin:unset;
+    }
+    .top_rood_container .svg_rood1 {
+        margin-left: 45vw;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .top_rood_container .svg_rood2:first-child {
+        margin-left: -60vw;
+    }
+
+    .top_rood_container .svg_rood2 {
+        margin-left: -35vw;
+    }
+    .years_container:nth-child(2){
+        margin: 12vh 12vw 6vh 12vw;
+    }
+    .bottom_rood_container{
+        margin-top: unset;
+    }
+}
+@media only screen and (max-height: 550px), (max-width: 1120px) {
+    .page_body_container{
+        margin-top: 220px;
+    }
+    .main_title_block {
+        margin-top: 79.5vh;
+    }
     .adaptive_navbar {
         position: fixed;
         top: 0;
@@ -266,6 +545,7 @@ header {
     }
 
     .admin_panel_box {
+        min-width:140px; 
         margin-top: 19px;
         margin-left: 10px;
         position: relative;
