@@ -13,19 +13,15 @@ namespace Floresta.Controllers
     {
         private FlorestaDbContext _context;
         private UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
 
-        public PaymentController(FlorestaDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+        public PaymentController(FlorestaDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
-            _signInManager = signInManager;
         }
         [HttpGet]
         public async Task<IActionResult> Index(PaymentViewModel m)
         {
-            if (_signInManager.IsSignedIn(User))
-            {
                 var user = await _userManager.GetUserAsync(User);
                 var marker = await _context.Markers.FirstOrDefaultAsync(x => x.Id == m.MarkerId);
                 var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == m.SeedlingId);
@@ -43,12 +39,6 @@ namespace Floresta.Controllers
                 };
 
                 return View(model);
-            }
-            else
-            {
-                RedirectToAction("Login", "Account");
-            }
-            return View();
         }
 
         [HttpPost]

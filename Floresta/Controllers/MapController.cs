@@ -28,15 +28,23 @@ namespace Floresta.Controllers
         }
         public IActionResult Index()
         {
-            var model = new PaymentViewModel();
-            model.Seedlings = _context.Seedlings
-                .Select(x => new SelectListItem()
-                {
-                    Value = x.Id.ToString(),
-                    Text = $"{x.Name} price: {x.Price}"
-                })
-                .ToList();
-            return View(model);
+            if (_signInManager.IsSignedIn(User))
+            {
+                var model = new PaymentViewModel();
+                model.Seedlings = _context.Seedlings
+                    .Select(x => new SelectListItem()
+                    {
+                        Value = x.Id.ToString(),
+                        Text = $"{x.Name} price: {x.Price}"
+                    })
+                    .ToList();
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return View();
         }
 
         public async Task<IActionResult> Edit(int? id)
