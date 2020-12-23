@@ -1,8 +1,8 @@
 ﻿
-    var menu = document.querySelector('.nav_menu'),
-        icon = document.querySelector('.animated_menu_icon'),
-        menuButton = document.querySelector('#menu_button_container'),
-        open= false;
+var menu = document.querySelector('.nav_menu'),
+    icon = document.querySelector('.animated_menu_icon'),
+    menuButton = document.querySelector('#menu_button_container'),
+    open= false;
 
 menuButton.onclick = function () {
     if (open == false) {
@@ -22,12 +22,29 @@ menuButton.onclick = function () {
     }   
 }
 
+
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
+
+    var trees;
+    $.ajax({
+        type: "GET",
+        url: "Home/GetDataForChart",
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            trees = result;
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
+        }
+    })
+
     var data = google.visualization.arrayToDataTable([
         ['Trees', 'Plant'],
-        ['Посаджено', 1220],
+        ['Посаджено', parseInt(trees)],
         ['Залишилось посадити', 5780]     
     ]);
 

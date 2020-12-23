@@ -18,5 +18,6 @@ namespace Floresta.Models
         public int PurchasedAmount { get; set; }
         public double Price { get; set; }
         public bool IsPaymentSucceded { get; set; } = false;
+        public bool IsPaymentFailed { get; set; } = false;
     }
 }

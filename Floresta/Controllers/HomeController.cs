@@ -140,5 +140,35 @@ namespace Floresta.Controllers
                 return NotFound();
             }            
         }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeclinePurchase(int? id)
+        {
+            if(id != null)
+            {
+                var purchase = _context.Payments.FirstOrDefault(x => x.Id == id);
+                var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
+                EmailService emailService = new EmailService();
+
+                await emailService.SendEmailAsync(user.Email, "Payment Faliled",
+                    $"Dear {user.Name} {user.UserSurname}, unfortunately, your payment was not successfull. Contact our support to get more information.");
+                purchase.IsPaymentFailed = true;
+                _context.Update(purchase);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Purchases", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public JsonResult GetDataForChart()
+        {
+          //  var users = _context.Payments.Select(p => p.UserId).Distinct().Count();
+            var trees = _context.Payments.Sum(p => p.PurchasedAmount);
+            return new JsonResult(trees);
+        }
     }
 }
