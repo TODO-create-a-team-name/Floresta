@@ -32,10 +32,10 @@ $.ajax({
 
 
 function initMap() {
-    var uluru = { lat: 48.5405822, lng: 24.9988393 };
+    var uluru = { lat: 49.2224200, lng: 31.8871400 };
 
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
+        zoom: 6,
         center: uluru,
         zoomControlOption: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
