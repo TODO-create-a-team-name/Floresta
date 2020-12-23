@@ -1,6 +1,11 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-header {
+html {
+
+}
+header{
     height: 1000px;
 }
 
@@ -15,7 +20,7 @@ header {
 }
 
 header {
-    background: url('/images/Backgroud-site.png') no-repeat center center;
+    background: url('/images/Home page/Backgroud-site.png') no-repeat center center;
     -webkit-background-size: cover;
     height: 80vh;
     -moz-background-size: cover;
@@ -29,7 +34,7 @@ header {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin-top: 72vh;
+    margin-top: 74vh;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
@@ -128,10 +133,10 @@ header {
     color: white;
     font-family: 'Roboto', sans-serif;
     padding: 5px 16px;
+    vertical-align: central;
 }
 
     .button_text span {
-        vertical-align: central;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -288,8 +293,8 @@ header {
     }
 
 
-.years_container:first-child {
-    margin: 4vh 12vw 6vh 12vw;
+.years_container{
+    margin: 5vh 12vw 6vh 12vw;
     font-family: Georgia;
 }
 .years_container:nth-child(2) {
@@ -308,7 +313,7 @@ header {
 
 .years_goal {
     margin-top: 25px;
-    background: url('/images/Goal.svg') center center no-repeat;
+    background: url('/images/Home page/Goal.svg') center center no-repeat;
     background-size: 100% 100%;
 }
 
@@ -523,17 +528,266 @@ header {
     margin-left: 8vw;
 }
 
+.map_block {
+    background: url('/images/Home page/Map Bg.svg') center center no-repeat;
+    background-size: 100% 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+    margin-top: 100px;
+}
+.control_title{
+    margin: 8px 10px 8px 20px;
+    display: inline-block;
+}
+.contol-item{
+    display: inline-block;
+}
+.controlpanel_block {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ABCD2D;
+    border-radius: 25px;
+    margin:10px 100px 15px 20px;
+}
+.region_button {
+    display: inline-block;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+}
+    .region_button:hover {
+        background-color: white;
+        color: #ABCD2D;
+    }
+    .region_button:focus {
+        outline: none;
+    }
+    .region_selected {
+        background-color: white;
+        color: #ABCD2D;
+    }
+
+
+#map {
+    border-radius: 25px;
+    height: 70vh;
+    width: 70vw;
+    margin-left: 2vw;
+    filter: drop-shadow(5px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+
+.years_container:nth-child(6){
+    margin-top: 15vh;
+}
+
+.join_bg {
+    background: url('/images/Home page/Join Bg.svg') center center no-repeat;
+    background-size: 100% 100%;
+    margin-top: 10vh;
+}
+
+.join_title {
+    display: inline-block;
+    max-width: 800px;
+    margin-top: 5vh;
+    margin-left: 12vw;
+}
+
+.sub_title {
+    margin-left: -2vw;
+    font-family: 'Rubik', serif;
+    font-size: 56px;
+    color: #ABCD2D;
+}
+.join_title .sub_title:nth-child(1) {
+    color: #EF8C39;
+}
+
+.margin_l8 {
+    margin-left: 22vw;
+}
+
+.margin_l5 {
+    margin-left: 6vw;
+}
+
+.quote_container {
+    margin-left: 8vw;
+    margin-right: 0vw;
+    margin-top: 6vh;
+}
+
+.quotes {
+    font-size: 1.5vw;
+}
+
+.card_team {
+    display: flex;
+    height: 170px;
+    width: 320px;
+    max-width: 320px;
+    margin-top: 25vh;
+    background-color: #ABCD2D;
+    border-radius: 30px;
+}
+.join_form {
+    max-width: 320px;
+    margin-left: 5vw;
+}
+
+.jointous_block {
+    display: inline-flex;
+}
+.text_in_center {
+    margin: 60px auto;
+    font-family: 'Rubik', serif;
+    font-size: 40px;
+    color: #EF8C39;
+    text-align: center;
+}
+.question_title {
+   
+    display: inline-block;
+    max-width: 900px;
+    margin-left: 8vw;
+}
+.card_q { 
+    border-radius: 30px;
+    background-color: #ABCD2D;
+    height: 250px;
+    width: 600px;
+}
+.question_form{
+    display: grid;
+    margin-top: 20px;
+    justify-content: center;
+    margin-left: 10vw;
+    margin-right: auto;
+}
+
+.question_title .sub_title:nth-child(1) {
+    color: #EF8C39;
+}
+
+.second_sub_title {
+    font-family: 'Rubik', serif;
+    font-size: 64px;
+    color: #ABCD2D;
+}
+
+.form {
+    max-width: 320px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+    .form .form_item:nth-child(1) {
+        margin-top: 20px;
+    }
+
+    .form .form_item:nth-child(2) {
+        margin-top: 15px;
+    }
+
+.form_item {
+    margin-top: 10px;
+    display: inline-grid;
+}
+.cancel_select {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.send_button {
+    cursor: pointer;
+    color: white;
+    font-size: 18px;
+    background: #EF8C39;
+    height: 40px;
+    border: none;
+    width: 245px;
+    border-radius: 18px;
+}
+
+    .send_button:hover {
+        background-color: #FD8118;
+    }
+    .send_button:focus{
+        outline:none;
+    }
+
+.form_buttons {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    height: 40px;
+    width: 238px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    margin-top: 20px;
+    margin-left: 100px;
+    text-align: center;
+}
+.form_control {
+    height: 40px;
+    padding-left: 15px;
+    width: 290px;
+    max-width: 300px;
+    border: none;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+    .form_control::placeholder {
+        font-style: normal;
+        font-weight: normal;
+        margin-left: 5px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: #ABCD2D;
+    }
+
+
 @media only screen and (max-width: 1550px) {
     .goal_buttons {
         margin-left: 5vw;
     }
-
+    .sub_title,
+    .second_sub_title {
+        font-size:3.5vw;
+    }
     .text_container {
         margin-left: 2vw;
     }
 }
 
+@media only screen and (max-width: 1020px){
+ 
+    .controlpanel_block {
+        width: 38vw;
+        min-width: 310px;
+    }
+    .region_button {
+        margin: 10px;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+    #map {
+        margin-left: 10px;
+    }
+}
+
 @media only screen and (max-width: 1300px) {
+   
     .goal_buttons {
         margin-left: unset;
     }
@@ -547,91 +801,36 @@ header {
     }
 }
 
-@media only screen and (max-width: 800px) {
-    .goal_container {
-        margin-left: unset;
-        display: grid;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .donut_single {
-        margin: unset;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .text_block {
-        margin-left: unset;
-        display: grid;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .bottom_rood_container {
-        margin-left: 7vw;
-    }
-}
-
-@media only screen and (max-width: 800px) {
-    .bottom_rood_container .svg_rood1:nth-child(2) {
+@media only screen and (max-height: 550px), (max-width: 1150px) {
+    .join_form{
         margin-left: 10vw;
     }
-    .top_rood_container .m_op {
-        margin-left: 0vw !important;
-    }
-    .images:nth-child(2){
-        position: absolute;
-        right: 0px;
-        left: 0px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .years_container:nth-child(4) {
-        margin-top: 100px;
-    }
-    .text_uotside_text_box:nth-child(1){
-        margin-top: 260px;
-    }
-    .text_box {
-        margin: unset;
+    .jointous_block {
+        display: inline-block;
     }
 
-    .top_rood_container .svg_rood1 {
-        margin-left: 45vw;
-        margin-top: 5px;
-        margin-bottom: 5px;
+    .card_team {
+        justify-content: center;
+        display: grid;
+        margin: 25px 0px 0px 0px;
     }
 
-    .top_rood_container .svg_rood2:first-child {
-        margin-left: -60vw;
+    .quote_container {
+        display: none;
     }
 
-    .top_rood_container .svg_rood2 {
-        margin-left: -35vw;
+    .out_icon {
+        margin-bottom: 15px;
     }
 
-    .years_container:nth-child(2) {
-        margin: 12vh 12vw 6vh 12vw;
-    }
-
-    .bottom_rood_container {
-        margin-top: unset;
-    }
-}
-
-@media only screen and (max-height: 550px), (max-width: 1150px) {
-    .logo_icon{
+    .logo_icon {
         margin: unset;
         margin-top: -10px;
         height: 40px;
     }
+
     .page_body_container {
         margin-top: 220px;
-    }
-
-    .main_title_block {
-        margin-top: 79.5vh;
     }
 
     .adaptive_navbar {
@@ -701,7 +900,162 @@ header {
         padding: 0px !important;
         margin: 0px !important;
     }
+    .sub_title,
+    .second_sub_title {
+        font-size: 36px;
+    }
 }
+
+@media only screen and (max-width: 800px) {
+    .map_container {
+        margin-left: -5%;
+    }
+    #map {
+        height: 50vh;
+        width: 85vw;
+    }
+    .main_sub_title{
+        font-size: 20px;
+    }
+    .main_title_block {
+        margin-top: 76vh;
+    }
+    .main_title{
+        font-size: 38px;
+    }
+    .title_box {
+        font-size: 30px;
+    }
+
+    .controlpanel_block {
+        margin: unset;
+        margin-bottom: 10px;
+
+    }
+    .goal_container {
+        margin-left: unset;
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+    #map {
+        margin-left: unset;
+    }
+
+    .donut_single {
+        margin: unset;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .text_block {
+        margin-left: unset;
+        display: grid;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .bottom_rood_container {
+        margin-left: 7vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .text_in_center{
+        font-size: 8vw;
+        margin: 30px auto;
+    }
+    .controlpanel_block {
+        margin-left: -15px;
+    }
+    .title_box {
+        margin: unset;
+        margin-left: -15px;
+    }
+    .map_container {
+        margin-left: -9%;
+    }
+    #map {
+        height: 55vh;
+        width: 90vw;
+    }
+}
+
+
+@media only screen and (max-width: 800px) {
+    .join_title,
+    .question_title,
+    .text_box {
+        margin: unset;
+    }
+    .sub_title,
+    .second_sub_title {
+        font-size: 6vw;
+    }
+    .card_q {
+        min-width: 330px;
+        width: 80vw;
+    }
+   
+    .join_form,
+    .question_form {
+        margin: unset;
+        margin-left: -10px;
+        margin-right: auto;
+        margin-top: 25px;
+        justify-content: center;
+        display: grid;
+    } 
+    .join_form {
+        margin-left: -20px;
+    }
+    .card_team{
+        min-width: 330px;
+        width: 80vw;
+    }
+    .bottom_rood_container .svg_rood1:nth-child(2) {
+        margin-left: 10vw;
+    }
+    .top_rood_container .m_op {
+        margin-left: 0vw !important;
+    }
+    .images:nth-child(2){
+        position: absolute;
+        right: 0px;
+        left: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .years_container:nth-child(4) {
+        margin-top: 100px;
+    }
+    .text_uotside_text_box:nth-child(1){
+        margin-top: 260px;
+    }
+
+    .top_rood_container .svg_rood1 {
+        margin-left: 45vw;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .top_rood_container .svg_rood2:first-child {
+        margin-left: -60vw;
+    }
+
+    .top_rood_container .svg_rood2 {
+        margin-left: -35vw;
+    }
+
+    .years_container:nth-child(2) {
+        margin: 12vh 12vw 6vh 12vw;
+    }
+
+    .bottom_rood_container {
+        margin-top: unset;
+    }
+}
+
 
 .nav_menu.menu-closed {
     display: inline-block;

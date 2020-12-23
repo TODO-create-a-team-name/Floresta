@@ -10,6 +10,20 @@
 html {
     height: 100%;
 }
+.validation-summary-errors ul {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 12px;
+    padding: unset;
+    margin: unset;
+    list-style: none;
+    list-style-type: none;
+    margin: 10px 10px -5px 10px;
+    color: white;
+}
 
 body {
     background: url('/images/Registration Background.svg') center center no-repeat;
