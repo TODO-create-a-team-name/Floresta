@@ -64,6 +64,16 @@ namespace Floresta.Controllers
                 PurchasedAmount = model.PurchasedAmount,
                 Price = model.Price
             };
+            if (seedling.Amount > 0)
+            {
+                seedling.Amount -= model.PurchasedAmount;
+                _context.Update(seedling);
+            }
+            if (marker.PlantCount > 0)
+            {
+                marker.PlantCount -= model.PurchasedAmount;
+                _context.Update(marker);
+            }
             _context.Add(payment);
             _context.SaveChanges();
             return RedirectToAction("Index", "Map");
