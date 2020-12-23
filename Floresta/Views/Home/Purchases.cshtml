@@ -29,6 +29,9 @@
         <td>
             <label class="text-danger">Failed</label>
         </td>
+        <td>
+            <a class="btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Send Email</a>
+        </td>
     }
     else if (!item.IsPaymentSucceded)
     {

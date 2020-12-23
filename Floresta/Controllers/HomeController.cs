@@ -91,14 +91,14 @@ namespace Floresta.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public async Task<IActionResult> AnswerQuestion(int id, AnswerQuestionViewModel model)
+        public async Task<IActionResult> AnswerQuestion(int id, SendEmailViewModel model)
         {
             Question question = _context.Questions.FirstOrDefault(x => id == x.Id);
             var user = _context.Users.FirstOrDefault(x => question.UserId == x.Id);
             EmailService emailService = new EmailService();
 
             await emailService.SendEmailAsync(user.Email, "The answer for your question",
-                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.AnswerMessage}");
+                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.Message}");
             question.IsAnswered = true;
             _context.Questions.Update(question);
             await _context.SaveChangesAsync();

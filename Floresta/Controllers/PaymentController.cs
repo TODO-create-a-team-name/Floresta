@@ -1,10 +1,10 @@
 ﻿using Floresta.Models;
 using Floresta.Services;
 using Floresta.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Math.EC.Rfc7748;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -65,6 +65,10 @@ namespace Floresta.Controllers
                 PurchasedAmount = model.PurchasedAmount,
                 Price = model.Price
             };
+            EmailService emailService = new EmailService();
+
+            await emailService.SendEmailAsync(user.Email, "Purchase status",
+                $"Dear {user.Name} {user.UserSurname}, thank you for purchasing! You will receive an e-mail about the purchase status as soon as it's possible!");
             if (seedling.Amount > 0)
             {
                 seedling.Amount -= model.PurchasedAmount;
@@ -77,12 +81,30 @@ namespace Floresta.Controllers
             }
             _context.Add(payment);
             _context.SaveChanges();
-            EmailService emailService = new EmailService();
-
-            await emailService.SendEmailAsync(user.Email, "Purchase status",
-                $"Dear {user.Name} {user.UserSurname}, thank you for purchasing! You will receive an e-mail about the purchase status as soon as it's possible!");
+            
 
             return RedirectToAction("Index", "Map");
+        }
+        [Authorize(Roles = "admin")]
+        public IActionResult SendEmail()
+        {
+            return View();
+        }
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> SendEmail(string id, SendEmailViewModel model)
+        {
+            
+            var user = await _userManager.FindByIdAsync(id);
+            if (user != null)
+            {
+                EmailService emailService = new EmailService();
+
+                await emailService.SendEmailAsync(user.Email, "Purchase status",
+                    model.Message);
+                return RedirectToAction("Purchases", "Home");
+            }
+            return NotFound();
         }
     }
 }
