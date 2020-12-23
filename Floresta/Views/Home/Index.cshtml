@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
 
-
 <div>
     <div class="years_container">
         <div class="title_box">
@@ -32,7 +31,7 @@
         </div>
         <div class="text_block">
             <div class="images">
-                <img class="help_image" src="~/images/Planet.svg" />
+                <img class="help_image" src="~/images/Home page/Planet.svg" />
             </div>
             <div class="text_uotside_text_box">
                 <div class="top_rood_container">
@@ -75,14 +74,14 @@
                 </div>
             </div>
             <div class="images">
-                <img class="help_image" src="~/images/Sky island.svg" />
+                <img class="help_image" src="~/images/Home page/Sky island.svg" />
             </div>
         </div>
     </div>
     <div class="years_container">
         <div class="text_block">
             <div class="images">
-                <img class="help_image" src="~/images/Form.svg" />
+                <img class="help_image" src="~/images/Home page/Form.svg" />
             </div>
             <div class="text_uotside_text_box">
                 <div class="top_rood_container">
@@ -104,7 +103,78 @@
             </div>
         </div>
     </div>
+    <div class="years_container">
+        <div class="map_block">
+            <div class="title_box">
+                <span class="home_title">Де можна посадити дерева?</span>
+            </div>
+            <div class="controlpanel_block">
+                <span class="control_title">Область:</span>
+                <div class="contol-item">
+                    <button class="region_button region_selected">Івано-Франківська</button>
+                    <button class="region_button">Львівська</button>
+                    <button class="region_button">Тернопільська</button>
+                </div>
+            </div>
+            <div class="map_container">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+    <div class="years_container">
+        <div class="join_bg">
+            <div class="jointous_block" id="Join_to_us">
+                <div class="join_title">
+                    <span class="sub_title">Приєднуйся</span>
+                    <br />
+                    <span class="sub_title margin_l7">до нашої команди</span>
+                    <div class="quote_container">
+                        <span class="quotes quote_text">
+                            “Допоможи нам
+                        </span><br />
+                               <span class="quotes quote_text margin_l5">
+                                   озеленити  Україну!”
+                               </span>
+                    </div>
+                </div>
+                <div class="join_form">
+                    <div class="card_team">
+                        <div class="form">
+                            <div class="form_item">
+                                <input placeholder="Прізвище та Ім'я" class="form_control" />
+                            </div>
+                            <div class="form_item">
+                                <input placeholder="Номер телефону" class="form_control" />
+                            </div>
+                            <div class="form_buttons cancel_select">
+                                <button type="submit" class="send_button">Надіслати</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="text_in_center">Або</div>
+            <div class="ask_question_block" id="ask_question">
+                <div class="question_title">
+                    <span class="sub_title">Задай </span><span class="second_sub_title">запитання</span>
+                </div>
+                <div class="question_form">
+                    <div class="card_q">
+                        <div class="form">
 
+                            <div class="form_buttons cancel_select">
+                                <button type="submit" class="send_button">Надіслати</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
+    </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </div>
