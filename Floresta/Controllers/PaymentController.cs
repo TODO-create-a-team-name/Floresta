@@ -86,6 +86,7 @@ namespace Floresta.Controllers
         {
             
             var user = await _userManager.FindByIdAsync(id);
+
             if (user != null)
             {
                 EmailService emailService = new EmailService();
