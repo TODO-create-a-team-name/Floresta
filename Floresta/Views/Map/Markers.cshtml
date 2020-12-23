@@ -1,0 +1,35 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
+@model IEnumerable<Floresta.Models.Marker>
+@{
+    ViewBag.Title = "Seedlings List";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<a class="btn btn-sm btn-success" asp-action="Index">Add Marker</a>
+<table class="table">
+    <tr>
+        <td>Title</td>
+        <td>PlaceCount</td>
+        <td>Lat</td>
+        <td>Lng</td>
+        <td>isPlantingFinished</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>@item.Title</td>
+    <td>@item.PlantCount</td>
+    <td>@item.Lat</td>
+    <td>@item.Lng</td>
+    <td>@item.isPlantingFinished</td>
+    <td>
+        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <button type="submit" class="btn btn-sm btn-danger">
+                Delete
+            </button>
+        </form>
+    </td>
+</tr>
+    }
+</table>
