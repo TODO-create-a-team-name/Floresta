@@ -38,7 +38,8 @@ namespace Floresta
                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             }
 
-            services.BuildServiceProvider().GetService<FlorestaDbContext>().Database.Migrate();
+                services.BuildServiceProvider().GetService<FlorestaDbContext>().Database.Migrate();
+            
 
                 services.AddIdentity<User, IdentityRole>(options =>
             {

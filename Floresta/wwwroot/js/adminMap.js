@@ -1,24 +1,33 @@
 ﻿var markers = [];
 var seedlings = [];
 
-function getData(url, arr) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        contentType: "application/json",
-        dataType: "json",
-        success: function (result) {
-            arr = result;
-        },
-        error: function (xhr, status, error) {
-            var errorMessage = xhr.status + ': ' + xhr.statusText
-            alert('Error - ' + errorMessage);
-        }
-    })
-}
+$.ajax({
+    type: "GET",
+    url: "Map/GetMarkers",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        markers = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
 
-getData("Map/GetMarkers", markers);
-getData("Map/GetSeedlings", seedlings);
+$.ajax({
+    type: "GET",
+    url: "Map/GetSeedlings",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        seedlings = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
 
 
 function initMap() {

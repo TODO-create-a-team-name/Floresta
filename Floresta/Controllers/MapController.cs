@@ -1,5 +1,6 @@
 ﻿using Floresta.Models;
 using Floresta.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,9 +13,11 @@ namespace Floresta.Controllers
     public class MapController : Controller
     {
         private FlorestaDbContext _context;
-        public MapController(FlorestaDbContext context)
+        private SignInManager<User> _signInManager;
+        public MapController(FlorestaDbContext context, SignInManager<User> signInManager)
         {
             _context = context;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -47,6 +50,12 @@ namespace Floresta.Controllers
         {
             var seedlings = _context.Seedlings.ToList();
             return new JsonResult(seedlings);
+        }
+
+        public JsonResult IsAdminCheck()
+        {
+            bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
+            return new JsonResult(IsAdmin);
         }
     }
 }
