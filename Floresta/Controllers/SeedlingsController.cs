@@ -1,10 +1,7 @@
 ﻿using Floresta.Models;
-using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Math.EC.Rfc7748;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,14 +11,10 @@ namespace Floresta.Controllers
     public class SeedlingsController : Controller
     {
         private FlorestaDbContext _context;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
 
-        public SeedlingsController(FlorestaDbContext context, UserManager<User> userManager, SignInManager<User> signInManager)
+        public SeedlingsController(FlorestaDbContext context)
         {
             _context = context;
-            _userManager = userManager;
-            _signInManager = signInManager;
         }
         public IActionResult Index()
         {
@@ -58,6 +51,19 @@ namespace Floresta.Controllers
             _context.Seedlings.Update(seedling);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
+            if(seedling != null)
+            {
+                _context.Seedlings.Remove(seedling);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return NotFound();
         }
     }
 }

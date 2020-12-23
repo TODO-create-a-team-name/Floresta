@@ -1,4 +1,5 @@
 ﻿using Floresta.Models;
+using Floresta.Services;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -76,6 +77,11 @@ namespace Floresta.Controllers
             }
             _context.Add(payment);
             _context.SaveChanges();
+            EmailService emailService = new EmailService();
+
+            await emailService.SendEmailAsync(user.Email, "Purchase status",
+                $"Dear {user.Name} {user.UserSurname}, thank you for purchasing! You will receive an e-mail about the purchase status as soon as it's possible!");
+
             return RedirectToAction("Index", "Map");
         }
     }

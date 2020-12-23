@@ -5,28 +5,27 @@
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
 
-@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-{
-    <a asp-action="Create">Add Seedling</a>
-}
-
+<a class="btn btn-sm btn-success" asp-action="Create">Add Seedling</a>
 <table class="table">
     <tr>
         <td>Name</td>
         <td>Price</td>
-        <td>Height</td>
         <td>Amount</td>
-        <td>Description</td>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.Price</td>
-            <td>@item.Height</td>
-            <td>@item.Amount</td>
-            <td>@item.Description</td>
-
-        </tr>
+<tr>
+    <td>@item.Name</td>
+    <td>@item.Price</td>
+    <td>@item.Amount</td>
+    <td>
+        <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            <button type="submit" class="btn btn-sm btn-danger">
+                Delete
+            </button>
+        </form>
+    </td>
+</tr>
     }
 </table>
