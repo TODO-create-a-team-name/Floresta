@@ -533,7 +533,6 @@ header {
     background-size: 100% 100%;
     padding-bottom: 50px;
     padding-top: 50px;
-    margin-top: 100px;
 }
 .control_title{
     margin: 8px 10px 8px 20px;
@@ -583,13 +582,13 @@ header {
 
 
 .years_container:nth-child(6){
-    margin-top: 15vh;
+    margin-top: 5vh;
 }
 
 .join_bg {
     background: url('/images/Home page/Join Bg.svg') center center no-repeat;
     background-size: 100% 100%;
-    margin-top: 10vh;
+    margin-top: 5vh;
 }
 
 .join_title {
@@ -660,8 +659,11 @@ header {
 .card_q { 
     border-radius: 30px;
     background-color: #ABCD2D;
+    display: grid;
     height: 250px;
-    width: 600px;
+    width: 30vw;
+    min-width: 360px;
+    justify-content: center;
 }
 .question_form{
     display: grid;
@@ -680,6 +682,7 @@ header {
     font-size: 64px;
     color: #ABCD2D;
 }
+
 
 .form {
     max-width: 320px;
@@ -755,7 +758,123 @@ header {
         font-size: 18px;
         color: #ABCD2D;
     }
+    .form_control:focus {
+        outline: none;
+    }
+.form_q {
+    text-align: center;
+    align-items: center;
+    display: grid;
+}
+.form_item_Question {
+    margin-top: 15px;
+}
+.form_control_Question {
+    padding: 10px;
+    resize: none;
+    background-color: white;
+    width: 28vw;
+    min-width: 310px;
+    height: 140px;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #ABCD2D;
+}
+    .form_control_Question::placeholder {
+        color: #ABCD2D;
+    }
+    .form_control_Question:focus{
+        outline: none;
+    }
+.question_selector {
+    color: #ABCD2D;
+    min-width: 310px;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    appearance: none;
+    border: 0 !important;
+    border-radius: 20px;
+    background-color: white;
+    overflow: hidden;
+    width: 28vw;
+    height: 40px;
+    min-width: 310px;
+    padding: 5px 40px 5px 15px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ABCD2D%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat, repeat;
+    background-position: right .9em top 50%, 0 0;
+    background-size: .65em auto, 10%;
+}
+        .question_selector:focus {
+          outline:none;
+        }
+select::-ms-expand {
+    display: none;
+}
+.options {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: black;
+    border: none;
+}
+.mt_2{
+    margin-top: 10px;
+    margin-left: 15vw;
+}
+.plant{
+    display: none;
+}
+.in_menu {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 34px;
+    background-color: #ABCD2D ;
+    margin-bottom: -10px;
+}
+    .in_menu:hover {
+        background-color: #ABD60E !important;
+        
+    }
 
+.payment_map_container {
+    margin: 3vh 6vw 6vh 6vw;
+    font-family: Georgia;
+}
+
+
+.control_panel_block {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ABCD2D;
+    border-radius: 25px;
+    margin: 10px 550px 15px 20px;
+}
+.map_option {
+    height: 70vh !important;
+    width: 60vw !important;
+
+}
+.map_container{
+    display: flex;
+}
+.pay_container {
+    min-height: 400px;
+    min-width:320px;
+    max-height: 620px;
+    width: 20vw;
+    background-color: #ABCD2D;
+    border-radius: 40px;
+    margin: 40px 20px 40px 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 @media only screen and (max-width: 1550px) {
     .goal_buttons {
@@ -801,7 +920,10 @@ header {
     }
 }
 
-@media only screen and (max-height: 550px), (max-width: 1150px) {
+@media only screen and (max-height: 550px), (max-width: 1200px) {
+    .plant {
+        display: inline-block;
+    }
     .join_form{
         margin-left: 10vw;
     }
@@ -879,6 +1001,7 @@ header {
     .account_button {
         margin-top: 15px;
         margin-left: 10px;
+        margin-right: 10px;
     }
 
     .admin_panel_box {
@@ -994,7 +1117,6 @@ header {
     }
     .card_q {
         min-width: 330px;
-        width: 80vw;
     }
    
     .join_form,
@@ -1071,7 +1193,7 @@ header {
 
 @keyframes close-menu-animation {
     0% {
-        height: 194px;
+        height: 233px;
     }
 
     100% {
@@ -1085,6 +1207,6 @@ header {
     }
 
     100% {
-        height: 194px;
+        height: 233px;
     }
 }

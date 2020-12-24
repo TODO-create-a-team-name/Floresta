@@ -17,7 +17,7 @@
                     <div class="goal_texts" id="treesPlantedDiv"><span class="iconify goal_icon" data-inline="false" data-icon="bi:tree"></span></div>
                     <div class="goal_buttons">
                         <button class="details_button">Детальніше</button>
-                        <button class="plant_button">Посадити дерево<span class="iconify shovel_icon" data-inline="false" data-icon="uil:shovel"></span></button>
+                        <button class="plant_button" onclick="location.href='@Url.Action("Index", "Map")'">Посадити дерево<span class="iconify shovel_icon" data-inline="false" data-icon="uil:shovel"></span></button>
                     </div>
                 </div>
 
@@ -131,14 +131,14 @@
                         <span class="quotes quote_text">
                             “Допоможіть нам
                         </span><br />
-                               <span class="quotes quote_text margin_l5">
-                                   озеленити  Україну!”
-                               </span>
+                        <span class="quotes quote_text margin_l5">
+                            озеленити  Україну!”
+                        </span>
                     </div>
                 </div>
                 <div class="join_form">
                     <div class="card_team">
-                        <div class="form">
+                        <form class="form">
                             <div class="form_item">
                                 <input placeholder="Прізвище та Ім'я" class="form_control" />
                             </div>
@@ -148,8 +148,8 @@
                             <div class="form_buttons cancel_select">
                                 <button type="submit" class="send_button">Надіслати</button>
                             </div>
-                        </div>
-                        
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -160,14 +160,22 @@
                 </div>
                 <div class="question_form">
                     <div class="card_q">
-                        <div class="form">
-                            <div class="form_buttons cancel_select">
-                                <form asp-action="AskQuestion" method="post">
-                                    <textarea class="form-control" rows="4" asp-for="Question"></textarea>
-                                    <input type="submit" class="send_button" value="Надіслати" />
-                                </form>
+                        <form class="form_q" method="post">
+                            <div class="form_item_Question">
+                                <select class="question_selector">
+                                    <option class="options">Запитання</option>
+                                    <option class="options">Що потрібно щоб стати членом команди?</option>
+                                    <option class="options">Присутні знижки при купівлі великої кількості дерев?</option>
+                                    <option class="options">Чи можна мені самому посадити дерево в цьому місці?</option>
+                                </select>
                             </div>
-                        </div>
+                            <div class="form_item_Question">
+                                <textarea placeholder="Доповнення до запитання" class="form_control_Question"></textarea>
+                            </div>
+                            <div class="form_buttons cancel_select mt_2">
+                                <button type="submit" class="send_button">Надіслати</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
