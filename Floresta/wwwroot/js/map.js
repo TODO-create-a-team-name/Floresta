@@ -1,6 +1,6 @@
 ﻿var markers = [];
 var seedlings = [];
-
+var admin;
 $.ajax({
     async: false,
     type: "GET",
@@ -23,6 +23,21 @@ $.ajax({
     dataType: "json",
     success: function (result) {
         seedlings = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+}) 
+
+$.ajax({
+    type: "GET",
+    url: "Map/IsAdminCheck",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        admin = result;
+
     },
     error: function (xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText
@@ -94,6 +109,33 @@ function initMap() {
 
     });
 
+    google.maps.event.addListener(map, 'click', function (event) {
+        placeMarker(event.latLng, "New marker");
+
+    });
+
+    function handleEvent(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    }
+    var marker = null;
+    function placeMarker(location, title) {
+        if (admin) {
+            marker = new google.maps.Marker({
+                position: location,
+                animation: google.maps.Animation.DROP,
+                title: title,
+                draggable: true
+            });
+            $("#lng").val(marker.getPosition().lng());
+            $("#lat").val(marker.getPosition().lat());
+            marker.addListener('drag', handleEvent);
+            marker.addListener('dragend', handleEvent);
+            marker.setMap(map);
+        }
+
+    }
+
     for (var i = 0; i < markers.length; i++) {
         const marker = new google.maps.Marker({
             position: {
@@ -114,7 +156,7 @@ function initMap() {
                 marker.setAnimation(google.maps.Animation.BOUNCE);
             }
         });
-        info(marker, markers[i].title);
+        info(marker, markers[i].title + "<br> plantCount: " + markers[i].plantCount);
     }
    
     function info(marker, title) {
