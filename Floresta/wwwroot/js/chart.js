@@ -33,8 +33,8 @@ function drawChart() {
         pieSliceTextStyle: {
             color: 'white',
         },
-        tooltip: null,
-        fontSize: 16,
+        fontSize: 18,
+        tooltip: { trigger: 'none' },
         legend: 'none',
         pieSliceText: 'value',
         backgroundColor: 'none',

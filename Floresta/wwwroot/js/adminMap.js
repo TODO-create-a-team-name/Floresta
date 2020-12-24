@@ -30,11 +30,11 @@ $.ajax({
     }
 })
 
-
+var map;
 function initMap() {
     var uluru = { lat: 49.2224200, lng: 31.8871400 };
 
-    var map = new google.maps.Map(document.getElementById('map'), {
+     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: uluru,
         zoomControlOption: {
@@ -183,3 +183,27 @@ function initMap() {
     }
     
 }
+
+var regionBt = document.querySelectorAll('.region_button');
+regionBt.forEach(region => {
+    region.addEventListener('click', {
+        handleEvent(event) {
+            regionBt.forEach(node => {// remove style for button 
+                node.classList.remove('region_selected');
+            });
+            switch (region.innerHTML) {
+                case 'Івано-Франківська': setRegoin(48.9215, 24.7097)
+                    break;
+                case 'Львівська': setRegoin(49.83826, 24.02324)
+                    break;
+                case 'Тернопільська': setRegoin(49.553516, 25.594767)
+                    break;
+            }
+            function setRegoin(lat, lng) { //set new location
+                region.classList.add('region_selected');
+                const pos = { lat: lat, lng: lng, };
+                map.setCenter(pos);
+            }
+        }
+    });
+});
