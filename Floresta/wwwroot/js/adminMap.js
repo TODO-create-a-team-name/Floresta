@@ -48,6 +48,7 @@ function initMap() {
 
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
+
     var searchMarkers = [];
     // Listern for the event fired when the user selecets a predition and retrieve more details
     searchBox.addListener('places_changed', function () {
@@ -94,6 +95,33 @@ function initMap() {
 
     });
 
+    google.maps.event.addListener(map, 'click', function (event) {
+        placeMarker(event.latLng, "Click title");
+
+    });
+
+
+    function handleEvent(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lng').value = event.latLng.lng();
+    }
+
+    var marker = null;
+    function placeMarker(location, title) {
+
+        marker = new google.maps.Marker({
+            position: location,
+            animation: google.maps.Animation.DROP,
+            title: title,
+            draggable: true
+        });
+
+        $("#lng").val(marker.getPosition().lng());
+        $("#lat").val(marker.getPosition().lat());
+        marker.addListener('drag', handleEvent);
+        marker.addListener('dragend', handleEvent);
+        marker.setMap(map);
+    }
     for (var i = 0; i < markers.length; i++) {
         const marker = new google.maps.Marker({
             position: {
@@ -116,19 +144,21 @@ function initMap() {
         });
         info(marker, markers[i].title);
     }
-   
+    
     function info(marker, title) {
         const infowindow = new google.maps.InfoWindow({
             content: title,
-        });
-        marker.addListener("click", () => {
 
+        });
+        
+        marker.addListener("click", () => {
+           
             infowindow.open(marker.get("map"), marker);
             $("#markerIdInput").val(marker.id);
             $("#markerTitleInput").val(marker.title);
 
             var seedlingId = $("#seedlingsDropdown option:selected").val();
-
+            
             var seedling;
 
             for (var i = 0; i < seedlings.length; i++) {
@@ -145,13 +175,15 @@ function initMap() {
                 count = seedling.amount;
             }
 
-            $("#plantCountInput").attr({
-                "max": count,
-                "min": 1
-            });
+                $("#plantCountInput").attr({
+                    "max": count,
+                    "min": 1
+                });
         });
     }
+    
 }
+
 var regionBt = document.querySelectorAll('.region_button');
 regionBt.forEach(region => {
     region.addEventListener('click', {
