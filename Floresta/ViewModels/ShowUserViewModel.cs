@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Floresta.ViewModels
 {
     public class ShowUserViewModel

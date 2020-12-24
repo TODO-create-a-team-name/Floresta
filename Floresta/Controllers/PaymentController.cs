@@ -75,11 +75,13 @@ namespace Floresta.Controllers
 
             return RedirectToAction("Index", "Map");
         }
+
         [Authorize(Roles = "admin")]
         public IActionResult SendEmail()
         {
             return View();
         }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> SendEmail(string id, SendEmailViewModel model)

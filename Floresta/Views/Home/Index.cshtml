@@ -1,5 +1,4 @@
-﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
-
+﻿@model Floresta.ViewModels.QuestionViewModel
 @{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
@@ -162,9 +161,11 @@
                 <div class="question_form">
                     <div class="card_q">
                         <div class="form">
-
                             <div class="form_buttons cancel_select">
-                                <button type="submit" class="send_button">Надіслати</button>
+                                <form asp-action="AskQuestion" method="post">
+                                    <textarea class="form-control" rows="4" asp-for="Question"></textarea>
+                                    <input type="submit" class="send_button" value="Надіслати" />
+                                </form>
                             </div>
                         </div>
                     </div>

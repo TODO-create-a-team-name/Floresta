@@ -1,11 +1,10 @@
 ﻿using Floresta.Models;
 using Floresta.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,12 +18,6 @@ namespace Floresta.Controllers
         {
             _context = context;
             _signInManager = signInManager;
-        }
-
-        public IActionResult Markers()
-        {
-            var list = _context.Markers.ToList();
-            return View(list);
         }
         public IActionResult Index()
         {
@@ -46,6 +39,14 @@ namespace Floresta.Controllers
             }
         }
 
+        [Authorize(Roles = "admin")]
+        public IActionResult Markers()
+        {
+            var list = _context.Markers.ToList();
+            return View(list);
+        }
+
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -56,6 +57,7 @@ namespace Floresta.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(Marker marker)
         {
@@ -72,6 +74,7 @@ namespace Floresta.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
