@@ -44,6 +44,11 @@
                                 <a class="nav_item_text" href="/#ask_question">Задати запитання</a>
                             </div>
                         </li>
+                        <li class=" nav_container plant">
+                            <div class="menu_conteiner">
+                                <button class="plant_button in_menu" asp-controller="Map" asp-action="Index" >Посадити дерево<span class="iconify shovel_icon" data-inline="false" data-icon="uil:shovel"></span></button>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 @if (!signInManager.IsSignedIn(User))
