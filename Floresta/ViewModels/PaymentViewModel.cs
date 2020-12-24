@@ -7,7 +7,7 @@ namespace Floresta.ViewModels
     public class PaymentViewModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Please, select a marker from the map")]
+        [Required(ErrorMessage = "The Title filed is required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "The Lat filed is required")]
         public string Lat { get; set; }
