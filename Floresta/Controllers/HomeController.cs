@@ -91,15 +91,17 @@ namespace Floresta.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public async Task<IActionResult> AnswerQuestion(int id, AnswerQuestionViewModel model)
+        public async Task<IActionResult> AnswerQuestion(int id, SendEmailViewModel model)
         {
             Question question = _context.Questions.FirstOrDefault(x => id == x.Id);
             var user = _context.Users.FirstOrDefault(x => question.UserId == x.Id);
             EmailService emailService = new EmailService();
 
             await emailService.SendEmailAsync(user.Email, "The answer for your question",
-                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.AnswerMessage}");
-
+                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.Message}");
+            question.IsAnswered = true;
+            _context.Questions.Update(question);
+            await _context.SaveChangesAsync();
             return RedirectToAction("GetQuestions");
         }
 
@@ -137,6 +139,43 @@ namespace Floresta.Controllers
             {
                 return NotFound();
             }            
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public async Task<IActionResult> DeclinePurchase(int? id)
+        {
+            if(id != null)
+            {
+
+                var purchase = _context.Payments.FirstOrDefault(x => x.Id == id);
+                var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == purchase.SeedlingId);
+                var marker = _context.Markers.FirstOrDefault(x => x.Id == purchase.MarkerId);
+                var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
+                EmailService emailService = new EmailService();
+                seedling.Amount += purchase.PurchasedAmount;
+                _context.Update(seedling);
+                marker.PlantCount += purchase.PurchasedAmount;
+                _context.Update(marker);
+                await emailService.SendEmailAsync(user.Email, "Payment Faliled",
+                    $"Dear {user.Name} {user.UserSurname}, unfortunately, your payment was not successfull. Contact our support to get more information.");
+                purchase.IsPaymentFailed = true;
+                _context.Update(purchase);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Purchases", "Home");
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        public JsonResult GetDataForChart()
+        {
+            var users = _context.Payments.Select(p => p.UserId).Distinct().Count();
+            var trees = _context.Payments.Where(p => p.IsPaymentSucceded).Sum(p => p.PurchasedAmount);
+            var remainingTrees = _context.Seedlings.Sum(s => s.Amount) - trees;
+            return new JsonResult(new {users = users, trees = trees, remainingTrees = remainingTrees });
         }
     }
 }

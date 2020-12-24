@@ -14,31 +14,51 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
-            <td>@item.User.Name</td>
-            <td>@item.User.UserSurname</td>
-            <td>@item.User.Email</td>
-            <td>@item.Seedling.Name</td>
-            <td>@item.Marker.Title</td>
-            <td>@item.PurchasedAmount</td>
-            <td>@item.Price</td>
-
-            <td>
-                @if (!item.IsPaymentSucceded)
-                {
-                    <form asp-action="Purchases" asp-route-id="@item.Id" method="post">
-                        <button type="submit" class="btn btn-sm btn-success">
-                            Confirm Payment
-                        </button>
-                    </form>
-                }
-                else
-                {
-                    <label class="text-success">Confirmed</label>
-                }
-            </td>
+<tr>
+    <td>@item.User.Name</td>
+    <td>@item.User.UserSurname</td>
+    <td>@item.User.Email</td>
+    <td>@item.Seedling.Name</td>
+    <td>@item.Marker.Title</td>
+    <td>@item.PurchasedAmount</td>
+    <td>@item.Price</td>
 
 
-        </tr>
+    @if (item.IsPaymentFailed)
+    {
+        <td>
+            <label class="text-danger">Failed</label>
+        </td>
+        <td>
+            <a class="btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Send Email</a>
+        </td>
+    }
+    else if (!item.IsPaymentSucceded)
+    {
+        <td>
+            <form asp-action="Purchases" asp-route-id="@item.Id" method="post">
+                <button type="submit" class="btn btn-sm btn-success">
+                    Confirm Payment
+                </button>
+            </form>
+        </td>
+        <td>
+            <form asp-action="DeclinePurchase" asp-route-id="@item.Id" method="post">
+                <button type="submit" class="btn btn-sm btn-danger">
+                    Decline Payment
+                </button>
+            </form>
+        </td>
+    }
+
+    else if (item.IsPaymentSucceded)
+    {
+        <td>
+            <label class="text-success">Confirmed</label>
+        </td>
+    }
+
+
+</tr>
     }
 </table>

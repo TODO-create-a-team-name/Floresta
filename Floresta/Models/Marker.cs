@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Floresta.Models
 {
     public class Marker
-    {
+    { 
         public int Id { get; set; }
         [Required(ErrorMessage = "The Title filed is required")]
         public string Title { get; set; }

@@ -13,5 +13,20 @@ namespace Floresta.Models
         public DbSet<Marker> Markers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Payment> Payments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<User>()
+                 .HasMany(q => q.Questions)
+                 .WithOne(u => u.User)
+                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<User>()
+                .HasMany(p => p.Payments)
+                .WithOne(u => u.User)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

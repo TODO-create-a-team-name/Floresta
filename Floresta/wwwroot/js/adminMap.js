@@ -1,31 +1,41 @@
 ﻿var markers = [];
 var seedlings = [];
 
-function getData(url, arr) {
-    $.ajax({
-        type: "GET",
-        url: url,
-        contentType: "application/json",
-        dataType: "json",
-        success: function (result) {
-            arr = result;
-        },
-        error: function (xhr, status, error) {
-            var errorMessage = xhr.status + ': ' + xhr.statusText
-            alert('Error - ' + errorMessage);
-        }
-    })
-}
+$.ajax({
+    async: false,
+    type: "GET",
+    url: "Map/GetMarkers",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        markers = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
 
-getData("Map/GetMarkers", markers);
-getData("Map/GetSeedlings", seedlings);
+$.ajax({
+    type: "GET",
+    url: "Map/GetSeedlings",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        seedlings = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
 
 
 function initMap() {
-    var uluru = { lat: 48.5405822, lng: 24.9988393 };
+    var uluru = { lat: 49.2224200, lng: 31.8871400 };
 
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 6,
         center: uluru,
         zoomControlOption: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
@@ -33,13 +43,11 @@ function initMap() {
     });
 
     var input = document.getElementById('pac-input');
-    var dropMarkers = document.getElementById("dropMarkers");
     var searchBox = new google.maps.places.SearchBox(input);
 
 
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(dropMarkers);
 
     var searchMarkers = [];
     // Listern for the event fired when the user selecets a predition and retrieve more details
@@ -114,32 +122,29 @@ function initMap() {
         marker.addListener('dragend', handleEvent);
         marker.setMap(map);
     }
-    ///get markers from database
-    dropMarkers.addEventListener("click", drop);
-    function drop() {
-        for (let i = 0; i < markers.length; ++i) {
-            const marker = new google.maps.Marker({
-                position: {
-                    lat: parseFloat(markers[i].lat),
-                    lng: parseFloat(markers[i].lng),
-                },
-                map: map,
-                title: markers[i].title,
-                plantCount: markers[i].plantCount,
-                id: markers[i].id,
-                animation: google.maps.Animation.DROP,
-            });
-            marker.addListener("click", () => {
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                }
-                else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
-            });
-            info(marker, markers[i].title);
-        }
+    for (var i = 0; i < markers.length; i++) {
+        const marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(markers[i].lat),
+                lng: parseFloat(markers[i].lng),
+            },
+            map: map,
+            title: markers[i].title,
+            plantCount: markers[i].plantCount,
+            id: markers[i].id,
+            animation: google.maps.Animation.DROP,
+        });
+        marker.addListener("click", () => {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            }
+            else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        });
+        info(marker, markers[i].title);
     }
+    
     function info(marker, title) {
         const infowindow = new google.maps.InfoWindow({
             content: title,

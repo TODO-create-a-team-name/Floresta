@@ -1,6 +1,8 @@
 ﻿var markers = [];
+var seedlings = [];
 
 $.ajax({
+    async: false,
     type: "GET",
     url: "Map/GetMarkers",
     contentType: "application/json",
@@ -29,10 +31,10 @@ $.ajax({
 })
 
 function initMap() {
-    var uluru = { lat: 48.5405822, lng: 24.9988393 };
+    var uluru = { lat: 49.2224200, lng: 31.8871400 };
 
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
+        zoom: 6,
         center: uluru,
         zoomControlOption: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
@@ -40,13 +42,11 @@ function initMap() {
     });
 
     var input = document.getElementById('pac-input');
-    var dropMarkers = document.getElementById("dropMarkers");
     var searchBox = new google.maps.places.SearchBox(input);
 
 
     //Pushing control on the map
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(dropMarkers);
     var searchMarkers = [];
     // Listern for the event fired when the user selecets a predition and retrieve more details
     searchBox.addListener('places_changed', function () {
@@ -93,32 +93,29 @@ function initMap() {
 
     });
 
-    ///get markers from database
-    dropMarkers.addEventListener("click", drop);
-    function drop() {
-        for (let i = 0; i < markers.length; ++i) {
-            const marker = new google.maps.Marker({
-                position: {
-                    lat: parseFloat(markers[i].lat),
-                    lng: parseFloat(markers[i].lng),
-                },
-                map: map,
-                title: markers[i].title,
-                plantCount: markers[i].plantCount,
-                id: markers[i].id,
-                animation: google.maps.Animation.DROP,
-            });
-            marker.addListener("click", () => {
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                }
-                else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
-            });
-            info(marker, markers[i].title);
-        }
+    for (var i = 0; i < markers.length; i++) {
+        const marker = new google.maps.Marker({
+            position: {
+                lat: parseFloat(markers[i].lat),
+                lng: parseFloat(markers[i].lng),
+            },
+            map: map,
+            title: markers[i].title,
+            plantCount: markers[i].plantCount,
+            id: markers[i].id,
+            animation: google.maps.Animation.DROP,
+        });
+        marker.addListener("click", () => {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            }
+            else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+            }
+        });
+        info(marker, markers[i].title);
     }
+   
     function info(marker, title) {
         const infowindow = new google.maps.InfoWindow({
             content: title,

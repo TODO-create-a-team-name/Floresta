@@ -30,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="PlantCount" class="control-label">PlantCount</label>
-                    <input type="number" asp-for="PlantCount" class="form-control-sm" min="1"  />
+                    <input type="number" asp-for="PlantCount" class="form-control-sm" min="1" />
                     <span asp-validation-for="PlantCount"></span>
                 </div>
                 <div class="form-group">
@@ -49,37 +49,36 @@
             </div>
         </form>
     }
-<form asp-action="Index" asp-controller="Payment" method="get">
-    <div>
-        <div class="validation" asp-validation-summary="ModelOnly"></div>
-        <div class="form-group">
-            <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
+    <form asp-action="Index" asp-controller="Payment" method="get">
+        <div>
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
 
-        </div>
-        <div class="form-group">
+            </div>
+            <div class="form-group">
 
-            <label asp-for="Title" class="control-label">Title</label>
-            <input id="markerTitleInput" type="text" asp-for="Title" class="form-control-sm" readonly/>
-            <span asp-validation-for="Title"></span>
+                <label asp-for="Title" class="control-label">Title</label>
+                <input id="markerTitleInput" type="text" asp-for="Title" class="form-control-sm" readonly />
+                <span asp-validation-for="Title"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SeedlingId" class="control-label">Seedling</label>
+                <select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="PlantCount" class="control-label">PlantCount</label>
+                <input id="plantCountInput" class="form-control-sm" type="number" asp-for="PlantCount" min="0" max="0" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Purchase" class="btn btn-success" />
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="SeedlingId" class="control-label">Seedling</label>
-            <select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>
-        </div>
-        <div class="form-group">
-            <label asp-for="PlantCount" class="control-label">PlantCount</label>
-            <input id="plantCountInput"  class="form-control-sm" type="number" asp-for="PlantCount" min="0" max="0" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Purchase" class="btn btn-success" />
-        </div>
-    </div>
-</form>
+    </form>
 
     <div id="map-dialog1">
         <div>
             <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
-            <input type="button" class="btn btn-success" id="dropMarkers" value="Show markers" style="margin-top: 9px" />
         </div>
     </div>
 
@@ -93,7 +92,7 @@
     {
         <script src="~/js/adminMap.js"></script>
     }
-        
+
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
     </script>
