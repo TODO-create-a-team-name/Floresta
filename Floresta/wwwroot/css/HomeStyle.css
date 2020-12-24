@@ -836,9 +836,12 @@ select::-ms-expand {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     height: 34px;
-    background-color: #ABCD2D !important;
+    background-color: #ABD60E;
     margin-bottom: -10px;
 }
+    .in_menu:hover {
+        background-color: #ABCD2D !important;
+    }
 
 @media only screen and (max-width: 1550px) {
     .goal_buttons {
@@ -884,7 +887,7 @@ select::-ms-expand {
     }
 }
 
-@media only screen and (max-height: 550px), (max-width: 1150px) {
+@media only screen and (max-height: 550px), (max-width: 1200px) {
     .plant {
         display: inline-block;
     }
