@@ -48,7 +48,6 @@ header {
     font-size: 48px;
     color: #EF8C39;
 }
-
 .main_sub_title {
     font-size: 24px;
     color: #BCBCBC;
@@ -133,7 +132,7 @@ header {
     color: white;
     font-family: 'Roboto', sans-serif;
     padding: 5px 16px;
-    vertical-align: central;
+    vertical-align: middle;
 }
 
     .button_text span {
@@ -862,7 +861,7 @@ select::-ms-expand {
     width: 60vw !important;
 
 }
-.map_container{
+.pay_map_container {
     display: flex;
 }
 .pay_container {
@@ -874,6 +873,16 @@ select::-ms-expand {
     border-radius: 40px;
     margin: 40px 20px 40px 20px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.plat_for_home {
+    margin-top: 30vh;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: Georgia;
 }
 
 @media only screen and (max-width: 1550px) {
@@ -890,10 +899,12 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 1020px){
- 
     .controlpanel_block {
         width: 38vw;
         min-width: 310px;
+    }
+    .rb {
+        margin: unset;
     }
     .region_button {
         margin: 10px;
@@ -906,7 +917,15 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 1300px) {
-   
+    .control_panel_block {
+        width: 38vw;
+        min-width: 310px;
+    }
+    .rb {
+        margin: 10px;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
     .goal_buttons {
         margin-left: unset;
     }
@@ -921,6 +940,12 @@ select::-ms-expand {
 }
 
 @media only screen and (max-height: 550px), (max-width: 1200px) {
+    .pay_map_container{
+        display: block;
+    }
+    .map_option{
+        width: 80vw !important;
+    }
     .plant {
         display: inline-block;
     }
@@ -1030,6 +1055,11 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 800px) {
+    .control_panel_block {
+        margin: unset;
+        margin-bottom: unset;
+        margin-bottom: 10px;
+    }
     .map_container {
         margin-left: -5%;
     }
@@ -1099,16 +1129,25 @@ select::-ms-expand {
         margin-left: -9%;
     }
     #map {
-        height: 55vh;
-        width: 90vw;
+        height: 55vh !important;
+        width: 90vw !important;
+    }
+    .pay_container {
+        margin-top: 40px;
+        margin-right: 20px;
+        margin-bottom: 40px;
+        margin-left: 0px !important;
+    }
+    .out_icon {
+        margin-top: -1px;
     }
 }
+.plat_for_home{
 
+}
 
 @media only screen and (max-width: 800px) {
-    .join_title,
-    .question_title,
-    .text_box {
+    .join_title, .question_title, .text_box {
         margin: unset;
     }
     .sub_title,
