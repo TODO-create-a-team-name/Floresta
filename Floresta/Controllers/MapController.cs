@@ -44,7 +44,6 @@ namespace Floresta.Controllers
             {
                 return RedirectToAction("Login", "Account");
             }
-            return View();
         }
 
         public async Task<IActionResult> Edit(int? id)
