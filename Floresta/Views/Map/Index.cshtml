@@ -8,14 +8,6 @@
 <head>
 
     <title> Google Map </title>
-
-    <style>
-
-        #map {
-            height: 800px;
-            width: auto;
-        }
-    </style>
 </head>
 <body>
     @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
@@ -49,32 +41,6 @@
             </div>
         </form>
     }
-    <form asp-action="Index" asp-controller="Payment" method="get">
-        <div>
-            <div class="validation" asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
-
-            </div>
-            <div class="form-group">
-
-                <label asp-for="Title" class="control-label">Title</label>
-                <input id="markerTitleInput" type="text" asp-for="Title" class="form-control-sm" readonly />
-                <span asp-validation-for="Title"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SeedlingId" class="control-label">Seedling</label>
-                <select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PlantCount" class="control-label">PlantCount</label>
-                <input id="plantCountInput" class="form-control-sm" type="number" asp-for="PlantCount" min="0" max="0" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Purchase" class="btn btn-success" />
-            </div>
-        </div>
-    </form>
 
     <div id="map-dialog1">
         <div>
@@ -82,9 +48,9 @@
         </div>
     </div>
 
-    <div class="years_container">
+    <div class="payment_map_container">
         <div class="map_block">
-            <div class="controlpanel_block">
+            <div class="control_panel_block">
                 <span class="control_title">Область:</span>
                 <div class="contol-item">
                     <button class="region_button region_selected">Івано-Франківська</button>
@@ -93,8 +59,41 @@
                 </div>
             </div>
             <div class="map_container">
-                <div id="map"></div>
+                <div id="map" class="map_option"></div>
+                <div class="pay_container">
+                    <form class="form" asp-action="Index" asp-controller="Payment" method="get">
+                        <div>
+                            <div class="validation" asp-validation-summary="ModelOnly"></div>
+                            <div class="form-group">
+                                <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
+
+                            </div>
+                            <div class="form-group">
+
+                                <label asp-for="Title" class="control-label">Title</label>
+                                <input id="markerTitleInput" type="text" asp-for="Title" class="form-control-sm" readonly />
+                                <span asp-validation-for="Title"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SeedlingId" class="control-label">Seedling</label>
+                                <select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="PlantCount" class="control-label">PlantCount</label>
+                                <input id="plantCountInput" class="form-control-sm" type="number" asp-for="PlantCount" min="0" max="0" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Purchase" class="btn btn-success" />
+                            </div>
+                        </div>
+                        <div class="form_buttons cancel_select">
+                            <a class="cancel_button" asp-controller="Home" asp-action="Index">Скасувати</a>
+                            <button type="submit" class="pay_button">Оплатити</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 

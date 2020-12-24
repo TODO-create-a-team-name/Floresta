@@ -582,7 +582,7 @@ header {
 
 
 .years_container:nth-child(6){
-    margin-top: 15vh;
+    margin-top: 5vh;
 }
 
 .join_bg {
@@ -836,12 +836,45 @@ select::-ms-expand {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     height: 34px;
-    background-color: #ABD60E;
+    background-color: #ABCD2D ;
     margin-bottom: -10px;
 }
     .in_menu:hover {
-        background-color: #ABCD2D !important;
+        background-color: #ABD60E !important;
+        
     }
+
+.payment_map_container {
+    margin: 3vh 6vw 6vh 6vw;
+    font-family: Georgia;
+}
+
+
+.control_panel_block {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ABCD2D;
+    border-radius: 25px;
+    margin: 10px 550px 15px 20px;
+}
+.map_option {
+    height: 70vh !important;
+    width: 60vw !important;
+
+}
+.map_container{
+    display: flex;
+}
+.pay_container {
+    min-height: 400px;
+    min-width:320px;
+    max-height: 620px;
+    width: 20vw;
+    background-color: #ABCD2D;
+    border-radius: 40px;
+    margin: 40px 20px 40px 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 @media only screen and (max-width: 1550px) {
     .goal_buttons {
