@@ -228,8 +228,7 @@ span {
     user-select: none;
 }
 
-
-.Registeration_title {
+.Login_title {
     z-index: 122;
     margin-top: 12vh;
     margin-left: 20vw;
@@ -237,49 +236,45 @@ span {
 
 
 .sub_title {
-    margin-left: -2vw;
     font-family: 'Rubik', serif;
     font-size: 64px;
     color: #ABCD2D;
 }
 
-.Registeration_title .sub_title:nth-child(1) {
+.Login_title .sub_title:nth-child(1) {
     color: #EF8C39;
 }
 
 .margin_l7 {
-    margin-left: 200px;
-}
-
-.margin_l8 {
-    margin-left: 22vw;
-}
-
-.margin_l5 {
-    margin-left: 6vw;
+    margin-left: 70px;
 }
 
 .quote_container {
-    margin-right: 35vw;
+    margin-right: 39vw;
     margin-top: 6vh;
+    margin-left: 1vw;
 }
 
 .quotes {
-    font-size: 1.5vw;
+    font-size: 1.7vw;
 }
 
 .author {
     font-family: 'Bitter', sans-serif;
     font-weight: 200;
     margin-top: 2vh;
-    margin-left: 28vw;
-    font-size: 1.1vw;
+    margin-left: 22vw;
+    font-size: 1.2vw;
 }
 
 .quote_text {
     font-family: 'Bitter', sans-serif;
     font-weight: 500;
     color: black;
+}
+
+.margin_l5 {
+    margin-left: 8vw;
 }
 
 @media only screen and (max-width: 1020px) {
