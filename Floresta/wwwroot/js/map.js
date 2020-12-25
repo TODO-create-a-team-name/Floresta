@@ -1,5 +1,4 @@
-﻿var data = {
-}
+﻿var data = {};
 
 const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
 const icons = {

@@ -115,19 +115,24 @@ namespace Floresta.Controllers
         {
             if (id != null)
             {
-
                 var purchase = _context.Payments.FirstOrDefault(x => x.Id == id);
+                var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
                 var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == purchase.SeedlingId);
                 var marker = _context.Markers.FirstOrDefault(x => x.Id == purchase.MarkerId);
-                var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
+
                 EmailService emailService = new EmailService();
-                seedling.Amount += purchase.PurchasedAmount;
-                _context.Update(seedling);
-                marker.PlantCount += purchase.PurchasedAmount;
-                _context.Update(marker);
                 await emailService.SendEmailAsync(user.Email, "Payment Faliled",
                     $"Dear {user.Name} {user.UserSurname}, unfortunately, your payment was not successfull. Contact our support to get more information.");
+                
+                seedling.Amount += purchase.PurchasedAmount;
+                _context.Update(seedling);
+
+                marker.PlantCount += purchase.PurchasedAmount;
+                marker.isPlantingFinished = false;
+                _context.Update(marker);
+                
                 purchase.IsPaymentFailed = true;
+                
                 _context.Update(purchase);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Purchases");
