@@ -1,18 +1,4 @@
 ﻿var treesAndUsers = [];
-$.ajax({
-    type: "GET",
-    url: "Home/GetDataForChart",
-    contentType: "application/json",
-    dataType: "json",
-    async: false,
-    success: function (result) {
-        treesAndUsers = result;
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-})
 
 document.getElementById("usersSupportedDiv").innerHTML += ` ${treesAndUsers.users} людей підтримало`;
 document.getElementById("treesPlantedDiv").innerHTML += ` ${treesAndUsers.trees} дерев посаджено`;
@@ -44,3 +30,17 @@ function drawChart() {
     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
     chart.draw(data, options);
 }
+
+$.ajax({
+    type: "GET",
+    url: "Home/GetDataForChart",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        treesAndUsers = result;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+})
