@@ -1,8 +1,5 @@
 ﻿var treesAndUsers = [];
 
-document.getElementById("usersSupportedDiv").innerHTML += ` ${treesAndUsers.users} людей підтримало`;
-document.getElementById("treesPlantedDiv").innerHTML += ` ${treesAndUsers.trees} дерев посаджено`;
-
 google.charts.load("current", { packages: ["corechart"] });
 google.charts.setOnLoadCallback(drawChart);
 
@@ -38,6 +35,10 @@ $.ajax({
     dataType: "json",
     success: function (result) {
         treesAndUsers = result;
+    },
+    complete: function () {
+        document.getElementById("usersSupportedDiv").innerHTML += ` ${treesAndUsers.users} людей підтримало`;
+        document.getElementById("treesPlantedDiv").innerHTML += ` ${treesAndUsers.trees} дерев посаджено`;
     },
     error: function (xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText
