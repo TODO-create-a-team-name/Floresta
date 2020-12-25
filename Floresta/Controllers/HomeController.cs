@@ -156,6 +156,7 @@ namespace Floresta.Controllers
                 seedling.Amount += purchase.PurchasedAmount;
                 _context.Update(seedling);
                 marker.PlantCount += purchase.PurchasedAmount;
+                marker.isPlantingFinished = false;
                 _context.Update(marker);
                 await emailService.SendEmailAsync(user.Email, "Payment Faliled",
                     $"Dear {user.Name} {user.UserSurname}, unfortunately, your payment was not successfull. Contact our support to get more information.");
