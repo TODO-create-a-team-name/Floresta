@@ -1,6 +1,6 @@
-﻿var markers = [];
-var seedlings = [];
-var admin;
+﻿var data = {
+}
+
 const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
 const icons = {
     finish: {
@@ -10,35 +10,23 @@ const icons = {
         icon: iconBase + "red-circle.png",
     },
 };
-var urls = ["Map/GetSeedlings" ,"Map/GetMarkers", "Map/IsAdminCheck"];
-for (var i = 0; i < urls.length; i++) {
-    $.ajax({
-        async: false,
-        type: "GET",
-        url: urls[i],
-        contentType: "application/json",
-        dataType: "json",
-        success: function (result) {
-            switch (i) {
-                case 0:
-                    seedlings = result;
-                    break;
-                case 1:
-                    markers = result;
-                    break;
-                case 2:
-                    admin = result;
-                    break;
-                default:
-                    alert('Error');
-            }
-        },
-        error: function (xhr, status, error) {
-            var errorMessage = xhr.status + ': ' + xhr.statusText
-            alert('Error - ' + errorMessage);
-        }
-    })
-}
+
+$.ajax({
+    async: false,
+    type: "GET",
+    url: "Map/GetRequiredData",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        data.markers = result.markers;
+        data.seedlings = result.seedlings;
+        data.isAdmin = result.isAdmin;
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
+});
 
 var map;
 function initMap() {
@@ -109,7 +97,7 @@ function initMap() {
     }
     var marker = null;
     function placeMarker(location, title) {
-        if (admin) {
+        if (data.isAdmin) {
             marker = new google.maps.Marker({
                 position: location,
                 animation: google.maps.Animation.DROP,
@@ -131,21 +119,21 @@ function initMap() {
         else
             return "working"
     }
-    for (var i = 0; i < markers.length; i++) {
+    for (var i = 0; i < data.markers.length; i++) {
         const marker = new google.maps.Marker({
             position: {
-                lat: parseFloat(markers[i].lat),
-                lng: parseFloat(markers[i].lng),
+                lat: parseFloat(data.markers[i].lat),
+                lng: parseFloat(data.markers[i].lng),
                 
             },
             map: map,
-            title: markers[i].title,
-            plantCount: markers[i].plantCount,
-            id: markers[i].id,
+            title: data.markers[i].title,
+            plantCount: data.markers[i].plantCount,
+            id: data.markers[i].id,
             animation: google.maps.Animation.DROP,
-            icon: icons[checkType(markers[i].isPlantingFinished)].icon
+            icon: icons[checkType(data.markers[i].isPlantingFinished)].icon
         });
-        if (!markers[i].isPlantingFinished) {
+        if (!data.markers[i].isPlantingFinished) {
             marker.addListener("click", () => {
                 if (marker.getAnimation() !== null) {
                     marker.setAnimation(null);
@@ -154,7 +142,7 @@ function initMap() {
                     marker.setAnimation(google.maps.Animation.BOUNCE);
                 }
             });
-        info(marker, markers[i].title + "<br> plantCount: " + markers[i].plantCount);
+            info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
         }
        
     }
@@ -173,9 +161,9 @@ function initMap() {
 
             var seedling;
 
-            for (var i = 0; i < seedlings.length; i++) {
-                if (seedlings[i].id == seedlingId) {
-                    seedling = seedlings[i];
+            for (var i = 0; i < data.seedlings.length; i++) {
+                if (data.seedlings[i].id == seedlingId) {
+                    seedling = data.seedlings[i];
                 }
                 break;
             }

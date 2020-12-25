@@ -91,16 +91,30 @@ namespace Floresta.Controllers
             var markers = _context.Markers.ToList();
             return new JsonResult(markers);
         }
-        public JsonResult GetSeedlings()
-        {
-            var seedlings = _context.Seedlings.ToList();
-            return new JsonResult(seedlings);
-        }
+        //public JsonResult GetSeedlings()
+        //{
+        //    var seedlings = _context.Seedlings.ToList();
+        //    return new JsonResult(seedlings);
+        //}
 
-        public JsonResult IsAdminCheck()
+        //public JsonResult IsAdminCheck()
+        //{
+        //    bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
+        //    return new JsonResult(IsAdmin);
+        //}
+
+        public JsonResult GetRequiredData()
         {
+            var markers = _context.Markers.ToList();
+            var seedlings = _context.Seedlings.ToList();
             bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
-            return new JsonResult(IsAdmin);
+
+            return new JsonResult(new
+            {
+                markers = markers,
+                seedlings = seedlings,
+                IsAdmin = IsAdmin
+            });
         }
     }
 }
