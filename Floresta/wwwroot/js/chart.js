@@ -17,6 +17,7 @@ function drawChart() {
             color: 'white',
         },
         fontSize: 18,
+        select: null,
         tooltip: { trigger: 'none' },
         legend: 'none',
         pieSliceText: 'value',

@@ -12,10 +12,10 @@ const icons = {
 
 var map;
 function initMap() {
-    var uluru = { lat: 48.9215, lng: 24.7097};
+    var uluru = { lat: 49.22242, lng: 31.88714};
 
      map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 11,
+        zoom: 6,
         center: uluru,
         zoomControlOption: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
@@ -103,17 +103,19 @@ regionBt.forEach(region => {
                 node.classList.remove('region_selected');
             });
             switch (region.innerHTML) {
-                case 'Івано-Франківська': setRegoin(48.9215, 24.7097)
+                case 'Івано-Франківська': setRegion(48.9215, 24.7097)
                     break;
-                case 'Львівська': setRegoin(49.83826, 24.02324)
+                case 'Львівська': setRegion(49.83826, 24.02324)
                     break;
-                case 'Тернопільська': setRegoin(49.553516, 25.594767)
+                case 'Тернопільська': setRegion(49.553516, 25.594767)
                     break;
             }
-            function setRegoin(lat, lng) { //set new location
+            function setRegion(lat, lng) { //set new location
                 region.classList.add('region_selected');
-                const pos = { lat: lat, lng: lng, };
+                const pos = { lat: lat, lng: lng };
                 map.setCenter(pos);
+                map.setZoom(11);
+                
             }
         }
     });
@@ -204,3 +206,65 @@ $.ajax({
         alert('Error - ' + errorMessage);
     }
 });
+
+var numStepeerInput = document.querySelector("#plantCountInput");
+var thisAction = document.querySelectorAll(".count_btn");
+
+
+thisAction.forEach(btnAction => {
+    btnAction.addEventListener('click', {
+        handleEvent(event) {
+            switch (btnAction.innerHTML) {
+                case '+': updateVal("increment");
+                    break;
+                case '-': updateVal("decrement");
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
+});
+numStepeerInput.addEventListener("blur", function () {
+    updateVal("entered");
+});
+numStepeerInput.addEventListener("keypress", function (e) {
+    if (e.key === 'Enter') {
+        updateVal("entered");
+    }
+});
+function updateVal(action) {
+    var StepperSetings = {
+        min: parseInt(numStepeerInput.min, 10),
+        max: parseInt(numStepeerInput.max, 10),
+        step: parseInt(numStepeerInput.step, 10)
+    };
+
+    var tempValue = parseInt(numStepeerInput.value, 10);
+    var newValue = parseInt(numStepeerInput.value, 10);
+    if (typeof tempValue === "number" && action == "entered" || typeof tempValue === "string") {
+        if (typeof tempValue === "string" || Number.isNaN(tempValue)) {
+            numStepeerInput.value = StepperSetings.min;
+        }
+        else {
+            if (tempValue > StepperSetings.max) {
+                numStepeerInput.value = StepperSetings.max;
+            }
+            else if (tempValue < StepperSetings.min) {
+                numStepeerInput.value = StepperSetings.min;
+            }
+            else {
+                numStepeerInput.value = tempValue;
+            }
+        }
+    }
+    else {
+        if (action == "increment" && newValue < StepperSetings.max) {
+            newValue = newValue + StepperSetings.step;
+        }
+        else if (action == "decrement" && newValue > StepperSetings.min) {
+            newValue = newValue - StepperSetings.step;
+        }
+        numStepeerInput.value = newValue;
+    }
+}
