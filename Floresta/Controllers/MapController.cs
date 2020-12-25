@@ -38,6 +38,12 @@ namespace Floresta.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
+        [Authorize(Roles = "admin")]
+        public IActionResult Markers()
+        {
+            var list = _context.Markers.ToList();
+            return View(list);
+        }
         [HttpPost]
         public async Task<IActionResult> Index(Marker marker)
         {
