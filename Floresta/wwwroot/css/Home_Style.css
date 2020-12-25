@@ -113,7 +113,9 @@ header {
     .account_button:focus{
         outline: none;
     }
-
+.user_Ntext{
+    margin-bottom: 5px;
+}
 
 .account_container {
     right: 10px;
@@ -147,7 +149,7 @@ header {
     }
 
 .out_icon {
-    margin-bottom: 13px;
+    margin-top: -25px !important;
     color: #ffffff;
     font-size: 22px;
     display: inline-block;
@@ -629,7 +631,7 @@ header {
 
 .card_team {
     display: flex;
-    height: 170px;
+    height: 110px;
     width: 320px;
     max-width: 320px;
     margin-top: 25vh;
@@ -894,7 +896,7 @@ select::-ms-expand {
 @media only screen and (max-height: 900px){
     .plat_for_home {
         font-family: 18px;
-        margin-top: 65vh;
+        margin-top: 67vh;
     }
 }
 @media only screen and (max-height: 600px) {
@@ -960,7 +962,7 @@ select::-ms-expand {
     }
 }
 
-@media only screen and (max-height: 550px), (max-width: 1200px) {
+@media only screen and (max-height: 650px), (max-width: 1200px) {
     .pay_map_container{
         display: block;
     }
@@ -987,9 +989,6 @@ select::-ms-expand {
         display: none;
     }
 
-    .out_icon {
-        margin-bottom: 15px;
-    }
 
     .logo_icon {
         margin: unset;
@@ -1160,7 +1159,7 @@ select::-ms-expand {
         margin-left: 0px !important;
     }
     .out_icon {
-        margin-top: -1px;
+        margin-top: 2px;
     }
     .plat_for_home{
         margin-top: 70vh;

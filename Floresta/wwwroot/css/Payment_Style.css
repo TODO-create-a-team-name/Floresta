@@ -1,0 +1,406 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+    background: url('/images/Home page/Map Bg.svg') center center no-repeat;
+    background-size: 100% 100%;
+}
+* {
+    font-family: 'Roboto', sans-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0;
+    padding: 0;
+}
+.logo_icon {
+    height: 4vw;
+    margin-top: 20px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-left: 20px;
+}
+
+.Big_site_logo {
+    font-size: 30px !important;
+    color: black;
+}
+.payment_map_container {
+    margin: 3vh 6vw 6vh 6vw;
+    font-family: Georgia;
+}
+
+
+.control_panel_block {
+    color: white;
+
+    background-color: #ABCD2D;
+    border-radius: 25px;
+    margin: 10px 550px 15px 20px;
+}
+
+.map_option {
+    height: 70vh !important;
+    width: 60vw !important;
+}
+
+.pay_map_container {
+    display: flex;
+}
+
+.pay_container {
+    min-height: 400px;
+    min-width: 320px;
+    max-height: 620px;
+    width: 330px;
+    background-color: #ABCD2D;
+    border-radius: 40px;
+    margin: 40px 20px 0px 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 13;
+}
+.container_panel{
+
+}
+.map_admin_panel {
+    min-height: 255px;
+    min-width: 320px;
+    width: 330px;
+    background-color: #ABCD2D;
+    border-radius: 40px;
+    margin: 10px 20px -30px 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    display: grid;
+}
+input[type="number"] {
+    outline: none;
+    -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.form_buttons {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 18px;
+    height: 40px;
+    width: 250px;
+    position:absolute;
+    margin-top: 15px;
+    margin-left: 85px;
+    display: inline-block;
+    text-align: center;
+}
+
+.cancel_button {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 2px;
+    color: #7F7F7F;
+    font-size: 16px;
+}
+
+    .cancel_button:hover {
+        text-decoration: underline;
+    }
+
+.pay_button {
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+    margin-right: -25px;
+    background: #EF8C39;
+    height: 40px;
+    border: none;
+    width: 150px;
+    border-radius: 18px;
+}
+
+    .pay_button:hover {
+        background-color: #FD8118;
+    }
+    .pay_button:focus{
+        outline: none;
+    }
+
+.control_title {
+    margin: 8px 10px 8px 20px;
+    display: inline-block;
+}
+
+.contol-item {
+    display: inline-block;
+}
+
+.control_panel_block {
+    
+    color: white;
+
+    background-color: #ABCD2D;
+    border-radius: 25px;
+    margin: 10px 550px 15px 20px;
+}
+.title_box {
+    margin-left: 12px;
+    color: #ABCD2D;
+    font-size: 40px;
+
+}
+
+    .title_box::first-letter {
+        color: #EF8C39;
+    }
+
+.region_button {
+
+    cursor: pointer;
+
+    font-size: 16px;
+    display: inline-block;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    margin-right: 5px;
+
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 20px;
+}
+
+    .region_button:hover {
+        background-color: white;
+        color: #ABCD2D;
+    }
+
+    .region_button:focus {
+        outline: none;
+    }
+
+.region_selected {
+    background-color: white;
+    color: #ABCD2D;
+}
+
+
+#map {
+    border-radius: 25px;
+    height: 70vh;
+    width: 70vw;
+    margin-left: 2vw;
+    filter: drop-shadow(5px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.form_item {
+    margin-top: 10px;
+    display: grid;
+    justify-content: center;
+}
+.control-label{
+    color: white;
+    font-size: 20px;
+}
+.admi_block{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.validation-summary-errors ul {
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 12px;
+    padding: unset;
+    margin: unset;
+    list-style: none;
+    list-style-type: none;
+    margin: 10px 10px -5px 10px;
+    color: white;
+}
+.Create_m_btn {
+    background-color: #F68526;
+    border: none;
+    border-radius: 25px;
+    height: 35px;
+    width: 200px;
+    font-size: 18px;
+    color: white;
+}
+.form_control_sm {
+    height: 35px;
+    border: 2px solid white;
+    border-radius: 15px;
+    font-size: 16px;
+    color: white;
+    background-color: transparent;
+    width: 290px;
+    padding-left: 15px;
+}
+    .form_control_sm::placeholder {
+        color: white;
+    }
+    .title_admin_panel {
+        font-size: 20px;
+        color: #EF8C39;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+.plant_c_block {
+    width: 300px;
+    height: 90px;
+    border-radius: 20px;
+    border: 2px solid white;
+    margin-top: 20px;
+    text-align: center;
+}
+.main_title_block {
+    background-color: white;
+    color: #ABCD2D;
+    padding: 6px 10px 10px 15px;
+    text-align: start;
+    border-radius: 16px 16px 0px 0px;
+}
+.count_btn {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    height: 35px;
+    font-size: 24px;
+    width: 35px;
+    color: #EF8C39;
+}
+    .count_btn:hover {
+    }
+    .count_btn:focus {
+        outline: none;
+    }
+.counter_area {
+    text-align: center;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    color: white;
+    padding: 0px 5px 2px 5px;
+    width: 80px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid white;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    font-size: 18px;
+}
+.counter_block{
+    margin-top: 5px;
+}
+.seedling_block {
+    width: 300px;
+    height: 230px;
+    border-radius: 20px;
+    border: 2px solid white;
+    margin-top: 10px;
+    text-align: center;
+}
+.seedling_title_block {
+    background-color: white;
+    color: #ABCD2D;
+    padding: 6px 10px 10px 15px;
+    text-align: start;
+    border-radius: 16px 16px 0px 0px;
+}
+.title_admin_panel{
+
+}
+@media only screen and (max-width: 1300px) {
+    .region_button {
+        margin: 10px;
+        margin-top: 0px;
+        margin-right: 0px;
+    }
+}
+@media only screen and (max-width: 1020px) {
+    .control_panel_block {
+        width: 38vw;
+        min-width: 310px;
+    }
+    
+
+    #map {
+        margin-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    .pay_map_container {
+        display: block;
+    }
+
+    .map_option {
+        width: 80vw !important;
+    }
+    .control_panel_block {
+        width: 38vw;
+        min-width: 310px;
+    }
+}
+
+    @media only screen and (max-width: 800px) {
+        .map_container {
+            margin-left: -5%;
+        }
+
+        #map {
+            height: 50vh;
+            width: 85vw;
+            margin: unset;
+        }
+        .control_panel_block {
+            margin: unset;
+            margin-bottom: unset;
+            margin-bottom: 20px;
+        }
+        .title_box {
+            font-size: 30px;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .map_admin_panel{
+            margin-left: unset;
+        }
+        .map_container {
+            margin-left: -9%;
+        }
+        .pay_container {
+            margin-left: unset;
+        }
+        #map {
+            height: 60vh !important;
+            width: 90vw !important;
+        }
+        .control_panel_block {
+            margin-left: -15px;
+        }
+
+        .title_box {
+            margin: unset;
+            margin-left: -15px;
+            margin-bottom: 10px;
+        }
+    }
