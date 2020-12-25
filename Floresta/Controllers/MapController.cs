@@ -38,15 +38,13 @@ namespace Floresta.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
-        [Authorize(Roles = "admin")]
-        public IActionResult Markers()
+        [HttpPost]
+        public async Task<IActionResult> Index(Marker marker)
         {
-            var list = _context.Markers.ToList();
-            return View(list);
+            _context.Markers.Add(marker);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
-
-        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -66,13 +64,7 @@ namespace Floresta.Controllers
             return RedirectToAction("Markers");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(Marker marker)
-        {
-            _context.Markers.Add(marker);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        
 
         [Authorize(Roles = "admin")]
         [HttpPost]
