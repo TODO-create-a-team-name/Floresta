@@ -69,6 +69,11 @@ namespace Floresta.Controllers
                 marker.PlantCount -= model.PurchasedAmount;
                 _context.Update(marker);
             }
+            if(marker.PlantCount==0)
+            {
+                marker.isPlantingFinished = true;
+                _context.Update(marker);
+            }
             _context.Add(payment);
             _context.SaveChanges();
             

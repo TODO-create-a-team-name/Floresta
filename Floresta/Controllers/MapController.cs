@@ -45,7 +45,13 @@ namespace Floresta.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
+        [HttpPost]
+        public async Task<IActionResult> Index(Marker marker)
+        {
+            _context.Markers.Add(marker);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -64,13 +70,7 @@ namespace Floresta.Controllers
             return RedirectToAction("Markers");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(Marker marker)
-        {
-            _context.Markers.Add(marker);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)

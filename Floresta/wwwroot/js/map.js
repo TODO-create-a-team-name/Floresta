@@ -1,49 +1,44 @@
 ﻿var markers = [];
 var seedlings = [];
 var admin;
-$.ajax({
-    async: false,
-    type: "GET",
-    url: "Map/GetMarkers",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        markers = result;
+const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
+const icons = {
+    finish: {
+        icon: iconBase + "grn-circle.png",
     },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-})
-
-$.ajax({
-    type: "GET",
-    url: "Map/GetSeedlings",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        seedlings = result;
+    working: {
+        icon: iconBase + "red-circle.png",
     },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-}) 
-
-$.ajax({
-    type: "GET",
-    url: "Map/IsAdminCheck",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        admin = result;
-
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-})
+};
+var urls = ["Map/GetSeedlings" ,"Map/GetMarkers", "Map/IsAdminCheck"];
+for (var i = 0; i < urls.length; i++) {
+    $.ajax({
+        async: false,
+        type: "GET",
+        url: urls[i],
+        contentType: "application/json",
+        dataType: "json",
+        success: function (result) {
+            switch (i) {
+                case 0:
+                    seedlings = result;
+                    break;
+                case 1:
+                    markers = result;
+                    break;
+                case 2:
+                    admin = result;
+                    break;
+                default:
+                    alert('Error');
+            }
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
+        }
+    })
+}
 
 var map;
 function initMap() {
@@ -83,13 +78,7 @@ function initMap() {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            var icon = {
-                url: place.icon,
-                size: new google.maps.Size(71, 71),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(17, 34),
-                scaledSize: new google.maps.Size(25, 25),
-            };
+            var icon = icons.finish;
             //creates a marker for each place
             searchMarkers.push(new google.maps.Marker({
                 map: map,
@@ -108,6 +97,7 @@ function initMap() {
         map.fitBounds(bounds);
 
     });
+
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng, "New marker");
 
@@ -135,27 +125,38 @@ function initMap() {
 
     }
 
+    function checkType(isFinish) {
+        if (isFinish)
+            return "finish";
+        else
+            return "working"
+    }
     for (var i = 0; i < markers.length; i++) {
         const marker = new google.maps.Marker({
             position: {
                 lat: parseFloat(markers[i].lat),
                 lng: parseFloat(markers[i].lng),
+                
             },
             map: map,
             title: markers[i].title,
             plantCount: markers[i].plantCount,
             id: markers[i].id,
             animation: google.maps.Animation.DROP,
+            icon: icons[checkType(markers[i].isPlantingFinished)].icon
         });
-        marker.addListener("click", () => {
-            if (marker.getAnimation() !== null) {
-                marker.setAnimation(null);
-            }
-            else {
-                marker.setAnimation(google.maps.Animation.BOUNCE);
-            }
-        });
+        if (!markers[i].isPlantingFinished) {
+            marker.addListener("click", () => {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                }
+                else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                }
+            });
         info(marker, markers[i].title + "<br> plantCount: " + markers[i].plantCount);
+        }
+       
     }
    
     function info(marker, title) {
