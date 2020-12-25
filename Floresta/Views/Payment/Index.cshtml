@@ -1,43 +1,71 @@
 ﻿@model Floresta.ViewModels.ConfirmPaymentViewModel
-<link rel="stylesheet" href="~/css/paymentStyles.css">
-@{ 
+@{
     Layout = null;
 }
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/css/Paymentform_Style.css" />
+<link rel="icon" href="~/images/Ws-small-icon.png" />
 <p>@Model.Name @Model.Surname</p>
 <p>@Model.Email</p>
 <p>Seedling: @Model.Seedling</p>
 <p>Amount: @Model.PurchasedAmount</p>
 <p>Location: @Model.MarkerTitle</p>
 <p>Total Price: @Model.Price</p>
-<div class="checkout_form">
-    <div class="card_number" id="card-container">
-        <input type="text" class="input" id="card" placeholder="0000 0000 0000 0000">
-        <div id="logo"></div>
-    </div>
-    <div class="card_grp">
-        <div class="expiry_date">
-            <input type="text" class="expiry_input" data-mask="00" placeholder="00">
-            <input type="text" class="expiry_input" data-mask="00" placeholder="00">
+
+<div class="container">
+    <div id="Checkout" class="inline">
+        <h1>Pay Invoice</h1>
+        <div class="card-row">
+            <span class="visa"></span>
+            <span class="mastercard"></span>
+            <span class="amex"></span>
+            <span class="discover"></span>
         </div>
-        <div class="cvc">
-            <input type="text" class="cvc_input" data-mask="000" placeholder="000">
-            <div class="cvc_img">
-                ?
-                <div class="img">
-                    <img src="https://i.imgur.com/2ameC0C.png" alt="">
+        <form>
+            <div class="form-group">
+                <label for="PaymentAmount">Сума до сплати</label>
+                <div class="amount-placeholder">
+                    <span>@Model.Price</span>
                 </div>
             </div>
-        </div>
-    </div>
-    <div>
-        <form asp-action="Index" method="post">
-            <input type="hidden" asp-for="MarkerId" />
-            <input type="hidden" asp-for="SeedlingId" />
-            <input type="hidden" asp-for="PurchasedAmount" />
-            <input type="hidden" asp-for="Price" />
-            <input class="btn" type="submit" value="Pay" />
+            <div class="form-group">
+                <label or="NameOnCard">Ім'я та Прізвище</label>
+                <input id="NameOnCard" class="form-control" type="text" maxlength="255" />
+            </div>
+            <div class="form-group">
+                <label for="CreditCardNumber">Номер карти</label>
+                <input id="CreditCardNumber" class="null card-image form-control" type="text" />
+            </div>
+            <div class="expiry-date-group form-group">
+                <label for="ExpiryDate">Термін придатності</label>
+                <input id="ExpiryDate" class="form-control" type="text" placeholder="MM / YY" maxlength="7" />
+            </div>
+            <div class="security-code-group form-group">
+                <label for="SecurityCode">Код безпеки</label>
+                <div class="input-container">
+                    <input id="SecurityCode" class="form-control" type="text" />
+                </div>
+            </div>
+            <div class="zip-code-group form-group">
+                <label for="ZIPCode">ZIP/Postal code</label>
+                <div class="input-container">
+                    <input id="ZIPCode" class="form-control" type="text" maxlength="10" />
+                </div>
+            </div>
+            <form asp-action="Index" method="post">
+                <input type="hidden" asp-for="MarkerId" />
+                <input type="hidden" asp-for="SeedlingId" />
+                <input type="hidden" asp-for="PurchasedAmount" />
+                <input type="hidden" asp-for="Price" />
+                <button id="PayButton" type="submit" class="btn btn-block btn-success submit-button">
+                    <span class="submit-button-lock"></span>
+                    <span class="align-middle">@Model.Price</span>
+                </button>
+            </form>
         </form>
     </div>
 </div>
+
 
 <script src="~/js/card-validator.js"></script>
