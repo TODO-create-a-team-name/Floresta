@@ -138,28 +138,31 @@ function info(marker, title) {
         $("#markerIdInput").val(marker.id);
         $("#markerTitleInput").val(marker.title);
 
-        var seedlingId = $("#seedlingsDropdown option:selected").val();
+        findSeedling();
 
-        var seedling;
-
-        for (var i = 0; i < data.seedlings.length; i++) {
-            if (data.seedlings[i].id == seedlingId) {
-                seedling = data.seedlings[i];
-            }
-            break;
-        }
-        var count;
-        if (seedling.amount >= marker.plantCount) {
-            count = marker.plantCount;
-        }
-        else if (marker.plantCount > seedling.amount) {
-            count = seedling.amount;
-        }
-
-        $("#plantCountInput").attr({
-            "max": count,
-            "min": 1
+        $("#seedlingsDropdown").change(() => {
+            findSeedling();
         });
+
+        function findSeedling() {
+            var seedlingId = $("#seedlingsDropdown option:selected").val();
+
+            var seedling = data.seedlings.find(x => x.id == seedlingId);
+
+            var count;
+            if (seedling.amount >= marker.plantCount) {
+                count = marker.plantCount;
+            }
+            else if (marker.plantCount > seedling.amount) {
+                count = seedling.amount;
+            }
+
+            $("#plantCountInput").attr({
+                "value": count,
+                "max": count,
+                "min": 1
+            });
+        }
     });
 }
 

@@ -47,7 +47,7 @@
                                     <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
                                 </div>
                                 <div class="form_item">
-                                    <label asp-for="PlantCount" class="control-label">Кількість місь для посадки</label>
+                                    <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
                                     <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
                                 </div>
                                 <div class="form_item">
@@ -59,7 +59,7 @@
                                     <span asp-validation-for="Lat"></span>
                                 </div>
                                 <div class="form_item">
-                                    <button type="submit" class="Create_m_btn">Створти</button>
+                                    <button type="submit" class="Create_m_btn">Створити</button>
                                 </div>
                             </div>
                         </form>
@@ -90,7 +90,7 @@
                             <div class="form_item">
                                 <div class="seedling_block">
                                     <div class="seedling_title_block">
-                                        <span>Виберіть садженець</span>
+                                        <span>Виберіть саджанець</span>
                                     </div>
                                     <div class="seedling_box">
                                         <select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>

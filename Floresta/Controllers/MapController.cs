@@ -25,6 +25,7 @@ namespace Floresta.Controllers
             {
                 var model = new PaymentViewModel();
                 model.Seedlings = _context.Seedlings
+                    .Where(s => s.Amount != 0)
                     .Select(x => new SelectListItem()
                     {
                         Value = x.Id.ToString(),
