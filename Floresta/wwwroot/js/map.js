@@ -11,23 +11,6 @@ const icons = {
     },
 };
 
-$.ajax({
-    async: false,
-    type: "GET",
-    url: "Map/GetRequiredData",
-    contentType: "application/json",
-    dataType: "json",
-    success: function (result) {
-        data.markers = result.markers;
-        data.seedlings = result.seedlings;
-        data.isAdmin = result.isAdmin;
-    },
-    error: function (xhr, status, error) {
-        var errorMessage = xhr.status + ': ' + xhr.statusText
-        alert('Error - ' + errorMessage);
-    }
-});
-
 var map;
 function initMap() {
     var uluru = { lat: 48.9215, lng: 24.7097};
@@ -112,75 +95,6 @@ function initMap() {
         }
 
     }
-
-    function checkType(isFinish) {
-        if (isFinish)
-            return "finish";
-        else
-            return "working"
-    }
-    for (var i = 0; i < data.markers.length; i++) {
-        const marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(data.markers[i].lat),
-                lng: parseFloat(data.markers[i].lng),
-                
-            },
-            map: map,
-            title: data.markers[i].title,
-            plantCount: data.markers[i].plantCount,
-            id: data.markers[i].id,
-            animation: google.maps.Animation.DROP,
-            icon: icons[checkType(data.markers[i].isPlantingFinished)].icon
-        });
-        if (!data.markers[i].isPlantingFinished) {
-            marker.addListener("click", () => {
-                if (marker.getAnimation() !== null) {
-                    marker.setAnimation(null);
-                }
-                else {
-                    marker.setAnimation(google.maps.Animation.BOUNCE);
-                }
-            });
-            info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
-        }
-       
-    }
-   
-    function info(marker, title) {
-        const infowindow = new google.maps.InfoWindow({
-            content: title,
-        });
-        marker.addListener("click", () => {
-
-            infowindow.open(marker.get("map"), marker);
-            $("#markerIdInput").val(marker.id);
-            $("#markerTitleInput").val(marker.title);
-
-            var seedlingId = $("#seedlingsDropdown option:selected").val();
-
-            var seedling;
-
-            for (var i = 0; i < data.seedlings.length; i++) {
-                if (data.seedlings[i].id == seedlingId) {
-                    seedling = data.seedlings[i];
-                }
-                break;
-            }
-            var count;
-            if (seedling.amount >= marker.plantCount) {
-                count = marker.plantCount;
-            }
-            else if (marker.plantCount > seedling.amount) {
-                count = seedling.amount;
-            }
-
-            $("#plantCountInput").attr({
-                "max": count,
-                "min": 1
-            });
-        });
-    }
 }
 var regionBt = document.querySelectorAll('.region_button');
 regionBt.forEach(region => {
@@ -204,4 +118,90 @@ regionBt.forEach(region => {
             }
         }
     });
+});
+
+function checkType(isFinish) {
+    if (isFinish)
+        return "finish";
+    else
+        return "working"
+}
+
+function info(marker, title) {
+    const infowindow = new google.maps.InfoWindow({
+        content: title,
+    });
+    marker.addListener("click", () => {
+
+        infowindow.open(marker.get("map"), marker);
+        $("#markerIdInput").val(marker.id);
+        $("#markerTitleInput").val(marker.title);
+
+        var seedlingId = $("#seedlingsDropdown option:selected").val();
+
+        var seedling;
+
+        for (var i = 0; i < data.seedlings.length; i++) {
+            if (data.seedlings[i].id == seedlingId) {
+                seedling = data.seedlings[i];
+            }
+            break;
+        }
+        var count;
+        if (seedling.amount >= marker.plantCount) {
+            count = marker.plantCount;
+        }
+        else if (marker.plantCount > seedling.amount) {
+            count = seedling.amount;
+        }
+
+        $("#plantCountInput").attr({
+            "max": count,
+            "min": 1
+        });
+    });
+}
+
+$.ajax({
+    type: "GET",
+    url: "Map/GetRequiredData",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (result) {
+        data.markers = result.markers;
+        data.seedlings = result.seedlings;
+        data.isAdmin = result.isAdmin;
+    },
+    complete: function () {
+        for (var i = 0; i < data.markers.length; i++) {
+            const marker = new google.maps.Marker({
+                position: {
+                    lat: parseFloat(data.markers[i].lat),
+                    lng: parseFloat(data.markers[i].lng),
+
+                },
+                map: map,
+                title: data.markers[i].title,
+                plantCount: data.markers[i].plantCount,
+                id: data.markers[i].id,
+                animation: google.maps.Animation.DROP,
+                icon: icons[checkType(data.markers[i].isPlantingFinished)].icon
+            });
+            if (!data.markers[i].isPlantingFinished) {
+                marker.addListener("click", () => {
+                    if (marker.getAnimation() !== null) {
+                        marker.setAnimation(null);
+                    }
+                    else {
+                        marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                });
+                info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
+            }
+        }
+    },
+    error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ': ' + xhr.statusText
+        alert('Error - ' + errorMessage);
+    }
 });
