@@ -36,7 +36,7 @@ body {
     align-items: center;
     position: absolute;
     width: 290px;
-    height: 315px;
+    height: 345px;
     right: 15%;
     top: 25%;
     background: #ABCD2D;
@@ -276,7 +276,16 @@ span {
 .margin_l5 {
     margin-left: 8vw;
 }
-
+.form_check{
+    display: inline-block !important;
+}
+.form_check_label{
+    cursor: pointer;
+    color: white;
+}
+.form_check_input{
+    border: 1px solid red;
+}
 @media only screen and (max-width: 1020px) {
     .Login_title {
         position: absolute;
