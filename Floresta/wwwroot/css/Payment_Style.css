@@ -56,7 +56,7 @@ body {
 }
 
 .pay_container {
-    min-height: 400px;
+    min-height: 450px;
     min-width: 320px;
     max-height: 620px;
     width: 330px;
@@ -71,12 +71,12 @@ body {
 }
 
 .map_admin_panel {
-    min-height: 255px;
-    min-width: 320px;
-    width: 330px;
-    background-color: #ABCD2D;
-    border-radius: 40px;
-    margin: 10px 20px -30px 20px;
+    min-height: 205px;
+    min-width: 280px;
+    width: 280px;
+    background-color: #ADCE52;
+    border-radius: 25px;
+    margin: -60px auto -30px auto;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     display: grid;
 }
@@ -212,13 +212,14 @@ input[type=number]::-webkit-outer-spin-button {
 
 .control-label {
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+    padding-left: 10px;
 }
 
 .admi_block {
     margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .validation-summary-errors ul {
@@ -232,7 +233,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin: unset;
     list-style: none;
     list-style-type: none;
-    margin: 10px 10px -5px 10px;
+    margin: 10px 10px -5px 15px;
     color: white;
 }
 
@@ -240,24 +241,28 @@ input[type=number]::-webkit-outer-spin-button {
     background-color: #F68526;
     border: none;
     border-radius: 25px;
+    margin-top: -5px;
+    margin-bottom: 5px;
     height: 35px;
     width: 200px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
 }
 
     .Create_m_btn:focus {
         outline: none;
     }
-
+    .Create_m_btn:hover {
+        background-color: #FD8118;
+    }
 .form_control_sm {
     height: 35px;
     border: 2px solid white;
     border-radius: 15px;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
     background-color: transparent;
-    width: 290px;
+    width: 260px;
     padding-left: 15px;
 }
 
@@ -268,15 +273,14 @@ input[type=number]::-webkit-outer-spin-button {
     .form_control_sm:focus {
         outline: none;
     }
-
-.title_admin_panel {
-    font-size: 20px;
-    color: #EF8C39;
-    background-color: white;
-    padding: 5px 10px;
-    border-radius: 15px;
-}
-
+    .title_admin_panel {
+        margin-left: 10px;
+        font-size: 16px;
+        color: #EF8C39;
+        background-color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
 .plant_c_block {
     width: 300px;
     height: 90px;
@@ -339,7 +343,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .seedling_block {
     width: 300px;
-    height: 230px;
+    height: 280px;
     border-radius: 20px;
     border: 2px solid white;
     margin-top: 10px;
@@ -387,7 +391,6 @@ input[type=number]::-webkit-outer-spin-button {
 .choice_block {
     text-align: center;
 }
-
 .tree_block span {
     font-size: 18px;
     color: #EF8C39;
@@ -414,6 +417,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 1300px) {
+    .map_admin_panel{
+        margin-top: 10px;
+        margin-left:50px;
+        margin-right: unset;
+    }
     .pay_map_container {
         display: block;
     }
@@ -450,27 +458,23 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-@media only screen and (max-width: 600px) {
-    .map_admin_panel {
-        margin-left: unset;
-    }
-
-    .map_container {
-        margin-left: -9%;
-    }
-
-    .pay_container {
-        margin-left: unset;
-    }
-
-    #map {
-        height: 60vh !important;
-        width: 90vw !important;
-    }
-
-    .control_panel_block {
-        margin-left: -15px;
-    }
+    @media only screen and (max-width: 600px) {
+        .map_admin_panel{
+            margin-left: 20px;
+        }
+        .map_container {
+            margin-left: -9%;
+        }
+        .pay_container {
+            margin-left: unset;
+        }
+        #map {
+            height: 60vh !important;
+            width: 90vw !important;
+        }
+        .control_panel_block {
+            margin-left: -15px;
+        }
 
     .title_box {
         margin: unset;

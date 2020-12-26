@@ -31,8 +31,8 @@
             <div class="pay_map_container">
                 <div id="map" class="map_option"></div>
                 <div class="container_panel">
-                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-                    {
+                    @*@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    {*@
                     <div class="map_admin_panel">
                         <form asp-action="index" class="form" asp-controller="map">
                             <div class="admi_block">
@@ -59,7 +59,7 @@
                             </div>
                         </form>
                     </div>
-                    }
+                    @*}*@
                     <div class="pay_container">
                         <form class="form" asp-action="Index" asp-controller="Payment" method="get">
                             <div class="validation" asp-validation-summary="ModelOnly"></div>
