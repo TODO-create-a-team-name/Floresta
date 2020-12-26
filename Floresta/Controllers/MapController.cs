@@ -23,15 +23,9 @@ namespace Floresta.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
+                var seedlings = _context.Seedlings.Where(s => s.Amount != 0).ToList();
                 var model = new PaymentViewModel();
-                model.Seedlings = _context.Seedlings
-                    .Where(s => s.Amount != 0)
-                    .Select(x => new SelectListItem()
-                    {
-                        Value = x.Id.ToString(),
-                        Text = $"{x.Name} price: {x.Price}"
-                    })
-                    .ToList();
+                model.Seedlings = seedlings;
                 return View(model);
             }
             else

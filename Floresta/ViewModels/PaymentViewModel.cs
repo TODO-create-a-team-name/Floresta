@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Floresta.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,6 +18,7 @@ namespace Floresta.ViewModels
         [Required(ErrorMessage = "The PlantCount filed is required")]
         public int PlantCount { get; set; }
         public int SeedlingId { get; set; }
-        public List<SelectListItem> Seedlings { get; set; }
+        public List<Seedling> Seedlings { get; set; }
+
     }
 }

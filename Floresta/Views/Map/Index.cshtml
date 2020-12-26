@@ -7,18 +7,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/PaymentStyle.css" />
+    <link rel="stylesheet" href="/css/Payment_Style.css" />
     <title> Google Map </title>
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="~/images/Ws-small-icon.png" />
 </head>
 <body>
     <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/Home page/Site icon.svg" class="logo_icon" /></a>
-    @*<div id="map-dialog1">
-            <div>
-                <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
-            </div>
-        </div>*@
 
     <div class="payment_map_container">
         <div class="map_block">
@@ -74,7 +69,7 @@
                             <div class="form_item">
                                 <div class="plant_c_block">
                                     <div class="main_title_block">
-                                        <span>Кількість дерев</span><span class="max_val">Max: 203</span>
+                                        <span>Кількість дерев</span><span class="max_val"></span>
                                     </div>
                                     <div class="counter_block">
                                         <span class="group_btn">
@@ -93,37 +88,15 @@
                                         <span>Виберіть саджанець</span>
                                     </div>
                                     <div class="seedling_box">
-                                        @*<select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>*@
+                                        @foreach (var s in Model.Seedlings) {
                                         <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
-                                                    <input type="radio" id="contactChoice1" name="tree" value="tree1">
-                                                    <label for="contactChoice1">Дуб</label>
-                                                </div>
-
-                                            </div>
+                                            <label class="tree_block" for="@s.Id">
+                                                <img src="~/images/Tree.svg" height="100" width="77"/><br />                                                    
+                                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
+                                                    <span>@s.Name</span>
+                                            </label>
                                         </div>
-                                        <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
-                                                    <input type="radio" id="contactChoice2" name="tree" value="tree2">
-                                                    <label for="contactChoice2">Дуб</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
-                                                    <input type="radio" id="contactChoice3" name="tree" value="tree3">
-                                                    <label for="contactChoice3">Дуб</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

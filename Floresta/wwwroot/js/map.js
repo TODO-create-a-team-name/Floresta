@@ -12,60 +12,14 @@ const icons = {
 
 var map;
 function initMap() {
-    var uluru = { lat: 49.22242, lng: 31.88714};
+    var uluru = { lat: 49.22242, lng: 31.88714 };
 
-     map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('map'), {
         zoom: 6,
         center: uluru,
         zoomControlOption: {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         },
-    });
-
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-
-
-    //Pushing control on the map
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
-    var searchMarkers = [];
-    // Listern for the event fired when the user selecets a predition and retrieve more details
-    searchBox.addListener('places_changed', function () {
-        var places = searchBox.getPlaces();
-        if (places.length == 0) {
-            return;
-        }
-        //clear out the old markers
-        searchMarkers.forEach(function (marker) {
-            marker.setMap(null);
-        });
-        searchMarkers = [];
-        //for each place, get the icon, name and location.
-        var bounds = new google.maps.LatLngBounds();
-        //debugger
-        places.forEach(function (place) {
-            if (!place.geometry) {
-                console.log("Returned place contains no geometry");
-                return;
-            }
-            var icon = icons.finish;
-            //creates a marker for each place
-            searchMarkers.push(new google.maps.Marker({
-                map: map,
-                icon: icon,
-                title: place.name,
-                position: place.geometry.location
-            }));
-
-            if (place.geometry.viewport) {
-                bounds.union(place.geometry.viewport);
-            }
-            else {
-                bounds.extend(place.geometry.location);
-            }
-        });
-        map.fitBounds(bounds);
-
     });
 
     google.maps.event.addListener(map, 'click', function (event) {
@@ -115,7 +69,7 @@ regionBt.forEach(region => {
                 const pos = { lat: lat, lng: lng };
                 map.setCenter(pos);
                 map.setZoom(11);
-                
+
             }
         }
     });
@@ -139,29 +93,30 @@ function info(marker, title) {
         $("#markerTitleInput").val(marker.title);
 
         findSeedling();
-
-        $("#seedlingsDropdown").change(() => {
-            findSeedling();
-        });
+        $('input[type=radio][name=SeedlingId]').change(findSeedling);
 
         function findSeedling() {
-            var seedlingId = $("#seedlingsDropdown option:selected").val();
+            var seedlingId = $('input[name="SeedlingId"]:checked').val();
 
             var seedling = data.seedlings.find(x => x.id == seedlingId);
 
             var count;
-            if (seedling.amount >= marker.plantCount) {
-                count = marker.plantCount;
-            }
-            else if (marker.plantCount > seedling.amount) {
-                count = seedling.amount;
-            }
+            if (seedling != null) {
+                if (seedling.amount >= marker.plantCount) {
+                    count = marker.plantCount;
+                }
+                else if (marker.plantCount > seedling.amount) {
+                    count = seedling.amount;
+                }
 
-            $("#plantCountInput").attr({
-                "value": count,
-                "max": count,
-                "min": 1
-            });
+                $(".max_val").text("Max: " + count);
+
+                $("#plantCountInput").attr({
+                    "value": count,
+                    "max": count,
+                    "min": 1
+                });
+            }  
         }
     });
 }
