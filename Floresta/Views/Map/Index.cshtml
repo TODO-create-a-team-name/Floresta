@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="/css/PaymentStyle.css" />
+    <link rel="stylesheet" href="/css/Payment_Style.css" />
     <title> Google Map </title>
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="~/images/Ws-small-icon.png" />
@@ -95,34 +95,11 @@
                                     <div class="seedling_box">
                                         @*<select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>*@
                                         <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
+                                            <label class="tree_block">
+                                                <img src="~/images/Tree.svg" height="100" width="77" /><br />
                                                     <input type="radio" id="contactChoice1" name="tree" value="tree1">
-                                                    <label for="contactChoice1">Дуб</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
-                                                    <input type="radio" id="contactChoice2" name="tree" value="tree2">
-                                                    <label for="contactChoice2">Дуб</label>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="tree_card">
-                                            <div class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" />
-                                                <div class="choice_block">
-                                                    <input type="radio" id="contactChoice3" name="tree" value="tree3">
-                                                    <label for="contactChoice3">Дуб</label>
-                                                </div>
-
-                                            </div>
+                                                    <span>Дуб</span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
