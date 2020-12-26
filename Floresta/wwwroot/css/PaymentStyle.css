@@ -241,6 +241,9 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 18px;
     color: white;
 }
+    .Create_m_btn:focus {
+        outline: none;
+    }
 .form_control_sm {
     height: 35px;
     border: 2px solid white;
@@ -253,6 +256,9 @@ input[type=number]::-webkit-outer-spin-button {
 }
     .form_control_sm::placeholder {
         color: white;
+    }
+    .form_control_sm:focus {
+        outline: none;
     }
     .title_admin_panel {
         font-size: 20px;
@@ -275,6 +281,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding: 6px 10px 10px 15px;
     text-align: start;
     border-radius: 16px 16px 0px 0px;
+    overflow: hidden;
 }
 .count_btn {
     background-color: white;
@@ -306,6 +313,9 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-right-radius: 2px;
     font-size: 18px;
 }
+    .counter_area:focus {
+        outline: none;
+    }
 .counter_block{
     margin-top: 5px;
 }
@@ -327,6 +337,35 @@ input[type=number]::-webkit-outer-spin-button {
 .title_admin_panel{
 
 }
+.max_val {
+    margin-left: 70px;
+}
+.seedling_box {
+    display: grid;
+    overflow: auto;
+    grid-template-columns: auto auto;
+    max-height: 192px;
+    width: 296px
+}
+.tree_block img {
+    margin-top: 10px;
+}
+.tree_card {
+    width: 120px;
+    height: 140px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px 0px 12px 12px;
+    overflow: hidden;
+}
+.choice_block{
+    text-align: center;
+}
+    .choice_block label {
+        font-size: 18px;
+        color: #EF8C39;
+    }
+
 @media only screen and (max-width: 1300px) {
     .region_button {
         margin: 10px;
