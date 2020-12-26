@@ -25,12 +25,11 @@ namespace Floresta.Controllers
 
         public IActionResult Index()
         {
-            var model = new QuestionViewModel();
+            var model = new HomeViewModel();
 
             return View(model);
                
         }
-
         public IActionResult Privacy()
         {
             return View();
@@ -40,7 +39,7 @@ namespace Floresta.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> AskQuestion(QuestionViewModel model)
+        public async Task<IActionResult> AskQuestion(HomeViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
@@ -51,13 +50,31 @@ namespace Floresta.Controllers
                 };
                 _context.Questions.Add(question);
                 user.Questions.Add(question);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
             else
                 return RedirectToAction("Login", "Account");
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> JoinTeam(HomeViewModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if(user != null && model.PhoneNumber != null)
+            {
+                user.PhoneNumber = model.PhoneNumber;
+                user.IsClaimingForTeamParticipating = true;
+                _context.Users.Update(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+            }
+        }
+
         public JsonResult GetDataForChart()
         {
             var users = _context.Payments.Select(p => p.UserId).Distinct().Count();
