@@ -19,6 +19,7 @@
     width: 380px;
     height: 250px;
     border-radius: 30px;
+    object-fit: cover;
 }
 
 .new_boby {
@@ -38,13 +39,17 @@
 }
 
 .news_title {
+    white-space: nowrap;
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
     font-family: 'Roboto', sans-serif;
-    font-size: 46px;
+    font-size: 36px;
     color: #ABCD2D;
 }
 
@@ -137,7 +142,7 @@
     }
 
     .news_img {
-        width: 270px;
+        width: 260px;
         height: 190px;
     }
 

@@ -1,14 +1,15 @@
 ﻿var data = {};
 
+//define icons that will be used for our map
 const iconBase = "http://maps.google.com/mapfiles/ms/micons/";
 const icons = {
     finish: {
-        icon: iconBase + "green-dot.png",
+        icon: iconBase + "green-dot.png"
     },
     working: {
-        icon: iconBase + "red-dot.png",
+        icon: iconBase + "red-dot.png"
     },
-};
+}
 
 var map;
 function initMap() {

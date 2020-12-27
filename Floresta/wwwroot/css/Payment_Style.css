@@ -380,7 +380,7 @@ input[type=number]::-webkit-outer-spin-button {
     display: grid;
     overflow: auto;
     grid-template-columns: auto auto;
-    max-height: 192px;
+    max-height: 242px;
     width: 296px
 }
 

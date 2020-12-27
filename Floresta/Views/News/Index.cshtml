@@ -1,7 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @model IEnumerable<Floresta.Models.News>
-@*
-*@
 @{
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
@@ -32,18 +30,4 @@
             </div>
         </div>
     </div>
-    @*<tr>
-            <td>@item.Title</td>
-            <td></td>
-            <td><img height="100" src="~/images/news/@item.Image" /></td>
-            <td>
-                <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Delete
-                    </button>
-                </form>
-            </td>
-
-        </tr>*@
 }

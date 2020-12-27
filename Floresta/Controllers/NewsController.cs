@@ -65,8 +65,7 @@ namespace Floresta.Controllers
             if (ModelState.IsValid)
             {
                 await SaveImageAsync(news);
-                //Insert record
-                _context.Add(news);
+                await _context.News.AddAsync(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -102,7 +101,7 @@ namespace Floresta.Controllers
                     //save new image
                     await SaveImageAsync(news);
                 }
-                _context.Update(news);
+                _context.News.Update(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
