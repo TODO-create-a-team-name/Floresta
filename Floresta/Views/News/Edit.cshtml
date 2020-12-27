@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
 <form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
         <input type="hidden" asp-for="Id" />
     </div>
@@ -14,12 +15,13 @@
         <label asp-for="Context" class="control-label">Context</label>
         <input type="text" asp-for="Context" class="form-control" />
     </div>
-    <div class="form-group">
-        <input type="text" asp-for="Image" hidden/>
+    <div>
+        <input type="text" asp-for="Image" hidden />
         <img src="~/images/news/@Model.Image" />
+    </div>
+    <div class="form-group">
         <label asp-for="ImageFile" class="control-label"></label>
         <input asp-for="ImageFile" accept="image/*" type="file" />
-        <span asp-validation-for="ImageFile"class="text-danger"></span>
     </div>
 
     <div class="form-group">
