@@ -157,6 +157,11 @@ $.ajax({
                 });
                 info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
             }
+            else if (data.markers[i].isPlantingFinished) {
+                marker.addListener("click", () => {
+                    swal("Ура!", "Усі дерева на цій мітці були посаджені!", "success");
+                });
+            }
         }
     },
     error: function (xhr, status, error) {

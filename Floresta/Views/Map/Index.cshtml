@@ -1,9 +1,7 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @model Floresta.ViewModels.PaymentViewModel
-@{
-    ViewData["Title"] = "Map Page";
-    Layout = null;
-}
+@{ ViewData["Title"] = "Map Page";
+                Layout = null; }
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,35 +29,34 @@
             <div class="pay_map_container">
                 <div id="map" class="map_option"></div>
                 <div class="container_panel">
-                    @*@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-                    {*@
-                    <div class="map_admin_panel">
-                        <form asp-action="index" class="form" asp-controller="map">
-                            <div class="admi_block">
-                                <span class="title_admin_panel">Адмін панель</span>
-                                <div class="validation" asp-validation-summary="All"></div>
-                                <div class="form_item">
-                                    <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
-                                </div>
-                                <div class="form_item">
-                                    <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
-                                    <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
-                                </div>
-                                <div class="form_item">
-                                    <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
-                                    <span asp-validation-for="Lng"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
-                                    <span asp-validation-for="Lat"></span>
-                                </div>
-                                <div class="form_item">
-                                    <button type="submit" class="Create_m_btn">Створити</button>
-                                </div>
-                            </div>
-                        </form>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    {
+        <div class="map_admin_panel">
+            <form asp-action="index" class="form" asp-controller="map">
+                <div class="admi_block">
+                    <span class="title_admin_panel">Адмін панель</span>
+                    <div class="validation" asp-validation-summary="All"></div>
+                    <div class="form_item">
+                        <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
                     </div>
-                    @*}*@
+                    <div class="form_item">
+                        <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
+                        <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
+                    </div>
+                    <div class="form_item">
+                        <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lng"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lat"></span>
+                    </div>
+                    <div class="form_item">
+                        <button type="submit" class="Create_m_btn">Створити</button>
+                    </div>
+                </div>
+            </form>
+        </div>}
                     <div class="pay_container">
                         <form class="form" asp-action="Index" asp-controller="Payment" method="get">
                             <div class="validation" asp-validation-summary="ModelOnly"></div>
@@ -88,15 +85,15 @@
                                         <span>Виберіть саджанець</span>
                                     </div>
                                     <div class="seedling_box">
-                                        @foreach (var s in Model.Seedlings) {
-                                        <div class="tree_card">
-                                            <label class="tree_block" for="@s.Id">
-                                                <img src="~/images/Tree.svg" height="100" width="77"/><br />                                                    
-                                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
-                                                    <span>@s.Name</span>
-                                            </label>
-                                        </div>
-                                        }
+                                        @foreach (var s in Model.Seedlings)
+                                        {
+                            <div class="tree_card">
+                                <label class="tree_block" for="@s.Id">
+                                    <img src="~/images/Tree.svg" height="100" width="77" /><br />
+                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
+                                    <span>@s.Name</span>
+                                </label>
+                            </div>}
                                     </div>
                                 </div>
                             </div>
@@ -121,5 +118,6 @@
     </script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>
