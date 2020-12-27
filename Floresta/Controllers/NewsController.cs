@@ -23,31 +23,22 @@ namespace Floresta.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            //News news = _context.News.OrderByDescending(i => i.Id).SingleOrDefault();
-
-
-            //var list = _context.News.ToList();
-            //foreach (var i in list)
-            //{
-            //    string imageBase64Data = Convert.ToBase64String(i.ImageByte);
-            //    string imageDataURL = string.Format("data:image/jpg;base64,{0}", imageBase64Data);
-            //    i.Image = imageDataURL;
-            //}
             return View(await _context.News.ToListAsync());
         }
         public IActionResult Create()
         {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Context,ImageFile")] News news)
+        public async Task<News> SaveImageAsync(News news)
         {
-            if (ModelState.IsValid)
+            string wwwRootPath = _hostEnvironment.WebRootPath;
+            //Save image to wwwroot/image/news
+            if(news.ImageFile == null)
             {
-                //Save image to wwwroot/image/news
-                string wwwRootPath = _hostEnvironment.WebRootPath;
+                news.Image = "/default.png";
+            }
+            else
+            {
                 string fileName = Path.GetFileNameWithoutExtension(news.ImageFile.FileName);
                 string extension = Path.GetExtension(news.ImageFile.FileName);
                 news.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
@@ -56,6 +47,24 @@ namespace Floresta.Controllers
                 {
                     await news.ImageFile.CopyToAsync(fileStream);
                 }
+            }
+            return news;
+        }
+
+        public News DeleteImage(News news)
+        {
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/news", news.Image);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+            return news;
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,Context,ImageFile")] News news)
+        {
+            if (ModelState.IsValid)
+            {
+                await SaveImageAsync(news);
                 //Insert record
                 _context.Add(news);
                 await _context.SaveChangesAsync();
@@ -75,28 +84,24 @@ namespace Floresta.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([Bind("Id,Title,Context,Image,ImageFile")] News news)
+        public async Task<IActionResult> Edit(News model)
         {
+            var news = await _context.News.FirstOrDefaultAsync(x => x.Id == model.Id);
+            if(news != null)
+            {
+                news.Title = model.Title;
+                news.Context = model.Context;
+                news.Image = model.Image;
+            }
             if (ModelState.IsValid)
             {
                 if(news.ImageFile!=null)
                 {
-                    var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/news", news.Image);
-                    if (System.IO.File.Exists(imagePath))
-                        System.IO.File.Delete(imagePath);
-                    string wwwRootPath = _hostEnvironment.WebRootPath;
-                    string fileName = Path.GetFileNameWithoutExtension(news.ImageFile.FileName);
-                    string extension = Path.GetExtension(news.ImageFile.FileName);
-                    news.Image = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-                    string path = Path.Combine(wwwRootPath + "/Images/news", fileName);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        await news.ImageFile.CopyToAsync(fileStream);
-                    }
+                    // delete old image
+                    DeleteImage(news);
+                    //save new image
+                    await SaveImageAsync(news);
                 }
-                //Save image to wwwroot/image/news
-                
-                //Insert record
                 _context.Update(news);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,10 +116,8 @@ namespace Floresta.Controllers
         {
             var news = await _context.News.FindAsync(id);
 
-            //delete image from wwwroot/image
-            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "images/news", news.Image);
-            if (System.IO.File.Exists(imagePath))
-                System.IO.File.Delete(imagePath);
+            //delete image from wwwroot/images/news
+            DeleteImage(news);
             //delete the record
             _context.News.Remove(news);
             await _context.SaveChangesAsync();
