@@ -4,14 +4,16 @@ using Floresta.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Floresta.Migrations
 {
     [DbContext(typeof(FlorestaDbContext))]
-    partial class FlorestaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201227120559_change news model #2")]
+    partial class changenewsmodel2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -171,12 +173,6 @@ namespace Floresta.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsClaimingForTeamParticipating")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTeamParticipant")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
