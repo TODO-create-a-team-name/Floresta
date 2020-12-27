@@ -141,6 +141,7 @@
                         <form class="form" asp-action="JoinTeam">
                             <div class="form_item">
                                 <input placeholder="Номер телефону" asp-for="PhoneNumber" class="form_control" />
+                                <span asp-validation-for="PhoneNumber"></span>
                             </div>
                             <div class="form_buttons cancel_select">
                                 <button type="submit" class="send_button">Надіслати</button>

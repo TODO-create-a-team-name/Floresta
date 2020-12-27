@@ -1,4 +1,5 @@
-﻿using Floresta.Models;
+﻿using AutoMapper;
+using Floresta.Models;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -14,7 +15,8 @@ namespace Floresta.Controllers
     {
         RoleManager<IdentityRole> _roleManager;
         UserManager<User> _userManager;
-        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager,
+            UserManager<User> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
@@ -63,6 +65,7 @@ namespace Floresta.Controllers
                     UserRoles = userRoles,
                     AllRoles = allRoles
                 };
+
                 return View(model);
             }
 

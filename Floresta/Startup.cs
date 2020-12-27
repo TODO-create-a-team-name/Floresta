@@ -1,3 +1,4 @@
+using AutoMapper;
 using Floresta.Models;
 using Floresta.Services;
 using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,7 @@ namespace Floresta
             options.AddPolicy("admin",
                 policy => policy.RequireClaim("Manager")));
 
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
         }
 

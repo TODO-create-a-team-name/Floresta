@@ -72,7 +72,7 @@ namespace Floresta.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
-                return RedirectToAction("Index", "Admin_Home");
+                return RedirectToAction("Index", "Home");
             else
                 return View("Error");
         }

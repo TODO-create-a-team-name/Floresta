@@ -61,12 +61,15 @@ namespace Floresta.Controllers
         public async Task<IActionResult> JoinTeam(HomeViewModel model)
         {
             var user = await _userManager.GetUserAsync(User);
-            if(user != null && model.PhoneNumber != null)
+            if(user != null)
             {
-                user.PhoneNumber = model.PhoneNumber;
-                user.IsClaimingForTeamParticipating = true;
-                _context.Users.Update(user);
-                await _context.SaveChangesAsync();
+                if (model.PhoneNumber != null)
+                {
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.IsClaimingForTeamParticipating = true;
+                    _context.Users.Update(user);
+                    await _context.SaveChangesAsync();
+                }
                 return RedirectToAction("Index", "Home");
             }
             else

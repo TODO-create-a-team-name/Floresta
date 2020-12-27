@@ -1,4 +1,5 @@
-﻿using Floresta.Models;
+﻿using AutoMapper;
+using Floresta.Models;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,10 +13,12 @@ namespace Floresta.Controllers
     public class UsersController : Controller
     {
         UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public UsersController(UserManager<User> userManager)
+        public UsersController(UserManager<User> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public IActionResult Index() => View(_userManager.Users.ToList());
@@ -57,13 +60,8 @@ namespace Floresta.Controllers
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel 
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Name = user.Name,
-                Surname = user.UserSurname
-            };
+
+            var model = _mapper.Map<EditUserViewModel>(user);
             return View(model);
         }
 
