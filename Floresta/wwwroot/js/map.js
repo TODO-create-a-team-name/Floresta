@@ -1,12 +1,12 @@
 ﻿var data = {};
 
-const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
+const iconBase = "http://maps.google.com/mapfiles/ms/micons/";
 const icons = {
     finish: {
-        icon: iconBase + "grn-circle.png",
+        icon: iconBase + "green-dot.png",
     },
     working: {
-        icon: iconBase + "red-circle.png",
+        icon: iconBase + "red-dot.png",
     },
 };
 
