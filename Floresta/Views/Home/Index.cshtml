@@ -1,4 +1,4 @@
-﻿@model Floresta.ViewModels.QuestionViewModel
+﻿@model Floresta.ViewModels.HomeViewModel
 @{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
@@ -138,9 +138,9 @@
                 </div>
                 <div class="join_form">
                     <div class="card_team">
-                        <form class="form">
+                        <form class="form" asp-action="JoinTeam">
                             <div class="form_item">
-                                <input placeholder="Номер телефону" class="form_control" />
+                                <input placeholder="Номер телефону" asp-for="PhoneNumber" class="form_control" />
                             </div>
                             <div class="form_buttons cancel_select">
                                 <button type="submit" class="send_button">Надіслати</button>

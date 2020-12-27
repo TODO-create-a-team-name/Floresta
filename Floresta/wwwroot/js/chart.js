@@ -22,7 +22,7 @@ function drawChart() {
         legend: 'none',
         pieSliceText: 'value',
         backgroundColor: 'none',
-        chartArea: { left: 20, top: 0, width: '100%', height: '100%' },
+        chartArea: { left: 20, top: 0, width: '100%', height: '90%' },
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));

@@ -6,6 +6,7 @@ body {
     background: url('/images/Home page/Map Bg.svg') center center no-repeat;
     background-size: 100% 100%;
 }
+
 * {
     font-family: 'Roboto', sans-serif;
     -webkit-box-sizing: border-box;
@@ -18,6 +19,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .logo_icon {
     height: 4vw;
     margin-top: 20px;
@@ -30,6 +32,7 @@ body {
     font-size: 30px !important;
     color: black;
 }
+
 .payment_map_container {
     margin: 3vh 6vw 6vh 6vw;
     font-family: Georgia;
@@ -38,7 +41,6 @@ body {
 
 .control_panel_block {
     color: white;
-
     background-color: #ABCD2D;
     border-radius: 25px;
     margin: 10px 550px 15px 20px;
@@ -54,7 +56,7 @@ body {
 }
 
 .pay_container {
-    min-height: 400px;
+    min-height: 450px;
     min-width: 320px;
     max-height: 620px;
     width: 330px;
@@ -64,19 +66,21 @@ body {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     z-index: 13;
 }
-.container_panel{
 
+.container_panel {
 }
+
 .map_admin_panel {
-    min-height: 255px;
-    min-width: 320px;
-    width: 330px;
-    background-color: #ABCD2D;
-    border-radius: 40px;
-    margin: 10px 20px -30px 20px;
+    min-height: 205px;
+    min-width: 280px;
+    width: 280px;
+    background-color: #ADCE52;
+    border-radius: 25px;
+    margin: -60px auto -30px auto;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     display: grid;
 }
+
 input[type="number"] {
     outline: none;
     -moz-appearance: textfield;
@@ -97,7 +101,7 @@ input[type=number]::-webkit-outer-spin-button {
     border-radius: 18px;
     height: 40px;
     width: 250px;
-    position:absolute;
+    position: absolute;
     margin-top: 15px;
     margin-left: 85px;
     display: inline-block;
@@ -133,7 +137,8 @@ input[type=number]::-webkit-outer-spin-button {
     .pay_button:hover {
         background-color: #FD8118;
     }
-    .pay_button:focus{
+
+    .pay_button:focus {
         outline: none;
     }
 
@@ -147,18 +152,16 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .control_panel_block {
-    
     color: white;
-
     background-color: #ABCD2D;
     border-radius: 25px;
     margin: 10px 550px 15px 20px;
 }
+
 .title_box {
     margin-left: 12px;
     color: #ABCD2D;
     font-size: 40px;
-
 }
 
     .title_box::first-letter {
@@ -166,16 +169,13 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
 .region_button {
-
     cursor: pointer;
-
     font-size: 16px;
     display: inline-block;
     color: white;
     background-color: transparent;
     border: 1px solid white;
     margin-right: 5px;
-
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 20px;
@@ -209,15 +209,19 @@ input[type=number]::-webkit-outer-spin-button {
     display: grid;
     justify-content: center;
 }
-.control-label{
+
+.control-label {
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+    padding-left: 10px;
 }
-.admi_block{
+
+.admi_block {
     margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 .validation-summary-errors ul {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -229,33 +233,49 @@ input[type=number]::-webkit-outer-spin-button {
     margin: unset;
     list-style: none;
     list-style-type: none;
-    margin: 10px 10px -5px 10px;
+    margin: 10px 10px -5px 15px;
     color: white;
 }
+
 .Create_m_btn {
     background-color: #F68526;
     border: none;
     border-radius: 25px;
+    margin-top: -5px;
+    margin-bottom: 5px;
     height: 35px;
     width: 200px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
 }
+
+    .Create_m_btn:focus {
+        outline: none;
+    }
+    .Create_m_btn:hover {
+        background-color: #FD8118;
+    }
 .form_control_sm {
     height: 35px;
     border: 2px solid white;
     border-radius: 15px;
-    font-size: 16px;
+    font-size: 14px;
     color: white;
     background-color: transparent;
-    width: 290px;
+    width: 260px;
     padding-left: 15px;
 }
+
     .form_control_sm::placeholder {
         color: white;
     }
+
+    .form_control_sm:focus {
+        outline: none;
+    }
     .title_admin_panel {
-        font-size: 20px;
+        margin-left: 10px;
+        font-size: 16px;
         color: #EF8C39;
         background-color: white;
         padding: 5px 10px;
@@ -269,13 +289,16 @@ input[type=number]::-webkit-outer-spin-button {
     margin-top: 20px;
     text-align: center;
 }
+
 .main_title_block {
     background-color: white;
     color: #ABCD2D;
     padding: 6px 10px 10px 15px;
     text-align: start;
     border-radius: 16px 16px 0px 0px;
+    overflow: hidden;
 }
+
 .count_btn {
     background-color: white;
     border: none;
@@ -285,11 +308,14 @@ input[type=number]::-webkit-outer-spin-button {
     width: 35px;
     color: #EF8C39;
 }
+
     .count_btn:hover {
     }
+
     .count_btn:focus {
         outline: none;
     }
+
 .counter_area {
     text-align: center;
     -webkit-user-select: text;
@@ -306,17 +332,24 @@ input[type=number]::-webkit-outer-spin-button {
     border-bottom-right-radius: 2px;
     font-size: 18px;
 }
-.counter_block{
+
+    .counter_area:focus {
+        outline: none;
+    }
+
+.counter_block {
     margin-top: 5px;
 }
+
 .seedling_block {
     width: 300px;
-    height: 230px;
+    height: 280px;
     border-radius: 20px;
     border: 2px solid white;
     margin-top: 10px;
     text-align: center;
 }
+
 .seedling_title_block {
     background-color: white;
     color: #ABCD2D;
@@ -324,9 +357,45 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: start;
     border-radius: 16px 16px 0px 0px;
 }
-.title_admin_panel{
 
+.title_admin_panel {
 }
+
+.max_val {
+    margin-left: 70px;
+}
+
+.seedling_box {
+    display: grid;
+    overflow: auto;
+    grid-template-columns: auto auto;
+    max-height: 192px;
+    width: 296px
+}
+
+.tree_block img {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+.tree_card {
+    width: 120px;
+    height: 140px;
+    background-color: white;
+    border-radius: 20px;
+    margin: 10px 0px 12px 12px;
+    overflow: hidden;
+}
+
+.choice_block {
+    text-align: center;
+}
+.tree_block span {
+    font-size: 18px;
+    color: #EF8C39;
+}
+
 @media only screen and (max-width: 1300px) {
     .region_button {
         margin: 10px;
@@ -334,12 +403,13 @@ input[type=number]::-webkit-outer-spin-button {
         margin-right: 0px;
     }
 }
+
 @media only screen and (max-width: 1020px) {
     .control_panel_block {
         width: 38vw;
         min-width: 310px;
     }
-    
+
 
     #map {
         margin-left: 10px;
@@ -347,6 +417,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 1300px) {
+    .map_admin_panel{
+        margin-top: 10px;
+        margin-left:50px;
+        margin-right: unset;
+    }
     .pay_map_container {
         display: block;
     }
@@ -354,35 +429,38 @@ input[type=number]::-webkit-outer-spin-button {
     .map_option {
         width: 80vw !important;
     }
+
     .control_panel_block {
         width: 38vw;
         min-width: 310px;
     }
 }
 
-    @media only screen and (max-width: 800px) {
-        .map_container {
-            margin-left: -5%;
-        }
-
-        #map {
-            height: 50vh;
-            width: 85vw;
-            margin: unset;
-        }
-        .control_panel_block {
-            margin: unset;
-            margin-bottom: unset;
-            margin-bottom: 20px;
-        }
-        .title_box {
-            font-size: 30px;
-        }
+@media only screen and (max-width: 800px) {
+    .map_container {
+        margin-left: -5%;
     }
+
+    #map {
+        height: 50vh;
+        width: 85vw;
+        margin: unset;
+    }
+
+    .control_panel_block {
+        margin: unset;
+        margin-bottom: unset;
+        margin-bottom: 20px;
+    }
+
+    .title_box {
+        font-size: 30px;
+    }
+}
 
     @media only screen and (max-width: 600px) {
         .map_admin_panel{
-            margin-left: unset;
+            margin-left: 20px;
         }
         .map_container {
             margin-left: -9%;
@@ -398,9 +476,9 @@ input[type=number]::-webkit-outer-spin-button {
             margin-left: -15px;
         }
 
-        .title_box {
-            margin: unset;
-            margin-left: -15px;
-            margin-bottom: 10px;
-        }
+    .title_box {
+        margin: unset;
+        margin-left: -15px;
+        margin-bottom: 10px;
     }
+}

@@ -4,14 +4,16 @@ using Floresta.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Floresta.Migrations
 {
     [DbContext(typeof(FlorestaDbContext))]
-    partial class FlorestaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201226193502_ updated User table for team participating")]
+    partial class updatedUsertableforteamparticipating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,27 +49,6 @@ namespace Floresta.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Markers");
-                });
-
-            modelBuilder.Entity("Floresta.Models.News", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Context")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("News");
                 });
 
             modelBuilder.Entity("Floresta.Models.Payment", b =>

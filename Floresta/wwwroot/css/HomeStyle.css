@@ -893,7 +893,8 @@ select::-ms-expand {
     font-family: 20px;
     border: 2.5px solid #819F00;
 }
-@media only screen and (max-height: 900px){
+
+@media only screen and (max-height: 900px) {
     .plat_for_home {
         font-family: 18px;
         margin-top: 67vh;
@@ -1159,7 +1160,7 @@ select::-ms-expand {
         margin-left: 0px !important;
     }
     .out_icon {
-        margin-top: 2px;
+        margin-top: 2px !important;
     }
     .plat_for_home{
         margin-top: 70vh;
