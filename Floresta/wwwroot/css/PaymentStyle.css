@@ -92,6 +92,14 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
 }
 
+.form_control_t {
+    pointer-events: none;
+    background-color: transparent;
+    border: none;
+    margin-top: 5px;
+    color: white;
+}
+
 .form_buttons {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -252,9 +260,11 @@ input[type=number]::-webkit-outer-spin-button {
     .Create_m_btn:focus {
         outline: none;
     }
+
     .Create_m_btn:hover {
         background-color: #FD8118;
     }
+
 .form_control_sm {
     height: 35px;
     border: 2px solid white;
@@ -273,20 +283,21 @@ input[type=number]::-webkit-outer-spin-button {
     .form_control_sm:focus {
         outline: none;
     }
-    .title_admin_panel {
-        margin-left: 10px;
-        font-size: 16px;
-        color: #EF8C39;
-        background-color: white;
-        padding: 5px 10px;
-        border-radius: 15px;
-    }
+
+.title_admin_panel {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #EF8C39;
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+}
+
 .plant_c_block {
     width: 300px;
     height: 90px;
     border-radius: 20px;
     border: 2px solid white;
-    margin-top: 20px;
     text-align: center;
 }
 
@@ -391,6 +402,7 @@ input[type=number]::-webkit-outer-spin-button {
 .choice_block {
     text-align: center;
 }
+
 .tree_block span {
     font-size: 18px;
     color: #EF8C39;
@@ -417,11 +429,12 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 1300px) {
-    .map_admin_panel{
+    .map_admin_panel {
         margin-top: 10px;
-        margin-left:50px;
+        margin-left: 50px;
         margin-right: unset;
     }
+
     .pay_map_container {
         display: block;
     }
@@ -458,23 +471,27 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-    @media only screen and (max-width: 600px) {
-        .map_admin_panel{
-            margin-left: 20px;
-        }
-        .map_container {
-            margin-left: -9%;
-        }
-        .pay_container {
-            margin-left: unset;
-        }
-        #map {
-            height: 60vh !important;
-            width: 90vw !important;
-        }
-        .control_panel_block {
-            margin-left: -15px;
-        }
+@media only screen and (max-width: 600px) {
+    .map_admin_panel {
+        margin-left: 20px;
+    }
+
+    .map_container {
+        margin-left: -9%;
+    }
+
+    .pay_container {
+        margin-left: unset;
+    }
+
+    #map {
+        height: 60vh !important;
+        width: 90vw !important;
+    }
+
+    .control_panel_block {
+        margin-left: -15px;
+    }
 
     .title_box {
         margin: unset;

@@ -38,19 +38,17 @@ namespace Floresta
                 services.AddDbContext<FlorestaDbContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             }
+            services.BuildServiceProvider().GetService<FlorestaDbContext>().Database.Migrate();
 
-                services.BuildServiceProvider().GetService<FlorestaDbContext>().Database.Migrate();
-            
-
-                services.AddIdentity<User, IdentityRole>(options =>
+            services.AddIdentity<User, IdentityRole>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireDigit = false;
 
             })
-                .AddEntityFrameworkStores<FlorestaDbContext>()
-                .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<FlorestaDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddAuthorization(options =>
             options.AddPolicy("admin",

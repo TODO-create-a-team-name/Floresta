@@ -13,6 +13,7 @@ namespace Floresta.Models
         public DbSet<Marker> Markers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<News> News { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
