@@ -1,6 +1,8 @@
-﻿@model Floresta.ViewModels.SendEmailViewModel 
-
-<form method="post" >
+﻿@model Floresta.ViewModels.SendEmailViewModel
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+<form method="post">
     <textarea class="input" asp-for="Message"></textarea>
     <input type="submit" value="Send" class="btn btn-default" />
 </form>

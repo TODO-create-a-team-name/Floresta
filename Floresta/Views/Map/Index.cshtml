@@ -1,9 +1,7 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @model Floresta.ViewModels.PaymentViewModel
-@{
-    ViewData["Title"] = "Map Page";
-    Layout = null;
-}
+@{ ViewData["Title"] = "Map Page";
+                Layout = null; }
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,11 +12,6 @@
 </head>
 <body>
     <a class="Big_site_logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/Home page/Site icon.svg" class="logo_icon" /></a>
-    @*<div id="map-dialog1">
-            <div>
-                <input id="pac-input" class="controls" type="text" placeholder="Search any location" />
-            </div>
-        </div>*@
 
     <div class="payment_map_container">
         <div class="map_block">
@@ -28,7 +21,7 @@
             <div class="control_panel_block">
                 <span class="control_title">Область:</span>
                 <div class="contol-item">
-                    <button class="region_button region_selected rb">Івано-Франківська</button>
+                    <button class="region_button rb">Івано-Франківська</button>
                     <button class="region_button rb">Львівська</button>
                     <button class="region_button rb">Тернопільська</button>
                 </div>
@@ -36,35 +29,34 @@
             <div class="pay_map_container">
                 <div id="map" class="map_option"></div>
                 <div class="container_panel">
-                    @*@if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-                    {*@
-                    <div class="map_admin_panel">
-                        <form asp-action="index" class="form" asp-controller="map">
-                            <div class="admi_block">
-                                <span class="title_admin_panel">Адмін панель</span>
-                                <div class="validation" asp-validation-summary="All"></div>
-                                <div class="form_item">
-                                    <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
-                                </div>
-                                <div class="form_item">
-                                    <label asp-for="PlantCount" class="control-label">Кількість місь для посадки</label>
-                                    <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
-                                </div>
-                                <div class="form_item">
-                                    <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
-                                    <span asp-validation-for="Lng"></span>
-                                </div>
-                                <div class="form-group">
-                                    <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
-                                    <span asp-validation-for="Lat"></span>
-                                </div>
-                                <div class="form_item">
-                                    <button type="submit" class="Create_m_btn">Створити</button>
-                                </div>
-                            </div>
-                        </form>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    {
+        <div class="map_admin_panel">
+            <form asp-action="index" class="form" asp-controller="map">
+                <div class="admi_block">
+                    <span class="title_admin_panel">Адмін панель</span>
+                    <div class="validation" asp-validation-summary="All"></div>
+                    <div class="form_item">
+                        <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
                     </div>
-                    @*}*@
+                    <div class="form_item">
+                        <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
+                        <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
+                    </div>
+                    <div class="form_item">
+                        <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lng"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lat"></span>
+                    </div>
+                    <div class="form_item">
+                        <button type="submit" class="Create_m_btn">Створити</button>
+                    </div>
+                </div>
+            </form>
+        </div>}
                     <div class="pay_container">
                         <form class="form" asp-action="Index" asp-controller="Payment" method="get">
                             <div class="validation" asp-validation-summary="ModelOnly"></div>
@@ -74,7 +66,7 @@
                             <div class="form_item">
                                 <div class="plant_c_block">
                                     <div class="main_title_block">
-                                        <span>Кількість дерев</span><span class="max_val">Max: 203</span>
+                                        <span>Кількість дерев</span><span class="max_val"></span>
                                     </div>
                                     <div class="counter_block">
                                         <span class="group_btn">
@@ -93,14 +85,15 @@
                                         <span>Виберіть саджанець</span>
                                     </div>
                                     <div class="seedling_box">
-                                        @*<select id="seedlingsDropdown" class="dropdown" asp-for="SeedlingId" asp-items="@Model.Seedlings"></select>*@
-                                        <div class="tree_card">
-                                            <label class="tree_block">
-                                                <img src="~/images/Tree.svg" height="100" width="77" /><br />
-                                                    <input type="radio" id="contactChoice1" name="tree" value="tree1">
-                                                    <span>Дуб</span>
-                                            </label>
-                                        </div>
+                                        @foreach (var s in Model.Seedlings)
+                                        {
+                            <div class="tree_card">
+                                <label class="tree_block" for="@s.Id">
+                                    <img src="~/images/Tree.svg" height="100" width="77" /><br />
+                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
+                                    <span>@s.Name</span>
+                                </label>
+                            </div>}
                                     </div>
                                 </div>
                             </div>
@@ -120,16 +113,11 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/map.js"></script>
-    <script src="~/js/MapStepper.js"></script>
-    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
-    {
-        <script src="~/js/adminMap.js"></script>
-    }
-
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
     </script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

@@ -1,11 +1,10 @@
 ﻿using Floresta.Models;
 using Floresta.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,24 +19,13 @@ namespace Floresta.Controllers
             _context = context;
             _signInManager = signInManager;
         }
-
-        public IActionResult Markers()
-        {
-            var list = _context.Markers.ToList();
-            return View(list);
-        }
         public IActionResult Index()
         {
             if (_signInManager.IsSignedIn(User))
             {
+                var seedlings = _context.Seedlings.Where(s => s.Amount != 0).ToList();
                 var model = new PaymentViewModel();
-                model.Seedlings = _context.Seedlings
-                    .Select(x => new SelectListItem()
-                    {
-                        Value = x.Id.ToString(),
-                        Text = $"{x.Name} price: {x.Price}"
-                    })
-                    .ToList();
+                model.Seedlings = seedlings;
                 return View(model);
             }
             else
@@ -45,7 +33,19 @@ namespace Floresta.Controllers
                 return RedirectToAction("Login", "Account");
             }
         }
-
+        [Authorize(Roles = "admin")]
+        public IActionResult Markers()
+        {
+            var list = _context.Markers.ToList();
+            return View(list);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Index(Marker marker)
+        {
+            _context.Markers.Add(marker);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -56,6 +56,7 @@ namespace Floresta.Controllers
             return NotFound();
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(Marker marker)
         {
@@ -64,14 +65,9 @@ namespace Floresta.Controllers
             return RedirectToAction("Markers");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Index(Marker marker)
-        {
-            _context.Markers.Add(marker);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -90,16 +86,30 @@ namespace Floresta.Controllers
             var markers = _context.Markers.ToList();
             return new JsonResult(markers);
         }
-        public JsonResult GetSeedlings()
-        {
-            var seedlings = _context.Seedlings.ToList();
-            return new JsonResult(seedlings);
-        }
+        //public JsonResult GetSeedlings()
+        //{
+        //    var seedlings = _context.Seedlings.ToList();
+        //    return new JsonResult(seedlings);
+        //}
 
-        public JsonResult IsAdminCheck()
+        //public JsonResult IsAdminCheck()
+        //{
+        //    bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
+        //    return new JsonResult(IsAdmin);
+        //}
+
+        public JsonResult GetRequiredData()
         {
+            var markers = _context.Markers.ToList();
+            var seedlings = _context.Seedlings.ToList();
             bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
-            return new JsonResult(IsAdmin);
+
+            return new JsonResult(new
+            {
+                markers = markers,
+                seedlings = seedlings,
+                IsAdmin = IsAdmin
+            });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Floresta.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,7 +8,7 @@ namespace Floresta.ViewModels
     public class PaymentViewModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Please, select a marker from the map")]
+        [Required(ErrorMessage = "The Title filed is required")]
         public string Title { get; set; }
         [Required(ErrorMessage = "The Lat filed is required")]
         public string Lat { get; set; }
@@ -17,6 +18,7 @@ namespace Floresta.ViewModels
         [Required(ErrorMessage = "The PlantCount filed is required")]
         public int PlantCount { get; set; }
         public int SeedlingId { get; set; }
-        public List<SelectListItem> Seedlings { get; set; }
+        public List<Seedling> Seedlings { get; set; }
+
     }
 }

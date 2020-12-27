@@ -1,7 +1,14 @@
 ﻿var markers = [];
 
+let map;
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 48.9215, lng: 24.7097 },
+        zoom: 11,
+    });
+}
+
 $.ajax({
-    async: false,
     type: "GET",
     url: "Map/GetMarkers",
     contentType: "application/json",
@@ -9,33 +16,30 @@ $.ajax({
     success: function (result) {
         markers = result;
     },
+    complete: function () {
+        for (var i = 0; i < markers.length; i++) {
+            const marker = new google.maps.Marker({
+                position: {
+                    lat: parseFloat(markers[i].lat),
+                    lng: parseFloat(markers[i].lng),
+                },
+                map: map,
+                title: markers[i].title,
+                plantCount: markers[i].plantCount,
+                id: markers[i].id,
+                animation: google.maps.Animation.DROP,
+            });
+            marker.addListener("click", () => {
+                window.location.href = "/Map";
+            });
+        }
+    },
     error: function (xhr, status, error) {
         var errorMessage = xhr.status + ': ' + xhr.statusText
         alert('Error - ' + errorMessage);
     }
-})
+});
 
-let map;
-function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 48.9215, lng: 24.7097 },
-        zoom: 11,
-    });
-
-    for (var i = 0; i < markers.length; i++) {
-        const marker = new google.maps.Marker({
-            position: {
-                lat: parseFloat(markers[i].lat),
-                lng: parseFloat(markers[i].lng),
-            },
-            map: map,
-            title: markers[i].title,
-            plantCount: markers[i].plantCount,
-            id: markers[i].id,
-            animation: google.maps.Animation.DROP,
-        });
-    }
-}
 var regionBt = document.querySelectorAll('.region_button');
 regionBt.forEach(region => {
     region.addEventListener('click', {

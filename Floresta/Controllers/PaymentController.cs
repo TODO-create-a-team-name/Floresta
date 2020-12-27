@@ -69,17 +69,24 @@ namespace Floresta.Controllers
                 marker.PlantCount -= model.PurchasedAmount;
                 _context.Update(marker);
             }
+            if(marker.PlantCount==0)
+            {
+                marker.isPlantingFinished = true;
+                _context.Update(marker);
+            }
             _context.Add(payment);
             _context.SaveChanges();
             
 
             return RedirectToAction("Index", "Map");
         }
+
         [Authorize(Roles = "admin")]
         public IActionResult SendEmail()
         {
             return View();
         }
+
         [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> SendEmail(string id, SendEmailViewModel model)
@@ -93,7 +100,7 @@ namespace Floresta.Controllers
 
                 await emailService.SendEmailAsync(user.Email, "Purchase status",
                     model.Message);
-                return RedirectToAction("Purchases", "Home");
+                return RedirectToAction("Purchases", "Admin_Home");
             }
             return NotFound();
         }
