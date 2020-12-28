@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html {
-
 }
-header{
+
+header {
     height: 1000px;
 }
 
@@ -43,6 +43,7 @@ header {
     font-size: 48px;
     color: #EF8C39;
 }
+
 .main_sub_title {
     font-size: 24px;
     color: #BCBCBC;
@@ -52,12 +53,11 @@ header {
     font-size: 30px !important;
     color: black;
 }
-.logo_icon{
+
+.logo_icon {
     height: 4vw;
     margin-top: 20px;
     max-height: 50px;
-    
-  
 }
 
 .Big_site_logo:hover {
@@ -103,11 +103,12 @@ header {
     .account_button:hover {
         background: #91B211;
     }
-    .account_button:focus{
+
+    .account_button:focus {
         outline: none;
     }
-.user_Ntext{
-    vertical-align: middle;
+
+.user_Ntext {
     margin-bottom: 5px;
 }
 
@@ -284,27 +285,31 @@ header {
         text-decoration: none;
         background-color: #FD8118;
     }
+
     .admin_panel:focus {
         outline: none;
     }
 
 
-.years_container{
+.years_container {
     margin: 5vh 12vw 6vh 12vw;
     font-family: Georgia;
 }
-.years_container:nth-child(2) {
-    margin: 12vh 15vw 0vh 12vw;
-    font-family: Georgia;
-}
-.years_container:nth-child(3) {
-    margin: 2vh 15vw 5vh 12vw;
-    font-family: Georgia;
-}
-.years_container:nth-child(4) {
-    margin: 2vh 15vw 6vh 12vw;
-    font-family: Georgia;
-}
+
+    .years_container:nth-child(2) {
+        margin: 12vh 15vw 0vh 12vw;
+        font-family: Georgia;
+    }
+
+    .years_container:nth-child(3) {
+        margin: 2vh 15vw 5vh 12vw;
+        font-family: Georgia;
+    }
+
+    .years_container:nth-child(4) {
+        margin: 2vh 15vw 6vh 12vw;
+        font-family: Georgia;
+    }
 
 
 .years_goal {
@@ -343,6 +348,7 @@ header {
     .details_button:hover {
         background-color: #FD8118;
     }
+
     .details_button:focus {
         outline: none;
     }
@@ -362,6 +368,7 @@ header {
     .plant_button:hover {
         background-color: #91B211;
     }
+
     .plant_button:focus {
         outline: none;
     }
@@ -419,9 +426,10 @@ header {
 .images {
     margin-top: 20px;
 }
-    .home_titleF {
-        margin-top: 40px;
-    }
+
+.home_titleF {
+    margin-top: 40px;
+}
 
 .svg_rood2 {
     min-width: 70px;
@@ -505,20 +513,25 @@ header {
 .text_box {
     margin-left: 6vw;
 }
+
 .top_rood_container .svg_rood2:nth-child(2) {
     margin-left: 26vw;
     margin-bottom: 10px;
 }
+
 .top_rood_container .svg_rood2:nth-child(1) {
     margin-left: 12vw;
 }
+
 .top_rood_container .svg_rood3 {
     margin-left: 18vw;
     margin-bottom: 10px;
 }
-.bottom_rood_container .svg_rood1:nth-child(2){
+
+.bottom_rood_container .svg_rood1:nth-child(2) {
     margin-left: 22vw;
 }
+
 .bottom_rood_container .svg_rood3:nth-child(3) {
     margin-top: -60px;
     margin-left: 8vw;
@@ -530,20 +543,24 @@ header {
     padding-bottom: 50px;
     padding-top: 50px;
 }
-.control_title{
+
+.control_title {
     margin: 8px 10px 8px 20px;
     display: inline-block;
 }
-.contol-item{
+
+.contol-item {
     display: inline-block;
 }
+
 .controlpanel_block {
     color: white;
     font-family: 'Roboto', sans-serif;
     background-color: #ABCD2D;
     border-radius: 25px;
-    margin:10px 100px 15px 20px;
+    margin: 10px 100px 15px 20px;
 }
+
 .region_button {
     display: inline-block;
     color: white;
@@ -554,17 +571,20 @@ header {
     padding-right: 10px;
     border-radius: 20px;
 }
+
     .region_button:hover {
         background-color: white;
         color: #ABCD2D;
     }
+
     .region_button:focus {
         outline: none;
     }
-    .region_selected {
-        background-color: white;
-        color: #ABCD2D;
-    }
+
+.region_selected {
+    background-color: white;
+    color: #ABCD2D;
+}
 
 
 #map {
@@ -577,7 +597,7 @@ header {
 
 
 
-.years_container:nth-child(6){
+.years_container:nth-child(6) {
     margin-top: 5vh;
 }
 
@@ -600,6 +620,7 @@ header {
     font-size: 56px;
     color: #ABCD2D;
 }
+
 .join_title .sub_title:nth-child(1) {
     color: #EF8C39;
 }
@@ -631,6 +652,7 @@ header {
     background-color: #ABCD2D;
     border-radius: 30px;
 }
+
 .join_form {
     max-width: 320px;
     margin-left: 5vw;
@@ -639,6 +661,7 @@ header {
 .jointous_block {
     display: inline-flex;
 }
+
 .text_in_center {
     margin: 60px auto;
     font-family: 'Rubik', serif;
@@ -646,13 +669,14 @@ header {
     color: #EF8C39;
     text-align: center;
 }
+
 .question_title {
-   
     display: inline-block;
     max-width: 900px;
     margin-left: 8vw;
 }
-.card_q { 
+
+.card_q {
     border-radius: 30px;
     background-color: #ABCD2D;
     display: grid;
@@ -661,7 +685,8 @@ header {
     min-width: 360px;
     justify-content: center;
 }
-.question_form{
+
+.question_form {
     display: grid;
     margin-top: 20px;
     justify-content: center;
@@ -699,6 +724,7 @@ header {
     margin-top: 10px;
     display: inline-grid;
 }
+
 .cancel_select {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -706,6 +732,7 @@ header {
     -ms-user-select: none;
     user-select: none;
 }
+
 .send_button {
     cursor: pointer;
     color: white;
@@ -720,8 +747,9 @@ header {
     .send_button:hover {
         background-color: #FD8118;
     }
-    .send_button:focus{
-        outline:none;
+
+    .send_button:focus {
+        outline: none;
     }
 
 .form_buttons {
@@ -736,6 +764,7 @@ header {
     margin-left: 100px;
     text-align: center;
 }
+
 .form_control {
     height: 40px;
     padding-left: 15px;
@@ -754,17 +783,21 @@ header {
         font-size: 18px;
         color: #ABCD2D;
     }
+
     .form_control:focus {
         outline: none;
     }
+
 .form_q {
     text-align: center;
     align-items: center;
     display: grid;
 }
+
 .form_item_Question {
     margin-top: 15px;
 }
+
 .form_control_Question {
     padding: 10px;
     resize: none;
@@ -780,12 +813,15 @@ header {
     font-size: 16px;
     color: #ABCD2D;
 }
+
     .form_control_Question::placeholder {
         color: #ABCD2D;
     }
-    .form_control_Question:focus{
+
+    .form_control_Question:focus {
         outline: none;
     }
+
 .question_selector {
     color: #ABCD2D;
     min-width: 310px;
@@ -809,35 +845,41 @@ header {
     background-position: right .9em top 50%, 0 0;
     background-size: .65em auto, 10%;
 }
-        .question_selector:focus {
-          outline:none;
-        }
+
+    .question_selector:focus {
+        outline: none;
+    }
+
 select::-ms-expand {
     display: none;
 }
+
 .options {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: black;
     border: none;
 }
-.mt_2{
+
+.mt_2 {
     margin-top: 10px;
     margin-left: 15vw;
 }
-.plant{
+
+.plant {
     display: none;
 }
+
 .in_menu {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     height: 34px;
-    background-color: #ABCD2D ;
+    background-color: #ABCD2D;
     margin-bottom: -10px;
 }
+
     .in_menu:hover {
         background-color: #ABD60E !important;
-        
     }
 
 .payment_map_container {
@@ -853,17 +895,19 @@ select::-ms-expand {
     border-radius: 25px;
     margin: 10px 550px 15px 20px;
 }
+
 .map_option {
     height: 70vh !important;
     width: 60vw !important;
-
 }
+
 .pay_map_container {
     display: flex;
 }
+
 .pay_container {
     min-height: 400px;
-    min-width:320px;
+    min-width: 320px;
     max-height: 620px;
     width: 20vw;
     background-color: #ABCD2D;
@@ -871,6 +915,7 @@ select::-ms-expand {
     margin: 40px 20px 40px 20px;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
+
 .plat_for_home {
     margin-top: 67vh;
     position: absolute;
@@ -881,6 +926,7 @@ select::-ms-expand {
     text-align: center;
     font-family: Georgia;
 }
+
 .home_plant {
     height: 40px;
     font-family: 20px;
@@ -893,10 +939,12 @@ select::-ms-expand {
         margin-top: 67vh;
     }
 }
+
 @media only screen and (max-height: 600px) {
     .main_title_block {
         margin-top: 90vh;
     }
+
     .plat_for_home {
         margin-top: 80vh;
     }
@@ -906,28 +954,33 @@ select::-ms-expand {
     .goal_buttons {
         margin-left: 5vw;
     }
+
     .sub_title,
     .second_sub_title {
-        font-size:3.5vw;
+        font-size: 3.5vw;
     }
+
     .text_container {
         margin-left: 2vw;
     }
 }
 
-@media only screen and (max-width: 1020px){
+@media only screen and (max-width: 1020px) {
     .controlpanel_block {
         width: 38vw;
         min-width: 310px;
     }
+
     .rb {
         margin: unset;
     }
+
     .region_button {
         margin: 10px;
         margin-top: 0px;
         margin-right: 0px;
     }
+
     #map {
         margin-left: 10px;
     }
@@ -938,17 +991,21 @@ select::-ms-expand {
         width: 38vw;
         min-width: 310px;
     }
+
     .rb {
         margin: 10px;
         margin-top: 0px;
         margin-right: 0px;
     }
+
     .goal_buttons {
         margin-left: unset;
     }
 
     .details_button {
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .plant_button {
@@ -957,18 +1014,22 @@ select::-ms-expand {
 }
 
 @media only screen and (max-height: 650px), (max-width: 1200px) {
-    .pay_map_container{
+    .pay_map_container {
         display: block;
     }
-    .map_option{
+
+    .map_option {
         width: 80vw !important;
     }
+
     .plant {
         display: inline-block;
     }
-    .join_form{
+
+    .join_form {
         margin-left: 10vw;
     }
+
     .jointous_block {
         display: inline-block;
     }
@@ -1062,6 +1123,7 @@ select::-ms-expand {
         padding: 0px !important;
         margin: 0px !important;
     }
+
     .sub_title,
     .second_sub_title {
         font-size: 36px;
@@ -1069,27 +1131,37 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 800px) {
+    .goal_buttons {
+        display: inline-grid;
+    }
+
     .control_panel_block {
         margin: unset;
         margin-bottom: unset;
         margin-bottom: 10px;
     }
+
     .map_container {
         margin-left: -5%;
     }
+
     #map {
         height: 50vh;
         width: 85vw;
     }
-    .main_sub_title{
+
+    .main_sub_title {
         font-size: 20px;
     }
+
     .main_title_block {
         margin-top: 76vh;
     }
-    .main_title{
+
+    .main_title {
         font-size: 38px;
     }
+
     .title_box {
         font-size: 30px;
     }
@@ -1097,14 +1169,15 @@ select::-ms-expand {
     .controlpanel_block {
         margin: unset;
         margin-bottom: 10px;
-
     }
+
     .goal_container {
         margin-left: unset;
         display: grid;
         justify-content: center;
         text-align: center;
     }
+
     #map {
         margin-left: unset;
     }
@@ -1128,35 +1201,41 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 600px) {
-    .text_in_center{
+    .text_in_center {
         font-size: 8vw;
         margin: 30px auto;
     }
+
     .controlpanel_block {
         margin-left: -15px;
     }
+
     .title_box {
         margin: unset;
         margin-left: -15px;
     }
+
     .map_container {
         margin-left: -9%;
     }
+
     #map {
         height: 55vh !important;
         width: 90vw !important;
     }
+
     .pay_container {
         margin-top: 40px;
         margin-right: 20px;
         margin-bottom: 40px;
         margin-left: 0px !important;
     }
-    .plat_for_home{
+
+    .plat_for_home {
         margin-top: 70vh;
     }
+
     .home_plant {
-        
     }
 }
 
@@ -1165,14 +1244,16 @@ select::-ms-expand {
     .join_title, .question_title, .text_box {
         margin: unset;
     }
+
     .sub_title,
     .second_sub_title {
         font-size: 6vw;
     }
+
     .card_q {
         min-width: 330px;
     }
-   
+
     .join_form,
     .question_form {
         margin: unset;
@@ -1181,31 +1262,38 @@ select::-ms-expand {
         margin-top: 25px;
         justify-content: center;
         display: grid;
-    } 
+    }
+
     .join_form {
         margin-left: -20px;
     }
-    .card_team{
+
+    .card_team {
         min-width: 330px;
         width: 80vw;
     }
+
     .bottom_rood_container .svg_rood1:nth-child(2) {
         margin-left: 10vw;
     }
+
     .top_rood_container .m_op {
         margin-left: 0vw !important;
     }
-    .images:nth-child(2){
+
+    .images:nth-child(2) {
         position: absolute;
         right: 0px;
         left: 0px;
         margin-left: auto;
         margin-right: auto;
     }
+
     .years_container:nth-child(4) {
         margin-top: 100px;
     }
-    .text_uotside_text_box:nth-child(1){
+
+    .text_uotside_text_box:nth-child(1) {
         margin-top: 260px;
     }
 
