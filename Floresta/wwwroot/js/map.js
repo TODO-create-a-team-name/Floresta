@@ -1,4 +1,5 @@
-﻿var data = {};
+﻿//the object that contains required data
+var data = {};
 
 //define icons that will be used for our map
 const iconBase = "http://maps.google.com/mapfiles/ms/micons/";
@@ -11,6 +12,7 @@ const icons = {
     },
 }
 
+//initializing map
 var map;
 function initMap() {
     var uluru = { lat: 49.22242, lng: 31.88714 };
@@ -22,16 +24,17 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         },
     });
-
+    // event for placing a new marker
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng, "New marker");
 
     });
-
+    //filling hidden lat and lng inputs with a brand new marker lan and lng values 
     function handleEvent(event) {
         document.getElementById('lat').value = event.latLng.lat();
         document.getElementById('lng').value = event.latLng.lng();
     }
+
     var marker = null;
     function placeMarker(location, title) {
         if (data.isAdmin) {
@@ -50,6 +53,7 @@ function initMap() {
 
     }
 }
+//setting a region view on the map
 var regionBt = document.querySelectorAll('.region_button');
 regionBt.forEach(region => {
     region.addEventListener('click', {
@@ -76,6 +80,7 @@ regionBt.forEach(region => {
     });
 });
 
+//checkers for marker state
 function checkType(isFinish) {
     if (isFinish)
         return "finish";
@@ -90,17 +95,20 @@ function info(marker, title) {
     marker.addListener("click", () => {
 
         infowindow.open(marker.get("map"), marker);
+        //setting values on inputs depending of clicked marker
         $("#markerIdInput").val(marker.id);
         $("#markerTitleInput").val(marker.title);
-
+        //looking for selected seedling
         findSeedling();
+        //change event for seedlings
         $('input[type=radio][name=SeedlingId]').change(findSeedling);
 
         function findSeedling() {
+            //get selected seedling id
             var seedlingId = $('input[name="SeedlingId"]:checked').val();
-
+            //get a seedling by id
             var seedling = data.seedlings.find(x => x.id == seedlingId);
-
+            //count variable determines max value for purchase
             var count;
             if (seedling != null) {
                 if (seedling.amount >= marker.plantCount) {
@@ -109,9 +117,9 @@ function info(marker, title) {
                 else if (marker.plantCount > seedling.amount) {
                     count = seedling.amount;
                 }
-
+                //filling input with max value
                 $(".max_val").text("Max: " + count);
-
+                //setting max and value with max value for plantCountInput
                 $("#plantCountInput").attr({
                     "value": count,
                     "max": count,
@@ -121,7 +129,7 @@ function info(marker, title) {
         }
     });
 }
-
+//get required data
 $.ajax({
     type: "GET",
     url: "Map/GetRequiredData",
@@ -171,6 +179,7 @@ $.ajax({
     }
 });
 
+//stepper
 var numStepeerInput = document.querySelector("#plantCountInput");
 var thisAction = document.querySelectorAll(".count_btn");
 

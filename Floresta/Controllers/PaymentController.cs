@@ -100,7 +100,7 @@ namespace Floresta.Controllers
 
                 await emailService.SendEmailAsync(user.Email, "Purchase status",
                     model.Message);
-                return RedirectToAction("Purchases", "Admin_Home");
+                return Ok();
             }
             return NotFound();
         }
