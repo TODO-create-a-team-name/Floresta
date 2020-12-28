@@ -15,7 +15,7 @@ namespace Floresta.Controllers
         public NewsController(FlorestaDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
-            _hostEnvironment = hostEnvironment; 
+            _hostEnvironment = hostEnvironment;
         }
         public async Task<IActionResult> Index()
         {
@@ -33,7 +33,7 @@ namespace Floresta.Controllers
         {
             string wwwRootPath = _hostEnvironment.WebRootPath;
             //Save image to wwwroot/image/news
-            if(news.ImageFile == null)
+            if (news.ImageFile == null)
             {
                 news.Image = "/default.png";
             }
@@ -86,15 +86,16 @@ namespace Floresta.Controllers
         public async Task<IActionResult> Edit(News model)
         {
             var news = await _context.News.FirstOrDefaultAsync(x => x.Id == model.Id);
-            if(news != null)
+            if (news != null)
             {
                 news.Title = model.Title;
-                news.Context = model.Context;
+                news.Content = model.Content;
                 news.Image = model.Image;
+                news.ImageFile = model.ImageFile;
             }
             if (ModelState.IsValid)
             {
-                if(news.ImageFile!=null)
+                if (news.ImageFile != null)
                 {
                     // delete old image
                     DeleteImage(news);
