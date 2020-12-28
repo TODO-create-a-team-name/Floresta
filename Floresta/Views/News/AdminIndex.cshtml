@@ -11,14 +11,14 @@
 <table class="table">
     <tr>
         <td>Title</td>
-        <td>Context</td>
+        <td>Content</td>
         <td>Image</td>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
             <td>@item.Title</td>
-            <td>@item.Context</td>
+            <td>@item.Content</td>
             <td><img src="~/images/news/@item.Image" /></td>
             <td>
                 <form asp-action="Delete" asp-route-id="@item.Id" method="post">
