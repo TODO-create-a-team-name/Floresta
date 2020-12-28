@@ -407,7 +407,24 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 18px;
     color: #EF8C39;
 }
-
+.info_icon {
+    color: #ffffff;
+    font-size: 20px;
+}
+.info_button {
+    vertical-align: middle;
+    margin-top: 0px;
+    border: none;
+    margin-right: 10px;
+    margin-left: 2px;
+    background-color: transparent;
+}
+.info_button:focus{
+    outline: none;
+}
+    .info_button:hover .info_icon {
+        color: #7F7F7F;
+    }
 @media only screen and (max-width: 1300px) {
     .region_button {
         margin: 10px;
