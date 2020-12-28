@@ -241,3 +241,15 @@ function updateVal(action) {
         numStepeerInput.value = newValue;
     }
 }
+
+$('#instructionButton').click(() => {
+    Swal.fire({
+        title: "<h1>Інструкція</h1>",
+        html: `<ol>
+            <li> Виберіть доступну мітку на карті</li>
+        <li>Виберіть саджанець для висадки</li>
+        <li>Вкажіть кількість саджанців, яку Ви хочете придбати</li>
+        <li>Натисніть "Оплатити"</li>
+    </ol >`
+    });
+});
