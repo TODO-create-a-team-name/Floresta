@@ -21,6 +21,10 @@ namespace Floresta.Controllers
         {
             return View(await _context.News.ToListAsync());
         }
+        public async Task<IActionResult> AdminIndex()
+        {
+            return View(await _context.News.ToListAsync());
+        }
         public IActionResult Create()
         {
             return View();
