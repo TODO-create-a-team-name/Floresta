@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Floresta.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class Admin_HomeController : Controller
     {
         private SignInManager<User> _signInManager;

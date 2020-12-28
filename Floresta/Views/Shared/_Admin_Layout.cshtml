@@ -26,7 +26,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Map</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="AdminIndex">News</a>
+                        </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
                             <li class="nav-item">
@@ -50,6 +52,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="Purchases">Purchases</a>
                             </li>
+                            
                         }
                     </ul>
                 </div>

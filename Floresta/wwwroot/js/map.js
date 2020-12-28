@@ -156,7 +156,7 @@ $.ajax({
                         marker.setAnimation(google.maps.Animation.BOUNCE);
                     }
                 });
-                info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
+                info(marker, data.markers[i].title + "<br> Кількість місць: " + data.markers[i].plantCount);
             }
             else if (data.markers[i].isPlantingFinished) {
                 marker.addListener("click", () => {
