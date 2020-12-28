@@ -19,7 +19,7 @@
         <tr>
             <td>@item.Title</td>
             <td>@item.Context</td>
-            <td><img src="~/images/news/@item.Image" /></td>
+            <td><img src="~/images/news/@item.Image" height="200"/></td>
             <td>
                 <form asp-action="Delete" asp-route-id="@item.Id" method="post">
                     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
