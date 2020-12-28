@@ -107,7 +107,6 @@ header {
         outline: none;
     }
 .user_Ntext{
-    vertical-align: middle;
     margin-bottom: 5px;
 }
 
@@ -1069,6 +1068,9 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 800px) {
+    .goal_buttons{
+        display:inline-block;
+    }
     .control_panel_block {
         margin: unset;
         margin-bottom: unset;
