@@ -168,7 +168,11 @@ $.ajax({
             }
             else if (data.markers[i].isPlantingFinished) {
                 marker.addListener("click", () => {
-                    swal("Ура!", "Усі дерева на цій мітці були посаджені!", "success");
+                    Swal.fire(
+                        'Ура!',
+                        'Усі дерева на цій мітці були посаджені!',
+                        'success'
+                    );
                 });
             }
         }
