@@ -198,19 +198,9 @@ namespace Floresta.Controllers
 
         public JsonResult GetSeedlingsRates()
         {
-            var payments = _context.Payments.Include(s => s.Seedling).ToList();
-
-            var seedlings = _context.Seedlings.ToList().Distinct();
-
-            Dictionary<string, int> statistics = new Dictionary<string, int>();
-
-            foreach(var s in seedlings)
-            {
-                statistics.Add(s.Name,
-                    payments.Where(p => p.Seedling.Name == s.Name)
-                    .Select(p => p.PurchasedAmount)
-                    .Sum());
-            }
+            var statistics = _context.Payments.Include(s => s.Seedling)
+                .GroupBy(p => p.Seedling.Name)
+                .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) });
 
             return new JsonResult(statistics);
         }

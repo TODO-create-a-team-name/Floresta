@@ -139,6 +139,7 @@ $.ajax({
         data.markers = result.markers;
         data.seedlings = result.seedlings;
         data.isAdmin = result.isAdmin;
+        console.log(result);
     },
     complete: function () {
         for (var i = 0; i < data.markers.length; i++) {

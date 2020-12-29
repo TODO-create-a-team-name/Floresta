@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -101,7 +103,7 @@ namespace Floresta.Controllers
         public JsonResult GetRequiredData()
         {
             var markers = _context.Markers.ToList();
-            var seedlings = _context.Seedlings.ToList();
+            var seedlings = _context.Seedlings.Select(s => new { s.Id, s.Amount});
             bool IsAdmin = _signInManager.IsSignedIn(User) && User.IsInRole("admin");
 
             return new JsonResult(new

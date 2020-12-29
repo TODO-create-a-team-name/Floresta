@@ -4,6 +4,10 @@
 //    contentType: "application/json",
 //    dataType: "json",
 //    success: function (result) {
-//        console.log(result);
+        
+//    },
+//    error: function (xhr, status, error) {
+//        var errorMessage = xhr.status + ': ' + xhr.statusText
+//        alert('Error - ' + errorMessage);
 //    }
 //})
