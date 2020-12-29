@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -192,6 +194,25 @@ namespace Floresta.Controllers
             }
             else
                 return NotFound();
+        }
+
+        public JsonResult GetSeedlingsRates()
+        {
+            var payments = _context.Payments.Include(s => s.Seedling).ToList();
+
+            var seedlings = _context.Seedlings.ToList().Distinct();
+
+            Dictionary<string, int> statistics = new Dictionary<string, int>();
+
+            foreach(var s in seedlings)
+            {
+                statistics.Add(s.Name,
+                    payments.Where(p => p.Seedling.Name == s.Name)
+                    .Select(p => p.PurchasedAmount)
+                    .Sum());
+            }
+
+            return new JsonResult(statistics);
         }
     }
 }
