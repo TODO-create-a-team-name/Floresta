@@ -169,7 +169,7 @@ namespace Floresta.Controllers
 
                 await emailService.SendEmailAsync(user.Email, "Participating status",
                     $"Dear {user.Name} {user.UserSurname}, you are now officially a participant of Floresta Team!<br /> " +
-                    $"Let's make make this world cleaner with fresh oxygen from our trees!");
+                    $"Let's make this world cleaner with fresh oxygen from our trees!");
                 return RedirectToAction("GetTeamParticipants");
             }
             else
@@ -183,6 +183,7 @@ namespace Floresta.Controllers
             if (user != null)
             {
                 user.IsClaimingForTeamParticipating = false;
+                user.IsTeamParticipant = false;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
                 EmailService emailService = new EmailService();
