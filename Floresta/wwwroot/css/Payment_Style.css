@@ -410,6 +410,7 @@ input[type=number]::-webkit-outer-spin-button {
 .info_icon {
     color: #ffffff;
     font-size: 20px;
+    cursor: pointer;
 }
 .info_button {
     vertical-align: middle;
@@ -478,9 +479,6 @@ input[type=number]::-webkit-outer-spin-button {
 .info_button:focus{
     outline: none;
 }
-    .info_button:hover .info_icon {
-        color: #7F7F7F;
-    }
 @media only screen and (max-width: 1300px) {
     .region_button {
         margin: 10px;
