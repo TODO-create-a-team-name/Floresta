@@ -1,13 +1,9 @@
 ﻿using Floresta.Models;
-using Floresta.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -64,7 +60,7 @@ namespace Floresta.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Context,ImageFile")] News news)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,ImageFile")] News news)
         {
             if (ModelState.IsValid)
             {

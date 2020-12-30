@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/Payment_Style.css" />
+    <link rel="stylesheet" href="~/css/PaymentStyle.css" />
     <title> Google Map </title>
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="~/images/Ws-small-icon.png" />
@@ -24,6 +24,7 @@
                     <button class="region_button rb">Івано-Франківська</button>
                     <button class="region_button rb">Львівська</button>
                     <button class="region_button rb">Тернопільська</button>
+                    <button class="info_button" id="instructionButton"><span class="iconify info_icon" data-inline="false" data-icon="el:info-circle"></span></button>
                 </div>
             </div>
             <div class="pay_map_container">
@@ -31,32 +32,32 @@
                 <div class="container_panel">
                     @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                     {
-                        <div class="map_admin_panel">
-                            <form asp-action="index" class="form" asp-controller="map">
-                                <div class="admi_block">
-                                    <span class="title_admin_panel">Адмін панель</span>
-                                    <div class="validation" asp-validation-summary="All"></div>
-                                    <div class="form_item">
-                                        <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
-                                    </div>
-                                    <div class="form_item">
-                                        <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
-                                        <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
-                                    </div>
-                                    <div class="form_item">
-                                        <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
-                                        <span asp-validation-for="Lng"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
-                                        <span asp-validation-for="Lat"></span>
-                                    </div>
-                                    <div class="form_item">
-                                        <button type="submit" class="Create_m_btn">Створити</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>}
+        <div class="map_admin_panel">
+            <form asp-action="index" class="form" asp-controller="map">
+                <div class="admi_block">
+                    <span class="title_admin_panel">Адмін панель</span>
+                    <div class="validation" asp-validation-summary="All"></div>
+                    <div class="form_item">
+                        <input type="text" placeholder="Заголовок" asp-for="Title" class="form_control_sm" />
+                    </div>
+                    <div class="form_item">
+                        <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
+                        <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
+                    </div>
+                    <div class="form_item">
+                        <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lng"></span>
+                    </div>
+                    <div class="form-group">
+                        <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
+                        <span asp-validation-for="Lat"></span>
+                    </div>
+                    <div class="form_item">
+                        <button type="submit" class="Create_m_btn">Створити</button>
+                    </div>
+                </div>
+            </form>
+        </div>}
                     <div class="pay_container">
                         <form class="form" asp-action="Index" asp-controller="Payment" method="get">
                             <div class="validation" asp-validation-summary="ModelOnly"></div>
@@ -90,13 +91,13 @@
                                     <div class="seedling_box">
                                         @foreach (var s in Model.Seedlings)
                                         {
-                                            <div class="tree_card">
-                                                <label class="tree_block" for="@s.Id">
-                                                    <img src="~/images/Tree.svg" height="100" width="77" /><br />
-                                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
-                                                    <span>@s.Name</span>
-                                                </label>
-                                            </div>}
+                            <div class="tree_card">
+                                <label class="tree_block" for="@s.Id">
+                                    <img src="~/images/Tree.svg" height="100" width="77" /><br />
+                                    <input type="radio" id="@s.Id" asp-for="SeedlingId" value="@s.Id">
+                                    <span>@s.Name</span>
+                                </label>
+                            </div>}
                                     </div>
                                 </div>
                             </div>
@@ -115,12 +116,13 @@
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
     <script src="~/js/map.js"></script>
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
     </script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

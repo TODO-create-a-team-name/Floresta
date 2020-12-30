@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -167,7 +169,7 @@ namespace Floresta.Controllers
 
                 await emailService.SendEmailAsync(user.Email, "Participating status",
                     $"Dear {user.Name} {user.UserSurname}, you are now officially a participant of Floresta Team!<br /> " +
-                    $"Let's make make this world cleaner with fresh oxygen from our trees!");
+                    $"Let's make this world cleaner with fresh oxygen from our trees!");
                 return RedirectToAction("GetTeamParticipants");
             }
             else
@@ -181,6 +183,7 @@ namespace Floresta.Controllers
             if (user != null)
             {
                 user.IsClaimingForTeamParticipating = false;
+                user.IsTeamParticipant = false;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
                 EmailService emailService = new EmailService();
@@ -192,6 +195,15 @@ namespace Floresta.Controllers
             }
             else
                 return NotFound();
+        }
+
+        public JsonResult GetSeedlingsRates()
+        {
+            var statistics = _context.Payments.Include(s => s.Seedling)
+                .GroupBy(p => p.Seedling.Name)
+                .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) });
+
+            return new JsonResult(statistics);
         }
     }
 }
