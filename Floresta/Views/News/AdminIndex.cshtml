@@ -12,6 +12,7 @@
     <tr>
         <td>Title</td>
         <td>Content</td>
+        <td>Published date</td>
         <td>Image</td>
     </tr>
     @foreach (var item in Model)
@@ -19,6 +20,7 @@
         <tr>
             <td>@item.Title</td>
             <td>@item.Content</td>
+            <td>@item.DatePublished</td>
             <td><img src="~/images/news/@item.Image" height="200"/></td>
             <td>
                 <form asp-action="Delete" asp-route-id="@item.Id" method="post">

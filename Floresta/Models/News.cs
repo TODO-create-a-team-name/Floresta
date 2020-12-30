@@ -16,6 +16,7 @@ namespace Floresta.Models
         [Required(ErrorMessage = "The Context filed is required")]
         public string Content { get; set; }
         public string Image { get;set; }
+        public DateTime DatePublished { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
     }
