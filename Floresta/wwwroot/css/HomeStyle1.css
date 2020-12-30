@@ -948,6 +948,8 @@ select::-ms-expand {
 
     .details_button {
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right:auto;
     }
 
     .plant_button {
@@ -1069,7 +1071,7 @@ select::-ms-expand {
 
 @media only screen and (max-width: 800px) {
     .goal_buttons{
-        display:inline-block;
+        display:inline-grid;
     }
     .control_panel_block {
         margin: unset;

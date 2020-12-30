@@ -419,6 +419,62 @@ input[type=number]::-webkit-outer-spin-button {
     margin-left: 2px;
     background-color: transparent;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.alert_container {
+    display: none;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
+.alert_card {
+    display: flex;
+    width: 319px;
+    height: 55px;
+    background: #FFFFFF;
+    border: 2.5px solid #ABCD2D;
+    box-sizing: border-box;
+    box-shadow: 4px 4px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    animation: animatioLine 0.5s linear forwards;
+}
+
+@keyframes animatioLine {
+    0% {
+        transform: translateY(-60px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.alert_context {
+    margin-top: 10px;
+    margin-left: 20px;
+    font-family: 'Roboto', sans-serif;
+    width: 252px;
+    color: #ABCD2D;
+    font-size: 14px;
+}
+
+    .alert_context::first-letter {
+        color: #EF8C39;
+    }
+
+.alert_icon {
+    margin: 8px;
+    height: 35px;
+    width: 35px;
+}
+
 .info_button:focus{
     outline: none;
 }
