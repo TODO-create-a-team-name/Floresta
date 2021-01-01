@@ -122,7 +122,7 @@ function info(marker, title) {
 }
 
 var alert = document.querySelector('.alert_container'),
-    alertSound = new Audio('for-sure-576.ogg');
+    alertSound = new Audio('Sound Effect/for-sure-576.ogg');
 
 $.ajax({
     type: "GET",
