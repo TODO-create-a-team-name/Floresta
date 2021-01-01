@@ -107,8 +107,7 @@ header {
     .account_button:focus {
         outline: none;
     }
-
-.user_Ntext {
+.user_Ntext{
     margin-bottom: 5px;
 }
 
@@ -1005,7 +1004,7 @@ select::-ms-expand {
     .details_button {
         margin-bottom: 20px;
         margin-left: auto;
-        margin-right: auto;
+        margin-right:auto;
     }
 
     .plant_button {
@@ -1131,10 +1130,9 @@ select::-ms-expand {
 }
 
 @media only screen and (max-width: 800px) {
-    .goal_buttons {
-        display: inline-grid;
+    .goal_buttons{
+        display:inline-grid;
     }
-
     .control_panel_block {
         margin: unset;
         margin-bottom: unset;

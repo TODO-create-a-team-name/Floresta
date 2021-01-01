@@ -13,7 +13,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"] - Floresta</title>
-    <link rel="stylesheet" href="~/css/Home_Style.css" />
+    <link rel="stylesheet" href="~/css/HomeStyle1.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="icon" href="~/images/Ws-small-icon.png" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -73,7 +73,7 @@
                         <button type="submit" class="account_button button_text">
                             @if (user != null)
                                 {
-                            @user.Name<span></span>  @user.UserSurname
+                                    @user.Name<span></span> @user.UserSurname
                                 }
                             <span class="iconify out_icon" data-inline="false" data-icon="ic:round-log-in"></span>
                         </button>
@@ -98,7 +98,6 @@
             </div>
         </div>
     </header>
-
 
     <div class="page_body_container">
         @RenderBody()

@@ -1,9 +1,10 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @model IEnumerable<Floresta.Models.News>
 @{
+    ViewData["Title"] = "News";
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/NewsStyle.css" />
+<link rel="stylesheet" href="~/css/News_Style.css" />
 <span class="news">Новини</span>
 @foreach (var item in Model)
 {
@@ -19,13 +20,10 @@
             <div class="new_context">
                 @item.Content
             </div>
+            <div class="news_date">
+                26 листопада 2003
+            </div>
             <div class="reed_block">
-                @*<form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                    </form>*@
                 <button class="reed_btn">Читати</button>
             </div>
         </div>

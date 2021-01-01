@@ -129,7 +129,10 @@ function info(marker, title) {
         }
     });
 }
-//get required data
+
+var alert = document.querySelector('.alert_container'),
+    alertSound = new Audio('for-sure-576.ogg');
+
 $.ajax({
     type: "GET",
     url: "Map/GetRequiredData",
@@ -169,11 +172,11 @@ $.ajax({
             }
             else if (data.markers[i].isPlantingFinished) {
                 marker.addListener("click", () => {
-                    Swal.fire(
-                        'Ура!',
-                        'Усі дерева на цій мітці були посаджені!',
-                        'success'
-                    );
+                    if (alert.style.display !== 'block') {
+                        alert.style.display = 'block';
+                        alertSound.play();
+                        setTimeout(() => alert.style.display = 'none', 6500);
+                    }
                 });
             }
         }

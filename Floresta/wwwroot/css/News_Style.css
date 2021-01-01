@@ -105,6 +105,15 @@
         font-size: 18px;
     }
 
+.news_date {
+    max-width: 135px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 190px;
+    color: #ABCD2D;
+    font-size: 12px;
+}
 .news {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -122,6 +131,9 @@
     }
 
 @media only screen and (max-width: 900px) {
+    .news_date{
+        margin-left: 150px;
+    }
     .page_body_container {
         background: unset;
     }
@@ -130,7 +142,7 @@
         background: url('/images/news mibile card.svg') center center no-repeat;
         background-size: 100% 100%;
         display: block;
-        height: 430px;
+        height: 480px;
         width: 310px;
     }
 
@@ -159,7 +171,7 @@
     }
 
     .reed_btn {
-        margin-left: 100px;
+        margin-left: 80px;
     }
 
     .reed_block {
