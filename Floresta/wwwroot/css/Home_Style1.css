@@ -138,7 +138,8 @@ header {
         white-space: nowrap;
         padding: unset;
         display: inline-block;
-        max-width: 125px;
+        max-width: 135px;
+        vertical-align: middle;
     }
 
 .out_icon {
