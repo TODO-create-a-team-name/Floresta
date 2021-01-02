@@ -2,8 +2,6 @@
 using Floresta.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -11,15 +9,15 @@ namespace Floresta.Controllers
     [Authorize(Roles = "admin")]
     public class SeedlingsController : Controller
     {
-        private ISeedling _service;
+        private IRepository<Seedling> _repo;
 
-        public SeedlingsController(ISeedling service)
+        public SeedlingsController(IRepository<Seedling> repo)
         {
-            _service = service;
+            _repo = repo;
         }
         public IActionResult Index()
         {            
-            return View(_service.GetAllSeedlings());
+            return View(_repo.GetAll());
         }
 
         public IActionResult Create()
@@ -30,7 +28,7 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Seedling seedling)
         {
-            await _service.AddSeedlingAsync(seedling);
+            await _repo.AddAsync(seedling);
             return RedirectToAction("Index");
         }
 
@@ -38,7 +36,7 @@ namespace Floresta.Controllers
         {
             if (id != null)
             {
-                var seedling = _service.GetById(id);
+                var seedling = _repo.GetById(id);
                 return View(seedling);
             }
                 return NotFound();
@@ -47,14 +45,14 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Seedling seedling)
         {
-            await _service.UpdateSeedingAsync(seedling);
+            await _repo.UpdateAsync(seedling);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            if(await _service.DeleteSeedingAsync(id))
+            if(await _repo.DeleteAsync(id))
                 return RedirectToAction("Index");
             else
             return NotFound();

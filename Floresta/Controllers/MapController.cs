@@ -1,12 +1,9 @@
-﻿using Floresta.Models;
+﻿using Floresta.Interfaces;
+using Floresta.Models;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,10 +11,15 @@ namespace Floresta.Controllers
 {
     public class MapController : Controller
     {
+        private IRepository<Marker> _repo;
         private FlorestaDbContext _context;
         private SignInManager<User> _signInManager;
-        public MapController(FlorestaDbContext context, SignInManager<User> signInManager)
+
+        public MapController(IRepository<Marker> repo,
+            FlorestaDbContext context,
+            SignInManager<User> signInManager)
         {
+            _repo = repo;
             _context = context;
             _signInManager = signInManager;
         }
@@ -38,22 +40,23 @@ namespace Floresta.Controllers
         [Authorize(Roles = "admin")]
         public IActionResult Markers()
         {
-            var list = _context.Markers.ToList();
-            return View(list);
+            var markers = _repo.GetAll();
+            return View(markers);
         }
+
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Index(Marker marker)
         {
-            _context.Markers.Add(marker);
-            await _context.SaveChangesAsync();
+            await _repo.AddAsync(marker);
             return RedirectToAction("Index");
         }
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id != null)
             {
-                var markers = await _context.Markers.FirstOrDefaultAsync(x => x.Id == id);
-                return View(markers);
+                var marker = _repo.GetById(id);
+                return View(marker);
             }
             return NotFound();
         }
@@ -62,8 +65,7 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Marker marker)
         {
-            _context.Markers.Update(marker);
-            await _context.SaveChangesAsync();
+            await _repo.UpdateAsync(marker);
             return RedirectToAction("Markers");
         }
 
@@ -72,15 +74,13 @@ namespace Floresta.Controllers
         [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
-        {
-            var marker = _context.Markers.FirstOrDefault(x => x.Id == id);
-            if (marker != null)
+        { 
+            if (await _repo.DeleteAsync(id))
             {
-                _context.Markers.Remove(marker);
-                await _context.SaveChangesAsync();
                 return RedirectToAction("Markers");
             }
-            return NotFound();
+            else
+                return NotFound();
         }
 
         public JsonResult GetMarkers()

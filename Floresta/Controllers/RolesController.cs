@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Floresta.Models;
+﻿using Floresta.Models;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

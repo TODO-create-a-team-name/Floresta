@@ -5,29 +5,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Floresta.Services
+namespace Floresta.Repositories
 {
-    public class SeedlingService : ISeedling
+    public class SeedlingRepository : IRepository<Seedling>
     {
         private FlorestaDbContext _context;
-        public SeedlingService(FlorestaDbContext context)
+        public SeedlingRepository(FlorestaDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Seedling> GetAllSeedlings()
+        public IEnumerable<Seedling> GetAll()
         => _context.Seedlings;
 
         public Seedling GetById(int? id)
-        => GetAllSeedlings().FirstOrDefault(x => x.Id == id);   
+        => GetAll().FirstOrDefault(x => x.Id == id);   
 
-        public async Task AddSeedlingAsync(Seedling newSeedling)
+        public async Task AddAsync(Seedling newSeedling)
         {
             await _context.Seedlings.AddAsync(newSeedling);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateAsync(Seedling seedling)
+        {
+            _context.Seedlings.Update(seedling);
+            await _context.SaveChangesAsync();
+        }
 
-        public async Task<bool> DeleteSeedingAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var seedling = GetById(id);
 
@@ -44,10 +49,5 @@ namespace Floresta.Services
             
         }
 
-        public async Task UpdateSeedingAsync(Seedling seedling)
-        {
-            _context.Seedlings.Update(seedling);
-            await _context.SaveChangesAsync();
-        }
     }
 }

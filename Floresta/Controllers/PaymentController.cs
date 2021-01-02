@@ -55,10 +55,11 @@ namespace Floresta.Controllers
                 PurchasedAmount = model.PurchasedAmount,
                 Price = model.Price
             };
-            EmailService emailService = new EmailService();
+            await _context.Payments.AddAsync(payment);
 
-            await emailService.SendEmailAsync(user.Email, "Purchase status",
-                $"Dear {user.Name} {user.UserSurname}, thank you for purchasing! You will receive an e-mail about the purchase status as soon as it's possible!");
+            await new EmailService().SendEmailAsync(user.Email, "Статус оплати",
+                $"Дорога(-ий) {user.Name} {user.UserSurname}," +
+                $" дякуємо вам за оплату! Ви отримаєте електронне повідомлення про статус оплати якнайшвидше!");
             if (seedling.Amount > 0)
             {
                 seedling.Amount -= model.PurchasedAmount;
@@ -74,8 +75,8 @@ namespace Floresta.Controllers
                 marker.isPlantingFinished = true;
                 _context.Update(marker);
             }
-            _context.Add(payment);
-            _context.SaveChanges();
+            
+            await _context.SaveChangesAsync();
             
 
             return RedirectToAction("Index", "Map");
@@ -91,15 +92,15 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> SendEmail(string id, SendEmailViewModel model)
         {
-            
             var user = await _userManager.FindByIdAsync(id);
 
             if (user != null)
             {
                 EmailService emailService = new EmailService();
 
-                await emailService.SendEmailAsync(user.Email, "Purchase status",
+                await emailService.SendEmailAsync(user.Email, "Статус оплати",
                     model.Message);
+
                 return Ok();
             }
             return NotFound();
