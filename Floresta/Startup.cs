@@ -1,4 +1,5 @@
 using AutoMapper;
+using Floresta.Interfaces;
 using Floresta.Models;
 using Floresta.Services;
 using Microsoft.AspNetCore.Builder;
@@ -28,6 +29,8 @@ namespace Floresta
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ISeedling, SeedlingService>();
+
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {
                 services.AddDbContext<FlorestaDbContext>(options =>

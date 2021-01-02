@@ -80,10 +80,10 @@ namespace Floresta.Controllers
 
         public JsonResult GetDataForChart()
         {
-            var users = _context.Payments.Select(p => p.UserId).Distinct().Count();
+            var users = _context.Payments.Where(p => p.IsPaymentSucceded).Select(p => p.UserId).Distinct().Count();
             var trees = _context.Payments.Where(p => p.IsPaymentSucceded).Sum(p => p.PurchasedAmount);
-            var remainingTrees = _context.Seedlings.Sum(s => s.Amount) - trees;
-            return new JsonResult(new {users = users, trees = trees, remainingTrees = remainingTrees });
+            var remainingTrees = _context.Seedlings.Sum(s => s.Amount);
+            return new JsonResult(new {users, trees, remainingTrees });
         }
     }
 }

@@ -41,10 +41,10 @@ namespace Floresta.Controllers
 
                     EmailService emailService = new EmailService();
 
-                    await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Confirm the registration by the following link: <a href='{callbackUrl}'>link</a>");
+                    await emailService.SendEmailAsync(model.Email, "Підтвердіть свій акаунт",
+                        $"Підтвердіть свій акаунт за наступним посиланням: <a href='{callbackUrl}'>Підтвердити акаунт</a>");
 
-                    return Content("For completing the registration follow the link that was sent to your email");
+                    return Content("Для завершення реєстрації, перейдіть за посиланням, яке було надіслане вам на пошту.");
                 }
                 else
                 {
@@ -93,7 +93,7 @@ namespace Floresta.Controllers
                     // check if email was confirmed
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
-                        ModelState.AddModelError(string.Empty, "You haven't confirmed your email");
+                        ModelState.AddModelError(string.Empty, "Ви не підтвердили свою пошту!");
                         return View(model);
                     }
                 }
@@ -105,7 +105,7 @@ namespace Floresta.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login and(or) password were not correct");
+                    ModelState.AddModelError("", "Невірний логін або(і) пароль");
                 }
             }
             return View(model);
@@ -143,10 +143,18 @@ namespace Floresta.Controllers
                 }
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                
+                var callbackUrl = Url.Action("ResetPassword",
+                    "Account",
+                    new { userId = user.Id, code = code },
+                    protocol: HttpContext.Request.Scheme);
+
                 EmailService emailService = new EmailService();
-                await emailService.SendEmailAsync(model.Email, "Reset Password",
-                    $"Follow the following link to reset your password: <a href='{callbackUrl}'>link</a>");
+
+                await emailService.SendEmailAsync(model.Email,
+                    "Зміна паролю",
+                    $"Перейдіть за наступним посиланням, щоб змінити ваш пароль: <a href='{callbackUrl}'>Змінити пароль</a>");
+
                 return View("ForgotPasswordConfirmation");
             }
             return View(model);

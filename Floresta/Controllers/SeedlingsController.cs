@@ -1,4 +1,5 @@
-﻿using Floresta.Models;
+﻿using Floresta.Interfaces;
+using Floresta.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,16 +11,15 @@ namespace Floresta.Controllers
     [Authorize(Roles = "admin")]
     public class SeedlingsController : Controller
     {
-        private FlorestaDbContext _context;
+        private ISeedling _service;
 
-        public SeedlingsController(FlorestaDbContext context)
+        public SeedlingsController(ISeedling service)
         {
-            _context = context;
+            _service = service;
         }
         public IActionResult Index()
-        {
-            var list = _context.Seedlings.ToList();
-            return View(list);
+        {            
+            return View(_service.GetAllSeedlings());
         }
 
         public IActionResult Create()
@@ -28,18 +28,17 @@ namespace Floresta.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Seedling seedling)
+        public async Task<IActionResult> Create(Seedling seedling)
         {
-            _context.Seedlings.Add(seedling);
-            _context.SaveChanges();
+            await _service.AddSeedlingAsync(seedling);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id != null)
             {
-                var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == id);
+                var seedling = _service.GetById(id);
                 return View(seedling);
             }
                 return NotFound();
@@ -48,21 +47,16 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Seedling seedling)
         {
-            _context.Seedlings.Update(seedling);
-            await _context.SaveChangesAsync();
+            await _service.UpdateSeedingAsync(seedling);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
-            if(seedling != null)
-            {
-                _context.Seedlings.Remove(seedling);
-                await _context.SaveChangesAsync();
+            if(await _service.DeleteSeedingAsync(id))
                 return RedirectToAction("Index");
-            }
+            else
             return NotFound();
         }
     }
