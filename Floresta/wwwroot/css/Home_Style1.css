@@ -885,7 +885,26 @@ select::-ms-expand {
     font-family: 20px;
     border: 2.5px solid #819F00;
 }
-
+.google-visualization-tooltip{
+    border-radius: 25px !important;
+    
+}
+.google-visualization-tooltip-item {
+    padding: 0em 1em 0em 1em !important;
+    margin: 5px 0px 0px 0px !important; 
+}
+    .google-visualization-tooltip-item span {
+       overflow-wrap: normal;
+        color: #ABCD2D !important;
+        display: block;
+        font-size: 18px !important;
+    }
+.google-visualization-tooltip-item-list .google-visualization-tooltip-item:last-child span{
+    justify-content: center;
+    display: flex;
+    font-size: 16px !important;
+    color: #EF8C39 !important;
+}
 @media only screen and (max-height: 900px) {
     .plat_for_home {
         font-family: 18px;
