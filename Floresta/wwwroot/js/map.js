@@ -37,6 +37,8 @@ function initMap() {
 
     var marker = null;
     function placeMarker(location, title) {
+        if (marker != null)
+            marker.setMap(null);
         if (data.isAdmin) {
             marker = new google.maps.Marker({
                 position: location,

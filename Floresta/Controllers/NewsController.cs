@@ -60,10 +60,11 @@ namespace Floresta.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Content,ImageFile")] News news)
+        public async Task<IActionResult> Create([Bind("Id,Title,Content,DatePublished,ImageFile")] News news)
         {
             if (ModelState.IsValid)
             {
+                news.DatePublished = DateTime.Now;
                 await SaveImageAsync(news);
                 await _context.News.AddAsync(news);
                 await _context.SaveChangesAsync();
