@@ -13,7 +13,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewData["Title"] - Floresta</title>
-    <link rel="stylesheet" href="~/css/HomeStyle1.css" />
+    <link rel="stylesheet" href="~/css/Home_Style.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="icon" href="~/images/Ws-small-icon.png" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -37,7 +37,7 @@
                         </li>
                         <li class=" nav_container">
                             <div class="menu_conteiner">
-                                <a class="nav_item_text" asp-controller="Home" asp-action="Index1">Про нас</a>
+                                <a class="nav_item_text" asp-controller="Home" asp-action="FAQ">FAQ</a>
                             </div>
                         </li>
                         <li class=" nav_container">
@@ -73,7 +73,7 @@
                         <button type="submit" class="account_button button_text">
                             @if (user != null)
                                 {
-                                    @user.Name<span></span> @user.UserSurname
+                                <span>@user.Name @user.UserSurname</span> 
                                 }
                             <span class="iconify out_icon" data-inline="false" data-icon="ic:round-log-in"></span>
                         </button>

@@ -1,5 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+.main_title_block{
+    display: none;
+}
 .news_card {
     background: url('/images/news card.svg') center center no-repeat;
     background-size: 100% 100%;
@@ -8,7 +10,9 @@
     margin: 20px auto;
     display: flex;
 }
-
+.page_body_container{
+    margin-top: 0px !important;
+}
 .img_container {
     padding-top: 10px;
     min-width: 330px;
@@ -92,7 +96,7 @@
     user-select: none;
     margin-top: -10px;
     width: 290px;
-    height: 132px;
+    max-height: 132px;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-left: 20px;
@@ -120,10 +124,14 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    font-family: 'Roboto', sans-serif;
-    margin-left: 30px;
+    font-family: Georgia;
+    margin-left: auto;
+    margin-right: auto;
+    width: 165px;
     font-size: 46px;
-    color: #ABCD2D;
+    color: #EF8C39;
+    display: block;
+    margin: -10px auto 20px auto;
 }
 
     .news::first-letter {

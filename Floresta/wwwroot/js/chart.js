@@ -33,13 +33,15 @@ function drawChart() {
         pieSliceTextStyle: {
             color: 'white',
         },
+        pieHole: 0.3,
         fontSize: 18,
         select: null,
-        tooltip: { trigger: 'none' },
+        tooltip: { isHtml: true, trigger: 'selection' }
+        /*tooltip: { trigger: 'none' }*/,
         legend: 'none',
         pieSliceText: 'value',
         backgroundColor: 'none',
-        chartArea: { left: 20, top: 0, width: '100%', height: '90%' },
+        chartArea: { left: 20, top: 10, width: '100%', height: '90%' },
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
