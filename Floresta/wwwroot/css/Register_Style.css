@@ -10,7 +10,6 @@
 html {
     height: 100%;
 }
-
 .validation-summary-errors ul {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -27,8 +26,15 @@ html {
 }
 
 body {
-    background: url('/images/Login Bg.svg') center center no-repeat;
+    background: url('/images/Registration Background.svg') center center no-repeat;
     background-size: cover;
+}
+
+.position_btn {
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    margin: 260px auto auto auto;
 }
 
 .card {
@@ -36,9 +42,9 @@ body {
     align-items: center;
     position: absolute;
     width: 290px;
-    height: 345px;
+    min-height: 430px;
     right: 15%;
-    top: 25%;
+    top: 20%;
     background: #ABCD2D;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
@@ -52,10 +58,6 @@ body {
 
     .form .form_item:nth-child(1) {
         margin-top: 30px;
-    }
-
-    .form .form_item:nth-child(2) {
-        margin-top: 15px;
     }
 
 .form_item {
@@ -81,6 +83,7 @@ body {
         color: #ABCD2D;
     }
 
+
 span {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -98,17 +101,22 @@ span {
     -moz-appearance: none;
     appearance: none;
     background: #FFFFFF;
+    position: absolute;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
     height: 40px;
-    width: 250px;
-    position: absolute;
+    width: 270px;
     display: inline-block;
-    bottom: -10px;
-    right: -25px;
+    bottom:-10px;
+    left: 50px;
     text-align: center;
 }
-
+.mag_cancel{
+    margin-top: 10px!important;
+}
+.form_g{
+    margin-bottom: 40px;
+}
 .cancel_button {
     text-decoration: none;
     cursor: pointer;
@@ -123,7 +131,7 @@ span {
         text-decoration: underline;
     }
 
-.login_button {
+.register_button {
     cursor: pointer;
     color: white;
     font-size: 16px;
@@ -131,23 +139,12 @@ span {
     background: #EF8C39;
     height: 40px;
     border: none;
-    width: 150px;
+    width: 170px;
     border-radius: 18px;
 }
 
-    .login_button:hover {
+    .register_button:hover {
         background-color: #FD8118;
-    }
-
-.fogot_password {
-    text-decoration: none;
-    cursor: pointer;
-    color: white;
-    font-size: 16px;
-}
-
-    .fogot_password:hover {
-        text-decoration: underline;
     }
 
 .Line_else {
@@ -228,7 +225,7 @@ span {
     user-select: none;
 }
 
-.Login_title {
+.Registeration_title {
     z-index: 122;
     margin-top: 12vh;
     margin-left: 20vw;
@@ -236,35 +233,43 @@ span {
 
 
 .sub_title {
+    margin-left: -2vw;
     font-family: 'Rubik', serif;
     font-size: 64px;
     color: #ABCD2D;
 }
 
-.Login_title .sub_title:nth-child(1) {
+.Registeration_title .sub_title:nth-child(1) {
     color: #EF8C39;
 }
 
 .margin_l7 {
-    margin-left: 70px;
+    margin-left: 200px;
+}
+
+.margin_l8 {
+    margin-left: 22vw;
+}
+
+.margin_l5 {
+    margin-left: 6vw;
 }
 
 .quote_container {
-    margin-right: 39vw;
+    margin-right: 35vw;
     margin-top: 6vh;
-    margin-left: 1vw;
 }
 
 .quotes {
-    font-size: 1.7vw;
+    font-size: 1.5vw;
 }
 
 .author {
     font-family: 'Bitter', sans-serif;
     font-weight: 200;
     margin-top: 2vh;
-    margin-left: 22vw;
-    font-size: 1.2vw;
+    margin-left: 28vw;
+    font-size: 1.1vw;
 }
 
 .quote_text {
@@ -273,23 +278,16 @@ span {
     color: black;
 }
 
-.margin_l5 {
-    margin-left: 8vw;
-}
-.form_check{
-    display: inline-block !important;
-}
-.form_check_label{
-    cursor: pointer;
-    color: white;
-}
-.form_check_input{
-    border: 1px solid red;
-}
-@media only screen and (max-width: 1020px) {
-    .Login_title {
+
+
+@media only screen and (max-width: 1120px) {
+    .Registeration_title {
         position: absolute;
         left: -8vw;
+    }
+
+    .margin_l7 {
+        margin-left: 1vw;
     }
 
     .sub_title {
@@ -297,7 +295,7 @@ span {
     }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 880px) {
     .margin_l7 {
         display: none;
     }
@@ -306,9 +304,13 @@ span {
         display: none;
     }
 
+    .Registeration_title {
+        margin-top: 10vh;
+    }
+
     .sub_title {
         font-size: 46px;
-        margin-left: 45%;
+        margin-left: 15%;
     }
 
     .card {
@@ -316,7 +318,11 @@ span {
     }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
+    .sub_title {
+        margin-left: unset !important;
+    }
+
     .card {
         right: 10%;
     }

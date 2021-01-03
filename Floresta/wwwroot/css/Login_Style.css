@@ -10,6 +10,7 @@
 html {
     height: 100%;
 }
+
 .validation-summary-errors ul {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -26,7 +27,7 @@ html {
 }
 
 body {
-    background: url('/images/Registration Background.svg') center center no-repeat;
+    background: url('/images/Login Bg.svg') center center no-repeat;
     background-size: cover;
 }
 
@@ -35,9 +36,9 @@ body {
     align-items: center;
     position: absolute;
     width: 290px;
-    min-height: 390px;
+    height: 345px;
     right: 15%;
-    top: 20%;
+    top: 25%;
     background: #ABCD2D;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 50px;
@@ -51,6 +52,10 @@ body {
 
     .form .form_item:nth-child(1) {
         margin-top: 30px;
+    }
+
+    .form .form_item:nth-child(2) {
+        margin-top: 15px;
     }
 
 .form_item {
@@ -76,7 +81,6 @@ body {
         color: #ABCD2D;
     }
 
-
 span {
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
@@ -97,11 +101,11 @@ span {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 18px;
     height: 40px;
-    width: 270px;
+    width: 250px;
+    position: absolute;
     display: inline-block;
-    margin-bottom: -35px;
-    margin-top: 10px;
-    margin-left: 45px;
+    bottom: -10px;
+    right: -25px;
     text-align: center;
 }
 
@@ -119,7 +123,7 @@ span {
         text-decoration: underline;
     }
 
-.register_button {
+.login_button {
     cursor: pointer;
     color: white;
     font-size: 16px;
@@ -127,14 +131,31 @@ span {
     background: #EF8C39;
     height: 40px;
     border: none;
-    width: 170px;
+    width: 150px;
     border-radius: 18px;
 }
 
-    .register_button:hover {
+    .login_button:hover {
         background-color: #FD8118;
     }
 
+.fogot_password {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    font-size: 16px;
+}
+
+    .fogot_password:hover {
+        text-decoration: underline;
+    }
+
+.position_btn {
+    position: absolute;
+    right:0px;
+    left: 0px;
+    margin: 180px auto auto auto;
+}
 .Line_else {
     color: white;
 }
@@ -213,7 +234,7 @@ span {
     user-select: none;
 }
 
-.Registeration_title {
+.Login_title {
     z-index: 122;
     margin-top: 12vh;
     margin-left: 20vw;
@@ -221,43 +242,35 @@ span {
 
 
 .sub_title {
-    margin-left: -2vw;
     font-family: 'Rubik', serif;
     font-size: 64px;
     color: #ABCD2D;
 }
 
-.Registeration_title .sub_title:nth-child(1) {
+.Login_title .sub_title:nth-child(1) {
     color: #EF8C39;
 }
 
 .margin_l7 {
-    margin-left: 200px;
-}
-
-.margin_l8 {
-    margin-left: 22vw;
-}
-
-.margin_l5 {
-    margin-left: 6vw;
+    margin-left: 70px;
 }
 
 .quote_container {
-    margin-right: 35vw;
+    margin-right: 39vw;
     margin-top: 6vh;
+    margin-left: 1vw;
 }
 
 .quotes {
-    font-size: 1.5vw;
+    font-size: 1.7vw;
 }
 
 .author {
     font-family: 'Bitter', sans-serif;
     font-weight: 200;
     margin-top: 2vh;
-    margin-left: 28vw;
-    font-size: 1.1vw;
+    margin-left: 22vw;
+    font-size: 1.2vw;
 }
 
 .quote_text {
@@ -266,16 +279,23 @@ span {
     color: black;
 }
 
-
-
-@media only screen and (max-width: 1120px) {
-    .Registeration_title {
+.margin_l5 {
+    margin-left: 8vw;
+}
+.form_check{
+    display: inline-block !important;
+}
+.form_check_label{
+    cursor: pointer;
+    color: white;
+}
+.form_check_input{
+    border: 1px solid red;
+}
+@media only screen and (max-width: 1020px) {
+    .Login_title {
         position: absolute;
         left: -8vw;
-    }
-
-    .margin_l7 {
-        margin-left: 1vw;
     }
 
     .sub_title {
@@ -283,7 +303,7 @@ span {
     }
 }
 
-@media only screen and (max-width: 880px) {
+@media only screen and (max-width: 770px) {
     .margin_l7 {
         display: none;
     }
@@ -292,13 +312,9 @@ span {
         display: none;
     }
 
-    .Registeration_title {
-        margin-top: 10vh;
-    }
-
     .sub_title {
         font-size: 46px;
-        margin-left: 15%;
+        margin-left: 45%;
     }
 
     .card {
@@ -306,11 +322,7 @@ span {
     }
 }
 
-@media only screen and (max-width: 420px) {
-    .sub_title {
-        margin-left: unset !important;
-    }
-
+@media only screen and (max-width: 400px) {
     .card {
         right: 10%;
     }

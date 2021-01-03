@@ -2,7 +2,7 @@
 @{
     Layout = null;
 }
-<link rel="stylesheet" href="~/css/RegisterStyle.css" />
+<link rel="stylesheet" href="~/css/Register_Style.css" />
 <meta name="viewport" content="width=device-width" />
 <link rel="icon" href="~/images/Ws-small-icon.png" />
 <title>Sign Up - Floresta</title>
@@ -28,7 +28,8 @@
             </div>
         </div>
     </div>
-    <div class="card">
+    <div class="card form">
+
         <form class="form" method="post" asp-controller="Account" asp-action="Register">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form_item">
@@ -51,7 +52,14 @@
                 <input type="password" placeholder="Підтвердіть пароль" asp-for="PasswordConfirm" class="form_control" />
                 <span asp-validation-for="PasswordConfirm"></span>
             </div><br />
-            <div class="form_item">
+
+            <div class="form_buttons cancel_select">
+                <a class="cancel_button" asp-controller="Home" asp-action="Index">Скасувати</a>
+                <input type="submit" class="register_button" value="Зареєструватися" />
+            </div>
+        </form>
+        <form class="form_g" >
+            <div class="form_item mag_cancel">
                 <div class="Line_else cancel_select">Або</div>
             </div><br />
             <div class="form_item">
@@ -64,11 +72,7 @@
                 <span class="account_text">В тебе вже є акаунт?</span>
                 <a asp-controller="Account" asp-action="Login">Ввійти</a>
             </div>
-            <div class="form_buttons cancel_select">
-                <a class="cancel_button" asp-controller="Home" asp-action="Index">Скасувати</a>
-                <input type="submit" class="register_button" value="Зареєструватися" />
-            </div>
         </form>
     </div>
-    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
-</div>
+        <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+    </div>
