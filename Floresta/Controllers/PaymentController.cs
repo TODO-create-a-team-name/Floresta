@@ -59,7 +59,7 @@ namespace Floresta.Controllers
 
             await new EmailService().SendEmailAsync(user.Email, "Статус оплати",
                 $"Дорога(-ий) {user.Name} {user.UserSurname}," +
-                $" дякуємо вам за оплату! Ви отримаєте електронне повідомлення про статус оплати якнайшвидше!");
+                $" дякуємо вам за оплату! Зовсім скоро ви отримаєте електронне повідомлення про статус оплати!");
             if (seedling.Amount > 0)
             {
                 seedling.Amount -= model.PurchasedAmount;

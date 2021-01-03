@@ -15,7 +15,6 @@ namespace Floresta.Controllers
         public HomeController(UserManager<User> userManager,
             FlorestaDbContext context)
         {
-
             _userManager = userManager;
             _context = context;
         }
