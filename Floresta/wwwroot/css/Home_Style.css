@@ -909,7 +909,7 @@ select::-ms-expand {
 @media only screen and (max-height: 900px) {
     .plat_for_home {
         font-family: 18px;
-        margin-top: 67vh;
+        margin-top: 64vh;
     }
 }
 @media only screen and (max-height: 600px) {

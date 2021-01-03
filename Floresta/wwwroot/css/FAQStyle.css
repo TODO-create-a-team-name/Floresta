@@ -1,0 +1,173 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+header{
+    height: 100vh;
+}
+.plat_for_home{
+    display: none;
+}
+.main_title_block {
+    display: none;
+}
+.page_body_container{
+    margin-top: -700px;
+}
+.title_faq {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    justify-content: center;
+    display: flex;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #EF8C39;
+    font-size: 36px;
+    font-family: 'Playfair Display', serif;
+    border-bottom: 1px solid #BCBCBC;
+}
+.faq_body{
+    /*background: url('/images/news bg.svg') center center no-repeat;
+    background-size: 100%;*/
+}
+.card_faq {
+    position: relative;
+    border: 2px solid #ABCD2D;
+    width: 38vw;
+    background-color: white;
+    min-height: 400px;
+    min-width: 340px;
+    margin: 20px auto 40px auto;
+    border-radius: 35px;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.item_container {
+    width: 30vw;
+    min-width: 300px;
+    margin: 20px auto 50px auto;
+}
+.faq_details {
+    border-bottom: 1px solid hsl(240, 5%, 91%);
+    margin: 10px 0 0 0;
+    padding: 5px 0 5px 0;
+}
+
+.faq_symmary {
+    display: block;
+    color: #ABCD2D;
+    font-size: 20px;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding-right: 20px;
+}
+    .faq_symmary:hover {
+        color: #EF8C39;
+        transition: all 0.3s ease;
+    }
+    .faq_symmary:after {
+        display: flex;
+        justify-content: end;
+        content: url("https://bobmatyas.github.io/fm-faq-accordion/images/icon-arrow-down.svg");
+        background-repeat: no-repeat;
+        background-position: right center;
+        text-align: right;
+        margin-right: -10px;
+        margin-top: -15px;
+        padding-bottom: 10px;
+    }
+details[open] .faq_symmary:after {
+    display: flex;
+    justify-content: end;
+    content: "";
+    background-image: url("https://bobmatyas.github.io/fm-faq-accordion/images/icon-arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: right center ;
+    transform: scaleY(-1);
+    margin-top: -15px;
+    margin-right: -10px;
+    padding-bottom: 10px;
+}
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+.faq__text {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: #939393;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+details[open] .faq_symmary {
+    color: #EF8C39;
+}
+details[open] .faq__text {
+    border-left: 2px solid #EF8C39;
+    margin-left: 5px;
+    padding-left: 10px;
+    opacity: 100;
+    transition: all 1s ease;
+}
+.nav-link {
+    padding: 0rem !important;
+    display: inline;
+}
+details > summary {
+    list-style: none;
+}
+
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+
+.write_question {
+    position: absolute;
+    bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0px;
+    right: 0px;
+    justify-content: center;
+    display: flex;
+}
+    .write_question a {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        font-size: 18px;
+        color: #EF8C39;
+    }
+        .write_question a:hover {
+            color: #E36F0D;
+            text-decoration: underline;
+        }
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        margin-left: -10px
+    }
+
+    100% {
+        opacity: 1;
+        margin-left: 0px
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    .page_body_container {
+        margin-top: -80vh;
+    }
+}

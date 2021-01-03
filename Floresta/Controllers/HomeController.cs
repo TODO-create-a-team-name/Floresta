@@ -34,7 +34,7 @@ namespace Floresta.Controllers
         {
             return View();
         }
-        public IActionResult Index1()
+        public IActionResult FAQ()
         {
             return View();
         }

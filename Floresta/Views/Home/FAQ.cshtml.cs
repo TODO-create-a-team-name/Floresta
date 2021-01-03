@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Floresta.Views.Admin
+namespace Floresta.Views.Home
 {
-    public class Index1Model : PageModel
+    public class FAQModel : PageModel
     {
         public void OnGet()
         {
