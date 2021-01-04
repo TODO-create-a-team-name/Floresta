@@ -39,6 +39,10 @@ namespace Floresta.Controllers
         {
             return View();
         }
+        public IActionResult ReadNews()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
