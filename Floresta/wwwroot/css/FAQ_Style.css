@@ -52,8 +52,12 @@ header{
     border-bottom: 1px solid hsl(240, 5%, 91%);
     margin: 10px 0 0 0;
     padding: 5px 0 5px 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
-
 .faq_symmary {
     display: block;
     color: #ABCD2D;
@@ -74,7 +78,8 @@ header{
     .faq_symmary:after {
         display: flex;
         justify-content: end;
-        content: url("https://bobmatyas.github.io/fm-faq-accordion/images/icon-arrow-down.svg");
+        content: "";
+        background-image: url("https://bobmatyas.github.io/fm-faq-accordion/images/icon-arrow-down.svg");
         background-repeat: no-repeat;
         background-position: right center;
         text-align: right;
@@ -116,7 +121,7 @@ details[open] .faq__text {
     margin-left: 5px;
     padding-left: 10px;
     opacity: 100;
-    transition: all 1s ease;
+    transition: step-start 1s ease;
 }
 .nav-link {
     padding: 0rem !important;
