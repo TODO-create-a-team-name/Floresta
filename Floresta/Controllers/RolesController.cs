@@ -96,5 +96,16 @@ namespace Floresta.Controllers
 
             return NotFound();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+               await _roleManager.DeleteAsync(role);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
