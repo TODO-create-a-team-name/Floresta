@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.AspNetCore.Authentication;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Floresta.ViewModels
@@ -15,5 +16,7 @@ namespace Floresta.ViewModels
         public bool RememberMe { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public IList<AuthenticationScheme> ExternalLogin { get; set; }
     }
 }

@@ -51,6 +51,13 @@ namespace Floresta
             .AddEntityFrameworkStores<FlorestaDbContext>()
             .AddDefaultTokenProviders();
 
+            services.AddAuthentication()
+                .AddGoogle(opt =>
+                {
+                    opt.ClientId = "631893719281-c9n16muiqeh4oh76ek73bjs3o52qnh4v.apps.googleusercontent.com";
+                    opt.ClientSecret = "GZqmOTCYj1VQN1DaFJHNtcP8";
+                });
+
             services.AddAuthorization(options =>
             options.AddPolicy("admin",
                 policy => policy.RequireClaim("Manager")));

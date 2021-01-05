@@ -4,6 +4,8 @@ using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -78,8 +80,88 @@ namespace Floresta.Controllers
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl = null) =>
-            View(new LoginViewModel { ReturnUrl = returnUrl });
+        public async Task<IActionResult> Login(string returnUrl = null) =>
+            View(new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogin = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            });
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account",
+                new { ReturnUrl = returnUrl });
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogin = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            if (remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Помилка зовнішнього провайдера {remoteError}");
+                return View("Login", loginViewModel);
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                ModelState.AddModelError(string.Empty, "Помилка завантаження інформації зовнішнього провайдера");
+
+                return View("Login", loginViewModel);
+            }
+
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+                info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
+            if (signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        user = new User
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Name = info.Principal.FindFirstValue(ClaimTypes.Name),
+                            UserSurname = info.Principal.FindFirstValue(ClaimTypes.Surname)
+                        };
+
+                        await _userManager.CreateAsync(user);
+                    }
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    return LocalRedirect(returnUrl);
+                }
+
+                ViewBag.ErrorTitle = $"Заява електронної пошти не була отримана від: {info.LoginProvider}";
+                ViewBag.ErrorMessage = "Будь ласка, зв'яжіться з підтримкою florestaofficial200.gmail.com";
+                return View("Error");
+            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]

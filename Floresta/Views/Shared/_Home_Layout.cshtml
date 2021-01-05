@@ -55,7 +55,7 @@
                 @if (!signInManager.IsSignedIn(User))
                 {
                 <div class="account_container">
-                    <form class="Login_form" method="post" asp-controller="Account" asp-action="Login">
+                    <form class="Login_form" method="get" asp-controller="Account" asp-action="Login">
                         <input class="account_button button_text" type="submit" value="Вхід/Реєстрація" />
                     </form>
                 </div>
