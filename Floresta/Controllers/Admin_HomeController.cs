@@ -59,6 +59,11 @@ namespace Floresta.Controllers
         {
             return View();
         }
+  
+        public IActionResult PurchasesDiagram()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> AnswerQuestion(int id, SendEmailViewModel model)
