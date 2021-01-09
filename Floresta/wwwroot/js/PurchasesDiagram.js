@@ -15,7 +15,7 @@ function drawChart() {
         }
     };
 
-    var chart = new google.charts.Bar(document.querySelector('#columnchart_purchases'));
+    var chart = new google.charts.Bar(document.querySelector('.columnchart_purchases'));
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
 }

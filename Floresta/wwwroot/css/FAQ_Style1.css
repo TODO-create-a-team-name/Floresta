@@ -13,7 +13,6 @@ header{
     margin-top: -700px;
 }
 .title_faq {
-    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -52,7 +51,6 @@ header{
     border-bottom: 1px solid hsl(240, 5%, 91%);
     margin: 10px 0 0 0;
     padding: 5px 0 5px 0;
-    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -63,7 +61,6 @@ header{
     color: #ABCD2D;
     font-size: 20px;
     cursor: pointer;
-    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -103,7 +100,6 @@ details[open] summary ~ * {
     animation: sweep .5s ease-in-out;
 }
 .faq__text {
-    -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -146,7 +142,6 @@ details > summary {
     display: flex;
 }
     .write_question a {
-        -webkit-touch-callout: none;
         -webkit-user-select: none;
         -khtml-user-select: none;
         -moz-user-select: none;
