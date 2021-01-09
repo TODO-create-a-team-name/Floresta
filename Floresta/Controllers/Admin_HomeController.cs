@@ -195,6 +195,7 @@ namespace Floresta.Controllers
                 await emailService.SendEmailAsync(user.Email, "Статус участі в команді",
                     $"{user.Name} {user.UserSurname}, на жаль, ви не стали учасником Floresta Team, " +
                     $"проте ви однаково зможете зробити світ кращим, посадивши дерево!");
+
                 return RedirectToAction("GetTeamParticipants");
             }
             else
