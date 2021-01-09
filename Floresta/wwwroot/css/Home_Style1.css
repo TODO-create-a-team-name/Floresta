@@ -952,6 +952,10 @@ select::-ms-expand {
     font-size: 16px !important;
     color: #EF8C39 !important;
 }
+
+
+
+
 @media only screen and (max-height: 900px) {
     .plat_for_home {
         font-family: 18px;

@@ -16,7 +16,7 @@
                     <div class="goal_texts" id="usersSupportedDiv"><span class="iconify goal_icon" data-inline="false" data-icon="octicon:people-24"></span></div>
                     <div class="goal_texts" id="treesPlantedDiv"><span class="iconify goal_icon" data-inline="false" data-icon="bi:tree"></span></div>
                     <div class="goal_buttons">
-                        <button class="details_button">Детальніше</button>
+                        <button class="details_button" onclick="location.href='@Url.Action("FAQ", "Home")'">Детальніше</button>
                         <button class="plant_button" onclick="location.href='@Url.Action("Index", "Map")'">Посадити дерево<span class="iconify shovel_icon" data-inline="false" data-icon="uil:shovel"></span></button>
                     </div>
                 </div>
@@ -30,7 +30,8 @@
         </div>
         <div class="text_block">
             <div class="images">
-                <img class="help_image cancel_select" src="~/images/Home page/Planet.svg" />
+                <object class="help_image cancel_select" type="image/svg+xml" data="~/images/Home page/Planet_.svg">
+                </object>
             </div>
             <div class="text_uotside_text_box cancel_select">
                 <div class="top_rood_container">
@@ -73,7 +74,8 @@
                 </div>
             </div>
             <div class="images">
-                <img class="help_image cancel_select" src="~/images/Home page/Sky island.svg" />
+                <object class="help_image cancel_select" type="image/svg+xml" data="~/images/Home page/Sky_Island.svg">
+                </object>
             </div>
         </div>
     </div>
@@ -161,10 +163,11 @@
                         <form class="form_q" asp-action="AskQuestion" method="post">
                             <div class="form_item_Question">
                                 <select class="question_selector">
-                                    <option class="options">Запитання</option>
-                                    <option class="options">Що потрібно щоб стати членом команди?</option>
-                                    <option class="options">Присутні знижки при купівлі великої кількості дерев?</option>
-                                    <option class="options">Чи можна мені самому посадити дерево в цьому місці?</option>
+                                    <option class="options">Тема запитання або звернення</option>
+                                    <option class="options">Нові місця посадки</option>
+                                    <option class="options">Ідеї для покращення проекту</option>
+                                    <option class="options">Допомога проекту та команда</option>
+                                    <option class="options">Технічні проблеми</option>
                                 </select>
                             </div>
                             <div class="form_item_Question">
