@@ -2,32 +2,34 @@
 @{
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
-<table class="table">
-    <tr>
-        <th>Email</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Question</th>
-    </tr>
-    @foreach (var q in Model)
-    {
+<div class="table-responsive-sm">
+    <table class="table">
         <tr>
-            <td>@q.User.Email</td>
-            <td>@q.User.Name</td>
-            <td>@q.User.UserSurname</td>
-            <td>@q.QuestionText</td>
-            <td>
-                @if(!q.IsAnswered)
-                {
-                    <form method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
-                    </form>
-                }
-                else
-                {
-                <label class="text-success">Answered</label>
-                }
-            </td>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Question</th>
         </tr>
-    }
-</table>
+        @foreach (var q in Model)
+        {
+            <tr>
+                <td>@q.User.Email</td>
+                <td>@q.User.Name</td>
+                <td>@q.User.UserSurname</td>
+                <td>@q.QuestionText</td>
+                <td>
+                    @if (!q.IsAnswered)
+                    {
+                        <form method="post">
+                            <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
+                        </form>
+                    }
+                    else
+                    {
+                        <label class="text-success">Answered</label>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
