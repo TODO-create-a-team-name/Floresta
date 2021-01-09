@@ -205,7 +205,7 @@ namespace Floresta.Controllers
             var statistics = _context.Payments.Include(s => s.Seedling)
                 .GroupBy(p => p.Seedling.Name)
                 .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) });
-
+         
             return new JsonResult(statistics);
         }
     }
