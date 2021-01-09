@@ -23,8 +23,7 @@ function drawChart() {
         },
         complete: function () {
             //data = google.visualization.arrayToDataTable([
-            //    ['Назва', 'Придбано одиниць']
-            //]);
+
 
             //for (var i = 0; i < statistics.length; i++) {
             var data = google.visualization.arrayToDataTable([
