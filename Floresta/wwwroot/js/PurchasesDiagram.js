@@ -1,45 +1,57 @@
-﻿google.charts.load('current', { 'packages': ['bar'] });
-google.charts.setOnLoadCallback(drawChart);
-
-
-function drawChart() {
-
-    var options = {
-        chart: {
-            title: 'Попит на саджанці',
-            subtitle: 'Кількість саджанців, які придбали за весь час.',
-        }
-    };
-
-    var statistics = [];
+﻿$(document).ready(function () {
     $.ajax({
         type: "GET",
         url: "/Admin_Home/GetSeedlingsRates",
         contentType: "application/json",
         dataType: "json",
         success: function (result) {
-            statistics = result;
-            console.log(statistics);
-        },
-        complete: function () {
-            //data = google.visualization.arrayToDataTable([
-            //    ['Назва', 'Придбано одиниць']
-            //]);
-
-            //for (var i = 0; i < statistics.length; i++) {
-            var data = google.visualization.arrayToDataTable([
-                ['Назва', 'Придбано одиниць'],
-                statistics.forEach(s => { return [s.seedling, s.sum] })
-                   // [statistics.forEach(s => s.seedling ), statistics.forEach(s => s.sum )]
-               ]);
-
-            var chart = new google.charts.Bar(document.querySelector('.columnchart_purchases'));
-
-            chart.draw(data, google.charts.Bar.convertOptions(options));
+            var keys = Object.keys(result);
+            var data = new Array();
+            for (var i = 0; i < keys.length; i++) {
+                var arr = new Array();
+                arr.push(keys[i]);
+                arr.push(result[keys[i]]);
+                data.push(arr);
+            }
+            createCharts(data);
         },
         error: function (xhr, status, error) {
             var errorMessage = xhr.status + ': ' + xhr.statusText
             alert('Error - ' + errorMessage);
         }
     })
+})
+
+function createCharts(data) {
+    Highcharts.chart('columnchart_purchases', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: "Статистика покупок"
+        },
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Придбано'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            type: 'column',
+            data: data,
+        }]
+    });
 }

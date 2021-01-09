@@ -21,39 +21,39 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Головна</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Map</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Index">Мапа</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="AdminIndex">News</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="AdminIndex">Новини</a>
                         </li>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Markers">Markers</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Markers">Мітки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="PurchasesDiagram">Purchases Diagram</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Seedlings" asp-action="Index">Саджанці</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Seedlings" asp-action="Index">Seedlings</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Користувачі</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage Users</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="GetTeamParticipants">Учасники команди</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="GetTeamParticipants">Participants</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Ролі</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Roles" asp-action="Index">Manage Roles</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="GetQuestions">Питання</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="GetQuestions">Questions</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="Purchases">Покупки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="Purchases">Purchases</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Admin_Home" asp-action="PurchasesDiagram">Статистика</a>
                             </li>
                             
                         }

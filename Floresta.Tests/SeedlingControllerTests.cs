@@ -5,9 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
-namespace ClassLibrary
+namespace Floresta.Tests
 {
     public class SeedlingsControllerTests
     {
@@ -39,7 +40,7 @@ namespace ClassLibrary
             return seedlings;
         }
         [Fact]
-        public void AddSeedlingReturnsViewResultWithSeedlingModel()
+        public async void AddSeedlingReturnsViewResultWithSeedlingModel()
         {
             // Arrange
             var mock = new Mock<IRepository<Seedling>>();
@@ -48,7 +49,7 @@ namespace ClassLibrary
             Seedling newSeedling = new Seedling();
 
             // Act
-            var result = controller.Create(newSeedling);
+            var result = await controller.Create(newSeedling);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
@@ -56,18 +57,20 @@ namespace ClassLibrary
         }
 
         [Fact]
-        public void AddSeedlingReturnsARedirectAndAddsSeedling()
+        public async void AddSeedlingReturnsARedirectAndAddsSeedling()
         {
             // Arrange
             var mock = new Mock<IRepository<Seedling>>();
             var controller = new SeedlingsController(mock.Object);
             var newSeedling = new Seedling()
             {
-                Name = "pear"
+                Name = "pear",
+                Price = 100,
+                Amount = 100 
             };
 
             // Act
-            var result = controller.Create(newSeedling);
+            var result = await controller.Create(newSeedling);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);

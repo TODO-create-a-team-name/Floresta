@@ -39,16 +39,16 @@ namespace Floresta.Tests
             return news;
         }
         [Fact]
-        public void AddNewsReturnsViewResultWithNewsModel()
+        public async void AddNewsReturnsViewResultWithNewsModel()
         {
             // Arrange
             var mock = new Mock<IRepository<News>>();
             var controller = new NewsController(mock.Object);
-            controller.ModelState.AddModelError("Name", "Required");
+            controller.ModelState.AddModelError("Title", "Required");
             News newNews = new News();
 
             // Act
-            var result = controller.Create(newNews);
+            var result = await controller.Create(newNews);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
@@ -57,7 +57,7 @@ namespace Floresta.Tests
 
 
         [Fact]
-        public void AddNewsReturnsARedirectAndAddsNews()
+        public async void AddNewsReturnsARedirectAndAddsNews()
         {
             // Arrange
             var mock = new Mock<IRepository<News>>();
@@ -68,7 +68,7 @@ namespace Floresta.Tests
             };
 
             // Act
-            var result = controller.Create(newNews);
+            var result = await controller.Create(newNews);
 
             // Assert
             var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
