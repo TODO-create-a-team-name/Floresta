@@ -141,7 +141,7 @@
                         <form class="form" asp-action="JoinTeam">
                             <div class="form_item">
                                 <input placeholder="Номер телефону" asp-for="PhoneNumber" class="form_control" />
-                                <span asp-validation-for="PhoneNumber"></span>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="form_buttons cancel_select">
                                 <button type="submit" class="send_button">Надіслати</button>
@@ -179,7 +179,8 @@
             </div>
         </div>
     </div>
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/homeMap.js"></script>
     <script defer
             src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAs2pYpMXar3INreWFXbUNVA8k1LtC35oM&region=UK&language=uk&callback=initMap">
