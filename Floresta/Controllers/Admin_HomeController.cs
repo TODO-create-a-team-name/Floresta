@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Math.EC.Rfc7748;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,9 +50,9 @@ namespace Floresta.Controllers
             return View();
         }
 
-        public async Task<IActionResult> GetQuestions()
+        public IActionResult GetQuestions()
         {
-            var questions = await _context.Questions.Include(c => c.User).ToListAsync();
+            var questions = _context.Questions.Include(c => c.User);
             return View(questions);
         }
 
@@ -86,8 +88,7 @@ namespace Floresta.Controllers
                 .Payments
                 .Include(u => u.User)
                 .Include(m => m.Marker)
-                .Include(s => s.Seedling)
-                .ToList();
+                .Include(s => s.Seedling);
 
             return View(purchases);
         }
@@ -194,6 +195,7 @@ namespace Floresta.Controllers
                 await emailService.SendEmailAsync(user.Email, "Статус участі в команді",
                     $"{user.Name} {user.UserSurname}, на жаль, ви не стали учасником Floresta Team, " +
                     $"проте ви однаково зможете зробити світ кращим, посадивши дерево!");
+
                 return RedirectToAction("GetTeamParticipants");
             }
             else
@@ -204,7 +206,9 @@ namespace Floresta.Controllers
         {
             var statistics = _context.Payments.Include(s => s.Seedling)
                 .GroupBy(p => p.Seedling.Name)
-                .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) });
+                .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) })
+                .AsEnumerable()
+                .ToDictionary(d => d.seedling, d => d.sum);
          
             return new JsonResult(statistics);
         }

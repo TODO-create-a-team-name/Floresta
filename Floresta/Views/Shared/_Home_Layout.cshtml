@@ -63,7 +63,7 @@
                 else
                 {
                 <div class="account_container">
-                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin") || User.IsInRole("moderator"))
                         {
                     <div class="admin_panel_box">
                         <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>

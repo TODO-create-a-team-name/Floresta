@@ -64,6 +64,7 @@ namespace Floresta
                 policy => policy.RequireClaim("Manager")));
 
             services.AddAutoMapper(typeof(Startup));
+
             services.AddControllersWithViews();
         }
 

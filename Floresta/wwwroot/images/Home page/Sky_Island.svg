@@ -17,7 +17,7 @@
 	.st11{fill:#ABCD2D;}
 	.st12{fill:#819F00;}
 	.stfloating{
-	 animation: floatAnim 5s ease-in-out infinite;
+	 animation: floatAnim 3s ease-in-out infinite;
 	}
 	@keyframes floatAnim { 
      0% {

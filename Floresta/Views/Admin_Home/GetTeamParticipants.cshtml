@@ -2,42 +2,44 @@
 @{
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
-<table class="table">
-    <tr>
-        <th>Email</th>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Phone Number</th>
-    </tr>
-    @foreach (var user in Model)
-    {
+<div class="table-responsive-sm">
+    <table class="table">
         <tr>
-            <td>@user.Email</td>
-            <td>@user.Name</td>
-            <td>@user.UserSurname</td>
-            <td>@user.PhoneNumber</td>
-            <td>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Phone Number</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.Name</td>
+                <td>@user.UserSurname</td>
+                <td>@user.PhoneNumber</td>
+                <td>
 
-                @if (!user.IsTeamParticipant)
-                {
-                    <form asp-action="ConfirmParticipating" asp-route-id="@user.Id" method="post">
-                        <button type="submit" class="btn btn-sm btn-success">
-                            Confirm
+                    @if (!user.IsTeamParticipant)
+                    {
+                        <form asp-action="ConfirmParticipating" asp-route-id="@user.Id" method="post">
+                            <button type="submit" class="btn btn-sm btn-success">
+                                Confirm
+                            </button>
+                        </form>
+                    }
+                    else
+                    {
+                        <label class="text-success">Confirmed</label>
+                    }
+                </td>
+                <td>
+                    <form asp-action="DeclineParticipating" asp-route-id="@user.Id" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Decline
                         </button>
                     </form>
-                }
-                else
-                {
-                    <label class="text-success">Confirmed</label>
-                }
-            </td>
-            <td>
-                <form asp-action="DeclineParticipating" asp-route-id="@user.Id" method="post">
-                    <button type="submit" class="btn btn-sm btn-danger">
-                        Decline
-                    </button>
-                </form>
-            </td>
-        </tr>
-    }
-</table>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

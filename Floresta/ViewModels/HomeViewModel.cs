@@ -9,7 +9,7 @@ namespace Floresta.ViewModels
         public string Question { get; set; }
 
         [Required(ErrorMessage ="Введіть, будь ласка, номер телефону")]
-        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Некоректний номер телефону")]
         public string PhoneNumber { get; set; }
     }
 }

@@ -2,63 +2,73 @@
 @{
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
-<table class="table">
-    <tr>
-        <td>User Name</td>
-        <td>User Surname</td>
-        <td>User Email</td>
-        <td>Seedling</td>
-        <td>Location</td>
-        <td>Amount</td>
-        <td>Total Price</td>
-    </tr>
-    @foreach (var item in Model)
-    {
-<tr>
-    <td>@item.User.Name</td>
-    <td>@item.User.UserSurname</td>
-    <td>@item.User.Email</td>
-    <td>@item.Seedling.Name</td>
-    <td>@item.Marker.Title</td>
-    <td>@item.PurchasedAmount</td>
-    <td>@item.Price</td>
+<div class="table-responsive-sm">
+    <table class="table table-striped">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">User Surname</th>
+                <th scope="col">User Email</th>
+                <th scope="col">Seedling</th>
+                <th scope="col">Location</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.User.Name</td>
+                    <td>@item.User.UserSurname</td>
+                    <td>@item.User.Email</td>
+                    <td>@item.Seedling.Name</td>
+                    <td>@item.Marker.Title</td>
+                    <td>@item.PurchasedAmount</td>
+                    <td>@item.Price</td>
 
 
-    @if (item.IsPaymentFailed)
-    {
-        <td>
-            <label class="text-danger">Failed</label>
-        </td>
-        <td>
-            <a class="btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Send Email</a>
-        </td>
-    }
-    else if (!item.IsPaymentSucceded)
-    {
-        <td>
-            <form asp-action="Purchases" asp-route-id="@item.Id" method="post">
-                <button type="submit" class="btn btn-sm btn-success">
-                    Confirm Payment
-                </button>
-            </form>
-        </td>
-        <td>
-            <form asp-action="DeclinePurchase" asp-route-id="@item.Id" method="post">
-                <button type="submit" class="btn btn-sm btn-danger">
-                    Decline Payment
-                </button>
-            </form>
-        </td>
-    }
+                    @if (item.IsPaymentFailed)
+                    {
+                        <td>
+                            <label class="text-danger">Failed</label>
+                        </td>
+                        <td>
+                            <a class="btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Send Email</a>
+                        </td>
+                    }
+                    else if (!item.IsPaymentSucceded)
+                    {
+                        <td>
+                            <form asp-action="Purchases" asp-route-id="@item.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-action="DeclinePurchase" asp-route-id="@item.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                    </svg>
+                                </button>
+                            </form>
+                        </td>
+                    }
 
-    else if (item.IsPaymentSucceded)
-    {
-        <td>
-            <label class="text-success">Confirmed</label>
-        </td>
-    }
+                    else if (item.IsPaymentSucceded)
+                    {
+                        <td>
+                            <label class="text-success">Confirmed</label>
+                        </td>
+                    }
 
 
-</tr>
-    }
-</table>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

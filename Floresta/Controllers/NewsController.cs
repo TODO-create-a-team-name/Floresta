@@ -29,10 +29,6 @@ namespace Floresta.Controllers
         {
             return View();
         }
-        public IActionResult ReadNews()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -48,12 +44,12 @@ namespace Floresta.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (id != null)
-            {
-                var news = _repo.GetById(id);
-                return View(news);
-            }
-            return NotFound();
+            if (!id.HasValue)
+                return BadRequest();
+            var news = _repo.GetById(id);
+            if (news == null)
+                return NotFound();
+            return View(news);
         }
 
         [HttpPost]
@@ -86,6 +82,12 @@ namespace Floresta.Controllers
             }
             else
                 return NotFound();
+        }
+
+        public IActionResult ReadNews(int id)
+        {
+            var news = _repo.GetById(id);
+            return View(news);
         }
     }
 }
