@@ -66,6 +66,8 @@
 }
 
 .reed_btn {
+    text-align: center;
+    display: inline-block;
     -moz-user-select: -moz-none;
     -khtml-user-select: none;
     -webkit-user-select: none;
@@ -73,6 +75,7 @@
     user-select: none;
     height: 32px;
     width: 150px;
+    padding-top: 4px;
     background-color: #EF8C39;
     border: none;
     color: white;
@@ -85,6 +88,8 @@
     }
 
     .reed_btn:hover {
+        text-decoration: none;
+        color: white;
         background-color: #FD8118;
     }
 
