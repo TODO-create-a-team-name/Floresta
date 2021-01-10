@@ -1,7 +1,7 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @inject Microsoft.AspNetCore.Identity.UserManager<User> userManager;
 
-@{ 
+@{
     User user = new Floresta.Models.User();
     if (signInManager.IsSignedIn(User))
         user = await userManager.FindByNameAsync(User.Identity.Name);
@@ -15,7 +15,7 @@
     <title>@ViewData["Title"] - Floresta</title>
     <link rel="stylesheet" href="~/css/Home_Style1.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="icon" href="~/images/Ws-small-icon.png"/>
+    <link rel="icon" href="~/images/Ws-small-icon.png" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
@@ -54,32 +54,32 @@
                 </div>
                 @if (!signInManager.IsSignedIn(User))
                 {
-                    <div class="account_container">
-                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Login">
-                            <input class="account_button button_text" type="submit" value="Вхід/Реєстрація" />
-                        </form>
-                    </div>
+                <div class="account_container">
+                    <form class="Login_form" method="get" asp-controller="Account" asp-action="Login">
+                        <input class="account_button button_text" type="submit" value="Вхід/Реєстрація" />
+                    </form>
+                </div>
                 }
                 else
                 {
-                    <div class="account_container">
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
+                <div class="account_container">
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("admin"))
                         {
-                            <div class="admin_panel_box">
-                                <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>
-                            </div>
+                    <div class="admin_panel_box">
+                        <a class="admin_panel" asp-controller="Admin_Home" asp-action="Index">Адмін панель</a>
+                    </div>
                         }
-                        <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
-                            <button type="submit" class="account_button button_text">
-                                @if (user != null)
+                    <form class="Login_form" method="post" asp-controller="Account" asp-action="Logout">
+                        <button type="submit" class="account_button button_text">
+                            @if (user != null)
                                 {
                                 <span>@user.Name @user.UserSurname</span> 
                                 }
-                                <span class="iconify out_icon" data-inline="false" data-icon="ic:round-log-in"></span>
-                            </button>
-                        </form>
+                            <span class="iconify out_icon" data-inline="false" data-icon="ic:round-log-in"></span>
+                        </button>
+                    </form>
 
-                    </div>
+                </div>
                 }
             </div>
             <button id="menu_button_container">

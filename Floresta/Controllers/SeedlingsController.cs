@@ -1,8 +1,7 @@
-﻿using Floresta.Models;
+﻿using Floresta.Interfaces;
+using Floresta.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -10,16 +9,15 @@ namespace Floresta.Controllers
     [Authorize(Roles = "admin")]
     public class SeedlingsController : Controller
     {
-        private FlorestaDbContext _context;
+        private IRepository<Seedling> _repo;
 
-        public SeedlingsController(FlorestaDbContext context)
+        public SeedlingsController(IRepository<Seedling> repo)
         {
-            _context = context;
+            _repo = repo;
         }
         public IActionResult Index()
-        {
-            var list = _context.Seedlings.ToList();
-            return View(list);
+        {            
+            return View(_repo.GetAll());
         }
 
         public IActionResult Create()
@@ -28,18 +26,17 @@ namespace Floresta.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Seedling seedling)
+        public async Task<IActionResult> Create(Seedling seedling)
         {
-            _context.Seedlings.Add(seedling);
-            _context.SaveChanges();
+            await _repo.AddAsync(seedling);
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id != null)
             {
-                var seedling = await _context.Seedlings.FirstOrDefaultAsync(x => x.Id == id);
+                var seedling = _repo.GetById(id);
                 return View(seedling);
             }
                 return NotFound();
@@ -48,21 +45,16 @@ namespace Floresta.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(Seedling seedling)
         {
-            _context.Seedlings.Update(seedling);
-            await _context.SaveChangesAsync();
+            await _repo.UpdateAsync(seedling);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var seedling = _context.Seedlings.FirstOrDefault(x => x.Id == id);
-            if(seedling != null)
-            {
-                _context.Seedlings.Remove(seedling);
-                await _context.SaveChangesAsync();
+            if(await _repo.DeleteAsync(id))
                 return RedirectToAction("Index");
-            }
+            else
             return NotFound();
         }
     }

@@ -23,6 +23,7 @@
     width: 380px;
     height: 250px;
     border-radius: 30px;
+    object-fit: cover;
 }
 
 .new_boby {
@@ -52,7 +53,7 @@
     -ms-user-select: none;
     user-select: none;
     font-family: 'Roboto', sans-serif;
-    font-size: 32px;
+    font-size: 36px;
     color: #ABCD2D;
 }
 

@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 
 namespace Floresta.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class Admin_HomeController : Controller
     {
         private SignInManager<User> _signInManager;
@@ -72,8 +71,8 @@ namespace Floresta.Controllers
             var user = _context.Users.FirstOrDefault(x => question.UserId == x.Id);
             EmailService emailService = new EmailService();
 
-            await emailService.SendEmailAsync(user.Email, "The answer for your question",
-                $"Your question was \"{question.QuestionText}\"\n\nThe official answer for your question:\n\n{model.Message}");
+            await emailService.SendEmailAsync(user.Email, "Відповідь на питання",
+                $"Ваше питання було: \"{question.QuestionText}\"\n\nОфіційна відповідь на ваше питання:\n\n{model.Message}");
             question.IsAnswered = true;
             _context.Questions.Update(question);
             await _context.SaveChangesAsync();
@@ -103,8 +102,9 @@ namespace Floresta.Controllers
                 var user = _context.Users.FirstOrDefault(x => x.Id == purchase.UserId);
                 EmailService emailService = new EmailService();
 
-                await emailService.SendEmailAsync(user.Email, "Congratulations!!!",
-                    $"Dear {user.Name} {user.UserSurname}, your purchase was successfully confirmed!\nYour desire to save the world is bigger than our graditude to you!\nFollow our updates to be aware of everything!");
+                await emailService.SendEmailAsync(user.Email, "Вітання!!!",
+                    $"Дорога(-ий) {user.Name} {user.UserSurname}, ваша оплата була успішно підтверджена!" +
+                    $"\nВаше бажання врятувати світ є більшим, ніж наша вдячність вам!\nСлідкуйте за нашими оновленнями, щоб бути в курсі всього!");
                 purchase.IsPaymentSucceded = true;
                 _context.Update(purchase);
                 await _context.SaveChangesAsync();
@@ -127,8 +127,8 @@ namespace Floresta.Controllers
                 var marker = _context.Markers.FirstOrDefault(x => x.Id == purchase.MarkerId);
 
                 EmailService emailService = new EmailService();
-                await emailService.SendEmailAsync(user.Email, "Payment Faliled",
-                    $"Dear {user.Name} {user.UserSurname}, unfortunately, your payment was not successfull. Contact our support to get more information.");
+                await emailService.SendEmailAsync(user.Email, "Статус Оплати",
+                    $"{user.Name} {user.UserSurname}, на жаль, ваша оплата не була успішною. Зв'яжіться з підтримкою Floresta для отримання більш детальної інформації.");
                 
                 seedling.Amount += purchase.PurchasedAmount;
                 _context.Update(seedling);
@@ -170,9 +170,9 @@ namespace Floresta.Controllers
                 await _context.SaveChangesAsync();
                 EmailService emailService = new EmailService();
 
-                await emailService.SendEmailAsync(user.Email, "Participating status",
-                    $"Dear {user.Name} {user.UserSurname}, you are now officially a participant of Floresta Team!<br /> " +
-                    $"Let's make make this world cleaner with fresh oxygen from our trees!");
+                await emailService.SendEmailAsync(user.Email, "Статус участі в команді",
+                    $"{user.Name} {user.UserSurname}, ви тепер офіційно учасник команди Floresta Team!<br /> " +
+                    $"Давайте зробимо світ чистішим киснем наших дерев!");
                 return RedirectToAction("GetTeamParticipants");
             }
             else
@@ -186,17 +186,27 @@ namespace Floresta.Controllers
             if (user != null)
             {
                 user.IsClaimingForTeamParticipating = false;
+                user.IsTeamParticipant = false;
                 _context.Users.Update(user);
                 await _context.SaveChangesAsync();
                 EmailService emailService = new EmailService();
 
-                await emailService.SendEmailAsync(user.Email, "Participating status",
-                    $"Dear {user.Name} {user.UserSurname}, unfortunately, you have not become a participant of Floresta Team, " +
-                    $"but you should still keep up with a thought that you can make this world better!");
+                await emailService.SendEmailAsync(user.Email, "Статус участі в команді",
+                    $"{user.Name} {user.UserSurname}, на жаль, ви не стали учасником Floresta Team, " +
+                    $"проте ви однаково зможете зробити світ кращим, посадивши дерево!");
                 return RedirectToAction("GetTeamParticipants");
             }
             else
                 return NotFound();
+        }
+
+        public JsonResult GetSeedlingsRates()
+        {
+            var statistics = _context.Payments.Include(s => s.Seedling)
+                .GroupBy(p => p.Seedling.Name)
+                .Select(p => new { seedling = p.Key, sum = p.Sum(p => p.PurchasedAmount) });
+         
+            return new JsonResult(statistics);
         }
     }
 }

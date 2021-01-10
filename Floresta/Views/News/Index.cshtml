@@ -1,7 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
 @model IEnumerable<Floresta.Models.News>
-@*
-*@
 @{
     ViewData["Title"] = "News";
     Layout = "~/Views/Shared/_Home_Layout.cshtml";
@@ -20,10 +18,10 @@
                 <p class="news_title">@item.Title</p>
             </div>
             <div class="new_context">
-                @item.Context
+                @item.Content
             </div>
             <div class="news_date">
-                26 листопада 2003
+                @item.DatePublished
             </div>
             <div class="reed_block">
                 <button class="reed_btn" onclick="location.href='@Url.Action("ReadNews", "News")'">Читати</button>

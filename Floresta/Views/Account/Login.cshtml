@@ -25,21 +25,22 @@
         </div>
     </div>   
     <div class="card form">
-        <form class="position_btn">
+        <form class="position_btn" method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
             <div class="form_item">
                 <div class="Line_else cancel_select">Або</div>
             </div><br />
-                  <div class="form_item">
-                      <button class="SignInG_button cancel_select">
-                          <span class="iconify google_icon" data-inline="false" data-icon="flat-color-icons:google"></span>
-                          <span class="google_text">Sign in with Google</span>
-                      </button>
-                  </div>
+            <div class="form_item">
+                @foreach (var provider in Model.ExternalLogin)
+                {
+        <button class="SignInG_button cancel_select" type="submit" name="provider" value="@provider.Name">
+            <span class="iconify google_icon" data-inline="false" data-icon="flat-color-icons:google"></span>
+            <span class="google_text">Sign in with Google</span>
+        </button>}
+            </div>
             <div class="form_item I_have_account_block cancel_select">
                 <span class="account_text">В тебе немає акаунта?</span>
                 <a asp-controller="Account" asp-action="Register">Реєстрація</a>
             </div>
-            
         </form>
         <form method="post" class="form" asp-controller="Account" asp-action="Login"
               asp-route-returnUrl="@Model.ReturnUrl">

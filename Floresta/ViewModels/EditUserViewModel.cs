@@ -1,5 +1,7 @@
 ﻿
 
+using System;
+
 namespace Floresta.ViewModels
 {
     public class EditUserViewModel

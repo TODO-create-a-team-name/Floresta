@@ -4,6 +4,8 @@ using Floresta.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers
@@ -41,10 +43,10 @@ namespace Floresta.Controllers
 
                     EmailService emailService = new EmailService();
 
-                    await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                        $"Confirm the registration by the following link: <a href='{callbackUrl}'>link</a>");
+                    await emailService.SendEmailAsync(model.Email, "Підтвердіть свій акаунт",
+                        $"Підтвердіть свій акаунт за наступним посиланням: <a href='{callbackUrl}'>Підтвердити акаунт</a>");
 
-                    return Content("For completing the registration follow the link that was sent to your email");
+                    return Content("Для завершення реєстрації, перейдіть за посиланням, яке було надіслане вам на пошту.");
                 }
                 else
                 {
@@ -72,14 +74,94 @@ namespace Floresta.Controllers
             }
             var result = await _userManager.ConfirmEmailAsync(user, code);
             if (result.Succeeded)
-                return RedirectToAction("Index", "Admin_Home");
+                return RedirectToAction("Index", "Home");
             else
                 return View("Error");
         }
 
         [HttpGet]
-        public IActionResult Login(string returnUrl = null) =>
-            View(new LoginViewModel { ReturnUrl = returnUrl });
+        public async Task<IActionResult> Login(string returnUrl = null) =>
+            View(new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogin = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            });
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account",
+                new { ReturnUrl = returnUrl });
+
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string returnUrl, string remoteError = null)
+        {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LoginViewModel loginViewModel = new LoginViewModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogin = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            if (remoteError != null)
+            {
+                ModelState.AddModelError(string.Empty, $"Помилка зовнішнього провайдера {remoteError}");
+                return View("Login", loginViewModel);
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                ModelState.AddModelError(string.Empty, "Помилка завантаження інформації зовнішнього провайдера");
+
+                return View("Login", loginViewModel);
+            }
+
+            var signInResult = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+                info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+
+            if (signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            else
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    var user = await _userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        user = new User
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Name = info.Principal.FindFirstValue(ClaimTypes.Name),
+                            UserSurname = info.Principal.FindFirstValue(ClaimTypes.Surname)
+                        };
+
+                        await _userManager.CreateAsync(user);
+                    }
+                    await _userManager.AddLoginAsync(user, info);
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+
+                    return LocalRedirect(returnUrl);
+                }
+
+                ViewBag.ErrorTitle = $"Заява електронної пошти не була отримана від: {info.LoginProvider}";
+                ViewBag.ErrorMessage = "Будь ласка, зв'яжіться з підтримкою florestaofficial200.gmail.com";
+                return View("Error");
+            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -93,7 +175,7 @@ namespace Floresta.Controllers
                     // check if email was confirmed
                     if (!await _userManager.IsEmailConfirmedAsync(user))
                     {
-                        ModelState.AddModelError(string.Empty, "You haven't confirmed your email");
+                        ModelState.AddModelError(string.Empty, "Ви не підтвердили свою пошту!");
                         return View(model);
                     }
                 }
@@ -105,7 +187,7 @@ namespace Floresta.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login and(or) password were not correct");
+                    ModelState.AddModelError("", "Невірний логін або(і) пароль");
                 }
             }
             return View(model);
@@ -143,10 +225,18 @@ namespace Floresta.Controllers
                 }
 
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                
+                var callbackUrl = Url.Action("ResetPassword",
+                    "Account",
+                    new { userId = user.Id, code = code },
+                    protocol: HttpContext.Request.Scheme);
+
                 EmailService emailService = new EmailService();
-                await emailService.SendEmailAsync(model.Email, "Reset Password",
-                    $"Follow the following link to reset your password: <a href='{callbackUrl}'>link</a>");
+
+                await emailService.SendEmailAsync(model.Email,
+                    "Зміна паролю",
+                    $"Перейдіть за наступним посиланням, щоб змінити ваш пароль: <a href='{callbackUrl}'>Змінити пароль</a>");
+
                 return View("ForgotPasswordConfirmation");
             }
             return View(model);

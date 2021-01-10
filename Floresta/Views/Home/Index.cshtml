@@ -93,7 +93,7 @@
                 <div class="text_box">
                     <div class="help_title cancel_select">Заповнюєте форму та опалачуєте послугу</div>
                     <div class="help_text_box cancel_select">
-                        Заповнюючи форму, ви засвідчуєте свій вклад в рух відновлення природи.
+                        Заповнюючи форму, ви засвідчуєте свій внесок <br /> в рух відновлення природи.
                     </div>
                 </div>
                 <div class="bottom_rood_container cancel_select">
@@ -143,6 +143,7 @@
                         <form class="form" asp-action="JoinTeam">
                             <div class="form_item">
                                 <input placeholder="Номер телефону" asp-for="PhoneNumber" class="form_control" />
+                                <span asp-validation-for="PhoneNumber"></span>
                             </div>
                             <div class="form_buttons cancel_select">
                                 <button type="submit" class="send_button">Надіслати</button>

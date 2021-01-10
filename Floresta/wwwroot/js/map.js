@@ -1,15 +1,18 @@
-﻿var data = {};
+﻿//the object that contains required data
+var data = {};
 
-const iconBase = "http://maps.google.com/mapfiles/kml/paddle/";
+//define icons that will be used for our map
+const iconBase = "http://maps.google.com/mapfiles/ms/micons/";
 const icons = {
     finish: {
-        icon: iconBase + "grn-circle.png",
+        icon: iconBase + "green-dot.png"
     },
     working: {
-        icon: iconBase + "red-circle.png",
+        icon: iconBase + "red-dot.png"
     },
-};
+}
 
+//initializing map
 var map;
 function initMap() {
     var uluru = { lat: 49.22242, lng: 31.88714 };
@@ -21,18 +24,21 @@ function initMap() {
             position: google.maps.ControlPosition.LEFT_BOTTOM
         },
     });
-
+    // event for placing a new marker
     google.maps.event.addListener(map, 'click', function (event) {
         placeMarker(event.latLng, "New marker");
 
     });
-
+    //filling hidden lat and lng inputs with a brand new marker lan and lng values 
     function handleEvent(event) {
         document.getElementById('lat').value = event.latLng.lat();
         document.getElementById('lng').value = event.latLng.lng();
     }
+
     var marker = null;
     function placeMarker(location, title) {
+        if (marker != null)
+            marker.setMap(null);
         if (data.isAdmin) {
             marker = new google.maps.Marker({
                 position: location,
@@ -49,6 +55,7 @@ function initMap() {
 
     }
 }
+//setting a region view on the map
 var regionBt = document.querySelectorAll('.region_button');
 regionBt.forEach(region => {
     region.addEventListener('click', {
@@ -75,6 +82,7 @@ regionBt.forEach(region => {
     });
 });
 
+//checkers for marker state
 function checkType(isFinish) {
     if (isFinish)
         return "finish";
@@ -89,17 +97,20 @@ function info(marker, title) {
     marker.addListener("click", () => {
 
         infowindow.open(marker.get("map"), marker);
+        //setting values on inputs depending of clicked marker
         $("#markerIdInput").val(marker.id);
         $("#markerTitleInput").val(marker.title);
-
+        //looking for selected seedling
         findSeedling();
+        //change event for seedlings
         $('input[type=radio][name=SeedlingId]').change(findSeedling);
 
         function findSeedling() {
+            //get selected seedling id
             var seedlingId = $('input[name="SeedlingId"]:checked').val();
-
+            //get a seedling by id
             var seedling = data.seedlings.find(x => x.id == seedlingId);
-
+            //count variable determines max value for purchase
             var count;
             if (seedling != null) {
                 if (seedling.amount >= marker.plantCount) {
@@ -108,9 +119,9 @@ function info(marker, title) {
                 else if (marker.plantCount > seedling.amount) {
                     count = seedling.amount;
                 }
-
+                //filling input with max value
                 $(".max_val").text("Max: " + count);
-
+                //setting max and value with max value for plantCountInput
                 $("#plantCountInput").attr({
                     "value": count,
                     "max": count,
@@ -158,7 +169,7 @@ $.ajax({
                         marker.setAnimation(google.maps.Animation.BOUNCE);
                     }
                 });
-                info(marker, data.markers[i].title + "<br> plantCount: " + data.markers[i].plantCount);
+                info(marker, data.markers[i].title + "<br> Кількість місць: " + data.markers[i].plantCount);
             }
             else if (data.markers[i].isPlantingFinished) {
                 marker.addListener("click", () => {
@@ -177,6 +188,7 @@ $.ajax({
     }
 });
 
+//stepper
 var numStepeerInput = document.querySelector("#plantCountInput");
 var thisAction = document.querySelectorAll(".count_btn");
 
@@ -238,3 +250,15 @@ function updateVal(action) {
         numStepeerInput.value = newValue;
     }
 }
+
+$('#instructionButton').click(() => {
+    Swal.fire({
+        title: "<h1>Інструкція</h1>",
+        html: `<ol>
+            <li> Виберіть доступну мітку на карті</li>
+        <li>Виберіть саджанець для висадки</li>
+        <li>Вкажіть кількість саджанців, яку Ви хочете придбати</li>
+        <li>Натисніть "Оплатити"</li>
+    </ol >`
+    });
+});

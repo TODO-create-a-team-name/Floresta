@@ -11,7 +11,7 @@ function initMap() {
 $.ajax({
     type: "GET",
     url: "Map/GetMarkers",
-    contentType: "application/json",
+    contentType: "application/json",    
     dataType: "json",
     success: function (result) {
         markers = result;

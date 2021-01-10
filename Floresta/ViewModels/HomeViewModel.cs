@@ -8,7 +8,7 @@ namespace Floresta.ViewModels
         [Required]
         public string Question { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Введіть, будь ласка, номер телефону")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
     }
