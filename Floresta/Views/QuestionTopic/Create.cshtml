@@ -1,0 +1,14 @@
+﻿@model Floresta.ViewModels.QuestionTopicViewModel
+@{
+    ViewBag.Title = "Додати тему";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+<form asp-action="Create" asp-controller="QuestionTopic">
+    <div class="form-group">
+        <label asp-for="Topic" class="control-label">Тема</label>
+        <input type="text" asp-for="Topic" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Додати" class="btn btn-default" />
+    </div>
+</form>

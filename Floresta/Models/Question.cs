@@ -10,5 +10,8 @@ namespace Floresta.Models
         public bool IsAnswered { get; set; }
         public string UserId { get; set; }
         public User User { get; set; }
+        public int QuestionTopicId { get; set; }
+        public QuestionTopic QuestionTopic { get; set; }
+
     }
 }

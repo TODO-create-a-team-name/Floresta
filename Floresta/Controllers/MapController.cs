@@ -27,7 +27,7 @@ namespace Floresta.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                var seedlings = _context.Seedlings.Where(s => s.Amount != 0).ToList();
+                var seedlings = _context.Seedlings.Where(s => s.Amount > 0).ToList();
                 var model = new PaymentViewModel();
                 model.Seedlings = seedlings;
                 return View(model);

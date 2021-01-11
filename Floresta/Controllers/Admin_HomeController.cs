@@ -52,9 +52,18 @@ namespace Floresta.Controllers
 
         public IActionResult GetQuestions()
         {
-            var questions = _context.Questions.Include(c => c.User);
+            var questions = _context.Questions
+                .Include(c => c.User)
+                .Include(t => t.QuestionTopic);
             return View(questions);
         }
+
+        public IActionResult GetQuestionTopics()
+        {
+            return View();
+        }
+
+
 
         public IActionResult AnswerQuestion()
         {

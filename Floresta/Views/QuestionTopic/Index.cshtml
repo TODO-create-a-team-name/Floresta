@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Floresta.ViewModels.QuestionTopicViewModel>
+@{
+    ViewBag.Title = "Теми запитань";
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+
+<a class="btn btn-sm btn-success" asp-action="Create">Додати</a>
+<table class="table">
+    <tr>
+        <td>Тема</td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Topic</td>
+            <td>
+                <form asp-action="Delete" asp-route-id="@item.Id" method="post">
+                    <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Змінити</a>
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Видалити
+                    </button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

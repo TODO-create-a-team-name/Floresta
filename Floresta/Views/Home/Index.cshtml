@@ -162,20 +162,18 @@
                     <div class="card_q">
                         <form class="form_q" asp-action="AskQuestion" method="post">
                             <div class="form_item_Question">
-                                <select class="question_selector">
-                                    <option class="options">Тема запитання або звернення</option>
-                                    <option class="options">Нові місця посадки</option>
-                                    <option class="options">Ідеї для покращення проекту</option>
-                                    <option class="options">Допомога проекту та команда</option>
-                                    <option class="options">Технічні проблеми</option>
+                                <select class="question_selector" asp-for="TopicId" asp-items="@Model.Topics">
+                                    <option class="options" disabled selected>Тема запитання або звернення</option>
                                 </select>
                             </div>
                             <div class="form_item_Question">
-                                <textarea placeholder="Доповнення до запитання" class="form_control_Question" asp-for="Question"></textarea>
+                                <textarea placeholder="Доповнення до запитання\звернення" class="form_control_Question" asp-for="Question"></textarea>
                             </div>
                             <div class="form_buttons cancel_select mt_2">
                                 <button type="submit" class="send_button">Надіслати</button>
                             </div>
+                            <span asp-validation-for="Question" class="text-danger"></span>
+                            <span asp-validation-for="TopicId" class="text-danger"></span>
                         </form>
                     </div>
                 </div>

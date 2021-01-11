@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Floresta.Models
 {
@@ -14,6 +13,7 @@ namespace Floresta.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<QuestionTopic> QuestionTopics { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,6 +27,11 @@ namespace Floresta.Models
             builder.Entity<User>()
                 .HasMany(p => p.Payments)
                 .WithOne(u => u.User)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<QuestionTopic>()
+                .HasMany(q => q.Questions)
+                .WithOne(t => t.QuestionTopic)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

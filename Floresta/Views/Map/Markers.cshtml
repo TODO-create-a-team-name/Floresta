@@ -9,11 +9,11 @@
 <div class="table-responsive-sm">
     <table class="table">
         <tr>
-            <td>Title</td>
-            <td>PlaceCount</td>
-            <td>Lat</td>
-            <td>Lng</td>
-            <td>isPlantingFinished</td>
+            <td>Локація</td>
+            <td>Кількість місць</td>
+            <td>Довгота</td>
+            <td>Широта</td>
+            <td>Висадка завершена</td>
         </tr>
         @foreach (var item in Model)
         {
@@ -25,9 +25,9 @@
                 <td>@item.isPlantingFinished</td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@item.Id" method="post">
-                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@item.Id">Редагувати</a>
                         <button type="submit" class="btn btn-sm btn-danger">
-                            Delete
+                            Видалити
                         </button>
                     </form>
                 </td>

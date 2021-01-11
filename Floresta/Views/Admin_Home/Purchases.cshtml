@@ -6,13 +6,13 @@
     <table class="table table-striped">
         <thead class="thead-light">
             <tr>
-                <th scope="col">User Name</th>
-                <th scope="col">User Surname</th>
-                <th scope="col">User Email</th>
-                <th scope="col">Seedling</th>
-                <th scope="col">Location</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Total Price</th>
+                <th scope="col">Ім'я</th>
+                <th scope="col">Прізвище</th>
+                <th scope="col">Email</th>
+                <th scope="col">Саджанець</th>
+                <th scope="col">Локація</th>
+                <th scope="col">Кількість</th>
+                <th scope="col">Сума</th>
             </tr>
         </thead>
         <tbody>
@@ -31,10 +31,10 @@
                     @if (item.IsPaymentFailed)
                     {
                         <td>
-                            <label class="text-danger">Failed</label>
+                            <label class="text-danger">Скасовано</label>
                         </td>
                         <td>
-                            <a class="btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Send Email</a>
+                            <a class="btn btn-sm btn-success" asp-action="SendEmail" asp-controller="Payment" asp-route-id="@item.User.Id">Написати на Email</a>
                         </td>
                     }
                     else if (!item.IsPaymentSucceded)
@@ -62,7 +62,7 @@
                     else if (item.IsPaymentSucceded)
                     {
                         <td>
-                            <label class="text-success">Confirmed</label>
+                            <label class="text-success">Підтверджено</label>
                         </td>
                     }
 

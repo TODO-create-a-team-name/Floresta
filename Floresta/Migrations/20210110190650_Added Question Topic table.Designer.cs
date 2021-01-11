@@ -4,14 +4,16 @@ using Floresta.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Floresta.Migrations
 {
     [DbContext(typeof(FlorestaDbContext))]
-    partial class FlorestaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210110190650_Added Question Topic table")]
+    partial class AddedQuestionTopictable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,7 +130,10 @@ namespace Floresta.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuestionTopicId")
+                    b.Property<int?>("QuestionTopicId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TopicId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -151,7 +156,6 @@ namespace Floresta.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Topic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -422,8 +426,7 @@ namespace Floresta.Migrations
                     b.HasOne("Floresta.Models.QuestionTopic", "QuestionTopic")
                         .WithMany("Questions")
                         .HasForeignKey("QuestionTopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Floresta.Models.User", "User")
                         .WithMany("Questions")

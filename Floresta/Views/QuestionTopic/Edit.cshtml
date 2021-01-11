@@ -1,0 +1,16 @@
+﻿@model Floresta.ViewModels.QuestionTopicViewModel
+@{
+    Layout = "~/Views/Shared/_Admin_Layout.cshtml";
+}
+<form asp-action="Edit" asp-controller="QuestionTopic">
+    <div class="form-group">
+        <input type="hidden" asp-for="Id" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Topic" class="control-label">Тема</label>
+        <input type="text" asp-for="Topic" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Зберегти" class="btn btn-default" />
+    </div>
+</form>

@@ -29,6 +29,7 @@ namespace Floresta
             services.AddScoped<IRepository<Seedling>, SeedlingRepository>();
             services.AddScoped<IRepository<Marker>, MarkerRepository>();
             services.AddScoped<IRepository<News>, NewsRepository>();
+            services.AddScoped<IRepository<QuestionTopic>, QuestionTopicRepository>();
 
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
             {

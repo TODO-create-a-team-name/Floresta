@@ -2,6 +2,7 @@
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,12 @@ namespace Floresta.Controllers
         public IActionResult Index()
         {
             var model = new HomeViewModel();
+            model.Topics = _context.QuestionTopics
+                .Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Topic
+                });
 
             return View(model);
                
@@ -42,7 +49,8 @@ namespace Floresta.Controllers
             {
                 Question question = new Question
                 {
-                    QuestionText = model.Question
+                    QuestionText = model.Question,
+                    QuestionTopicId = model.TopicId
                 };
                 _context.Questions.Add(question);
                 user.Questions.Add(question);

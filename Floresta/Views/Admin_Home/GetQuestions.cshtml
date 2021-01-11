@@ -2,13 +2,15 @@
 @{
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
+<a class="btn-primary" asp-action="Index" asp-controller="QuestionTopic">Теми питань</a>
 <div class="table-responsive-sm">
     <table class="table">
         <tr>
             <th>Email</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Question</th>
+            <th>Ім'я</th>
+            <th>Прізвище</th>
+            <th>Тема питання</th>
+            <th>Питання</th>
         </tr>
         @foreach (var q in Model)
         {
@@ -16,17 +18,18 @@
                 <td>@q.User.Email</td>
                 <td>@q.User.Name</td>
                 <td>@q.User.UserSurname</td>
+                <td>@q.QuestionTopic?.Topic</td>
                 <td>@q.QuestionText</td>
                 <td>
                     @if (!q.IsAnswered)
                     {
                         <form method="post">
-                            <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Answer</a>
+                            <a class="btn btn-sm btn-primary" asp-action="AnswerQuestion" asp-route-id="@q.Id">Відповісти</a>
                         </form>
                     }
                     else
                     {
-                        <label class="text-success">Answered</label>
+                        <label class="text-success">Готово</label>
                     }
                 </td>
             </tr>
