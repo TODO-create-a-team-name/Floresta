@@ -1,5 +1,9 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
 
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 header{
     height: 100vh;
 }
@@ -47,6 +51,9 @@ header{
     min-width: 300px;
     margin: 20px auto 50px auto;
 }
+details[open] {
+    outline: none;
+}
 .faq_details {
     border-bottom: 1px solid hsl(240, 5%, 91%);
     margin: 10px 0 0 0;
@@ -56,18 +63,31 @@ header{
     -moz-user-select: none;
     -ms-user-select: none;
 }
-.faq_symmary {
-    display: block;
-    color: #ABCD2D;
-    font-size: 20px;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    padding-right: 20px;
+    .faq_details:active{
+        outline: none;
+    }
+    .faq_details:focus {
+        outline: none;
+    }
+.faq_symmary:active {
+    outline: none;
 }
+
+.faq_symmary:focus {
+    outline: none;
+} 
+.faq_symmary {
+        display: block;
+        color: #ABCD2D;
+        font-size: 20px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        padding-right: 20px;
+    }
     .faq_symmary:hover {
         color: #EF8C39;
         transition: all 0.3s ease;
@@ -85,12 +105,13 @@ header{
         padding-bottom: 10px;
     }
 details[open] .faq_symmary:after {
+
     display: flex;
     justify-content: end;
     content: "";
     background-image: url("https://bobmatyas.github.io/fm-faq-accordion/images/icon-arrow-down.svg");
     background-repeat: no-repeat;
-    background-position: right center ;
+    background-position: right center;
     transform: scaleY(-1);
     margin-top: -15px;
     margin-right: -10px;
