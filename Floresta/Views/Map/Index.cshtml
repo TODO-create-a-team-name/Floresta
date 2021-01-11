@@ -42,15 +42,13 @@
                     </div>
                     <div class="form_item">
                         <label asp-for="PlantCount" class="control-label">Кількість місць для висадки</label>
-                        <input type="number" asp-for="PlantCount" class="form_control_sm" min="1" />
+                        <input type="number" asp-for="PlantCount" class="form_control_sm" />
                     </div>
                     <div class="form_item">
-                        <input id="lng" type="hidden" asp-for="Lng" class="form_control_sm" readonly />
-                        <span asp-validation-for="Lng"></span>
+                        <input id="lng" asp-for="Lng" class="form_control_sm" readonly placeholder ="Координати" />
                     </div>
                     <div class="form-group">
                         <input id="lat" type="hidden" asp-for="Lat" class="form_control_sm" readonly />
-                        <span asp-validation-for="Lat"></span>
                     </div>
                     <div class="form_item">
                         <button type="submit" class="Create_m_btn">Створити</button>
@@ -66,7 +64,8 @@
                                 <input id="markerIdInput" type="hidden" asp-for="MarkerId" />
                             </div>
                             <div class="form_item">
-                                <input id="markerTitleInput" type="text" asp-for="Title" class="form_control_t" readonly />
+                                <input id="markerTitleInput" type="text" placeholder="Заголовок" asp-for="Title" class="form_control_t" readonly />
+                                <span asp-validation-for="Title"></span>
                             </div>
                             <div class="form_item">
                                 <div class="plant_c_block">
