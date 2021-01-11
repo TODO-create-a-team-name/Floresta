@@ -15,8 +15,9 @@ namespace Floresta.ViewModels
         public string Lng { get; set; }
         public int MarkerId { get;set; }
         [Required(ErrorMessage = "Поле кількості місць обов’язкове")]
-        [Range(1, int.MaxValue, ErrorMessage = "Введіть число більше за {1}")]
+        [Range(1, int.MaxValue, ErrorMessage = "Введіть кількість місць більшу за {1}")]
         public int PlantCount { get; set; }
+        [Required(ErrorMessage = "Виберіть саджанець для висадки")]
         public int SeedlingId { get; set; }
         public List<Seedling> Seedlings { get; set; }
 

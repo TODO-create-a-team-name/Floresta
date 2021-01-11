@@ -1,11 +1,10 @@
-﻿@inject Microsoft.AspNetCore.Identity.SignInManager<User> signInManager;
-@model IEnumerable<Floresta.Models.Marker>
+﻿@model IEnumerable<Floresta.Models.Marker>
 @{
     ViewBag.Title = "Seedlings List";
     Layout = "~/Views/Shared/_Admin_Layout.cshtml";
 }
 
-<a class="btn btn-sm btn-success" asp-action="Index">Add Marker</a>
+<a class="btn btn-sm btn-success" asp-action="Index">Додати мітку</a>
 <div class="table-responsive-sm">
     <table class="table">
         <tr>

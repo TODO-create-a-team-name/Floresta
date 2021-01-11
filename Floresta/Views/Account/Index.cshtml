@@ -6,7 +6,7 @@
 
 @if (User.Identity.IsAuthenticated)
 {<div class="jumbotron bg-light">
-        <p class="text-body h3 mt-2">User name: @Model.Name @Model.Surname </p>
+        <p class="text-body h3 mt-2">Користувач: @Model.Name @Model.Surname </p>
         <p class="text-body h3 mt-2">Email: @Model.Email </p>
         <a class="navbar-brand nav-link" asp-controller="Home" asp-action="Index">Повернутися на головну сторінку</a>
         <form class="mt-2" method="post" asp-controller="Account" asp-action="Logout">
@@ -18,14 +18,6 @@ else
 {
     <div class="jumbotron bg-light">
 
-        <h1 class="display-4">Morpheus</h1>
-        <p class="lead">
-            Take the blue pill - and the story ends. You will wake up in your bed and believe that it was a dream. Take the red pill and enter the wonderland. I'll show you if the rabbit hole is deep.
-        </p>
-        <hr class="my-4">
-        <p>
-            Make a choice!
-        </p>
         <a asp-controller="Account" class="btn btn-primary " asp-action="Login">Sign in</a>
         <a asp-controller="Account" class="btn btn-danger " asp-action="Register">Sign Up</a>
 

@@ -1,5 +1,3 @@
-using System;
-
 namespace Floresta.Models
 {
     public class ErrorViewModel

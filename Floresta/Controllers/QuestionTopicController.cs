@@ -3,9 +3,7 @@ using Floresta.Interfaces;
 using Floresta.Models;
 using Floresta.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Floresta.Controllers

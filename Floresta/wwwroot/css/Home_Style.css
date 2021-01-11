@@ -39,6 +39,10 @@ header {
     font-family: Georgia;
 }
 
+.text-white {
+    font-size: 14px !important;
+}
+
 .main_title {
     font-size: 48px;
     color: #EF8C39;
