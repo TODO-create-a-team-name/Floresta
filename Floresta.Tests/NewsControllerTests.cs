@@ -81,37 +81,61 @@ namespace Floresta.Tests
         public void GetNewsReturnsNotFoundResultWhenNewsNotFound()
         {
             // Arrange
-            int testSeedlingId = 1;
+            int testNewsId = 1;
             var mock = new Mock<IRepository<News>>();
-            mock.Setup(repo => repo.GetById(testSeedlingId))
+            mock.Setup(repo => repo.GetById(testNewsId))
                 .Returns(null as News);
             var controller = new NewsController(mock.Object);
 
             // Act
-            var result = controller.Edit(testSeedlingId);
+            var result = controller.Edit(testNewsId);
 
             // Assert
             Assert.IsType<NotFoundResult>(result);
         }
 
         [Fact]
-        public void GetSeedlingReturnsViewResultWithSeedling()
+        public void GetNewsReturnsViewResultWithNews()
         {
             // Arrange
-            int testSeedlingId = 1;
+            int testNewsId = 1;
             var mock = new Mock<IRepository<News>>();
-            mock.Setup(repo => repo.GetById(testSeedlingId))
-                .Returns(GetTestNews().FirstOrDefault(p => p.Id == testSeedlingId));
+            mock.Setup(repo => repo.GetById(testNewsId))
+                .Returns(GetTestNews().FirstOrDefault(p => p.Id == testNewsId));
             var controller = new NewsController(mock.Object);
 
             // Act
-            var result = controller.Edit(testSeedlingId);
+            var result = controller.Edit(testNewsId);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             var model = Assert.IsType<News>(viewResult.ViewData.Model);
             Assert.Equal("First title", model.Title);
             Assert.Equal("some text", model.Content);
+        }
+        [Fact]
+        public async void CreatePostAction_SaveModel()
+        {
+            // arrange
+            var mock = new Mock<IRepository<News>>();
+            var news = new News();
+            var controller = new NewsController(mock.Object);
+            // act
+            RedirectToRouteResult result = await controller.Create(news) as RedirectToRouteResult;
+            // assert
+            mock.Verify(a => a.AddAsync(news));
+        }
+        [Fact]
+        public async void DeletePostAction_SaveModel()
+        {
+            // arrange
+            var mock = new Mock<IRepository<News>>();
+            int newsId = 1;
+            var controller = new NewsController(mock.Object);
+            // act
+            RedirectToRouteResult result = await controller.DeleteConfirmed(newsId) as RedirectToRouteResult;
+            // assert
+            mock.Verify(a => a.DeleteAsync(newsId));
         }
     }
 }

@@ -116,5 +116,29 @@ namespace Floresta.Tests
             Assert.Equal(200, model.Amount);
             Assert.Equal(testSeedlingId, model.Id);
         }
+        [Fact]
+        public async void CreatePostAction_SaveModel()
+        {
+            // arrange
+            var mock = new Mock<IRepository<Seedling>>();
+            var seedling = new Seedling();
+            var controller = new SeedlingsController(mock.Object);
+            // act
+            RedirectToRouteResult result = await controller.Create(seedling) as RedirectToRouteResult;
+            // assert
+            mock.Verify(a => a.AddAsync(seedling));
+        }
+        [Fact]
+        public async void DeletePostAction_SaveModel()
+        {
+            // arrange
+            var mock = new Mock<IRepository<Seedling>>();
+            int newsId = 1;
+            var controller = new SeedlingsController(mock.Object);
+            // act
+            RedirectToRouteResult result = await controller.Delete(newsId) as RedirectToRouteResult;
+            // assert
+            mock.Verify(a => a.DeleteAsync(newsId));
+        }
     }
 }
