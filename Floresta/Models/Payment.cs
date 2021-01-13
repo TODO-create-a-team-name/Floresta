@@ -1,9 +1,4 @@
-﻿using MimeKit.Cryptography;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace Floresta.Models
 {
     public class Payment
